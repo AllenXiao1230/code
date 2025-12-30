@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "rocket",
+			"path": "../../../PlatformIO/Projects/rocket"
+		}
+	],
+	"settings": {
+		"chatgpt.openOnStartup": true
+	}
+}

@@ -6,7 +6,7 @@ import time
 class ReplayWorker(QThread):
     """
     Replay telemetry data as if it comes from serial.
-    Emits raw bytes to be fed into ProtocolParser.
+    Emits raw bytes to be fed into the serial data handler.
     """
 
     data_emitted = pyqtSignal(bytes)

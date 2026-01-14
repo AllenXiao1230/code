@@ -58,7 +58,6 @@ class TelemetryPanel(QWidget):
         self.lbl_state = QLabel()
         self.lbl_error = QLabel()
         self.lbl_time = QLabel()
-        self.lbl_tplus = QLabel()
 
         f.addWidget(QLabel("狀態"), 0, 0)
         f.addWidget(self.lbl_state, 0, 1)
@@ -66,11 +65,9 @@ class TelemetryPanel(QWidget):
         f.addWidget(self.lbl_error, 1, 1)
         f.addWidget(QLabel("時間 (秒)"), 2, 0)
         f.addWidget(self.lbl_time, 2, 1)
-        f.addWidget(QLabel("任務時間"), 3, 0)
-        f.addWidget(self.lbl_tplus, 3, 1)
 
-        # ===== GPS =====
-        gps = QGroupBox("GPS / 導航")
+        # ===== GPS / Yaw =====
+        gps = QGroupBox("定位 / 偏航")
         g = QGridLayout(gps)
         self.lbl_lat = QLabel()
         self.lbl_lon = QLabel()
@@ -78,28 +75,43 @@ class TelemetryPanel(QWidget):
         self.lbl_sat = QLabel()
 
         items = [
-            ("緯度", self.lbl_lat),
-            ("經度", self.lbl_lon),
-            ("航向 (度)", self.lbl_head),
-            ("衛星數", self.lbl_sat),
+            ("緯度 (GPS)", self.lbl_lat),
+            ("經度 (GPS)", self.lbl_lon),
+            ("偏航 (IMU, 度)", self.lbl_head),
+            ("衛星數 (GPS)", self.lbl_sat),
         ]
         for i, (n, l) in enumerate(items):
             g.addWidget(QLabel(n), i, 0)
             g.addWidget(l, i, 1)
 
         # ===== IMU =====
-        imu = QGroupBox("姿態 / 慣性")
+        imu = QGroupBox("姿態 / IMU")
         i = QGridLayout(imu)
-        self.lbl_accz = QLabel()
+        self.lbl_roll = QLabel()
         self.lbl_pitch = QLabel()
-        self.lbl_gyro = QLabel()
+        self.lbl_accx = QLabel()
+        self.lbl_accy = QLabel()
+        self.lbl_accz = QLabel()
+        self.lbl_gx = QLabel()
+        self.lbl_gy = QLabel()
+        self.lbl_gz = QLabel()
 
-        i.addWidget(QLabel("加速度Z (g)"), 0, 0)
-        i.addWidget(self.lbl_accz, 0, 1)
-        i.addWidget(QLabel("俯仰 (度)"), 1, 0)
+        i.addWidget(QLabel("滾轉 (IMU, 度)"), 0, 0)
+        i.addWidget(self.lbl_roll, 0, 1)
+        i.addWidget(QLabel("俯仰 (IMU, 度)"), 1, 0)
         i.addWidget(self.lbl_pitch, 1, 1)
-        i.addWidget(QLabel("陀螺Z (度/秒)"), 2, 0)
-        i.addWidget(self.lbl_gyro, 2, 1)
+        i.addWidget(QLabel("加速度X (ADXL, g)"), 2, 0)
+        i.addWidget(self.lbl_accx, 2, 1)
+        i.addWidget(QLabel("加速度Y (ADXL, g)"), 3, 0)
+        i.addWidget(self.lbl_accy, 3, 1)
+        i.addWidget(QLabel("加速度Z (ADXL, g)"), 4, 0)
+        i.addWidget(self.lbl_accz, 4, 1)
+        i.addWidget(QLabel("陀螺X (ICM, 度/秒)"), 5, 0)
+        i.addWidget(self.lbl_gx, 5, 1)
+        i.addWidget(QLabel("陀螺Y (ICM, 度/秒)"), 6, 0)
+        i.addWidget(self.lbl_gy, 6, 1)
+        i.addWidget(QLabel("陀螺Z (ICM, 度/秒)"), 7, 0)
+        i.addWidget(self.lbl_gz, 7, 1)
 
         # ===== Power =====
         pwr = QGroupBox("環境感測")
@@ -112,7 +124,7 @@ class TelemetryPanel(QWidget):
         p.addWidget(self.lbl_temp, 0, 1)
         p.addWidget(QLabel("濕度 (%)"), 1, 0)
         p.addWidget(self.lbl_hum, 1, 1)
-        p.addWidget(QLabel("氣壓 (Pa)"), 2, 0)
+        p.addWidget(QLabel("氣壓 (kPa)"), 2, 0)
         p.addWidget(self.lbl_press, 2, 1)
 
         layout.addWidget(fs, 0, 0)
@@ -120,27 +132,29 @@ class TelemetryPanel(QWidget):
         layout.addWidget(imu, 2, 0)
         layout.addWidget(pwr, 3, 0)
 
-    def update_data(self, d, t_plus):
+    def update_data(self, d):
         data = d or {}
         self.lbl_state.setText(decode_state(data.get("status")))
         self.lbl_error.setText(decode_error(data.get("error")))
         self.lbl_time.setText(self._fmt(data.get("time"), "{:.1f}"))
-        self.lbl_tplus.setText(
-            "T+---.- s" if t_plus is None else self._fmt(t_plus, "T+{:.1f} s")
-        )
 
         self.lbl_lat.setText(self._fmt(data.get("lat"), "{:.7f}"))
         self.lbl_lon.setText(self._fmt(data.get("lon"), "{:.7f}"))
         self.lbl_head.setText(self._fmt(data.get("heading"), "{:.1f}"))
         self.lbl_sat.setText(self._fmt(data.get("sat"), "{}", fallback="0"))
 
-        self.lbl_accz.setText(self._fmt(data.get("accz"), "{:.2f}"))
+        self.lbl_roll.setText(self._fmt(data.get("roll"), "{:.2f}"))
         self.lbl_pitch.setText(self._fmt(data.get("pitch"), "{:.2f}"))
-        self.lbl_gyro.setText(self._fmt(data.get("gyro"), "{:.1f}"))
+        self.lbl_accx.setText(self._fmt(data.get("accx"), "{:.2f}"))
+        self.lbl_accy.setText(self._fmt(data.get("accy"), "{:.2f}"))
+        self.lbl_accz.setText(self._fmt(data.get("accz"), "{:.2f}"))
+        self.lbl_gx.setText(self._fmt(data.get("gyro_x"), "{:.1f}"))
+        self.lbl_gy.setText(self._fmt(data.get("gyro_y"), "{:.1f}"))
+        self.lbl_gz.setText(self._fmt(data.get("gyro"), "{:.1f}"))
 
         self.lbl_temp.setText(self._fmt(data.get("temp"), "{:.2f}"))
         self.lbl_hum.setText(self._fmt(data.get("hum"), "{:.1f}"))
-        self.lbl_press.setText(self._fmt(data.get("pressure"), "{}", fallback="---"))
+        self.lbl_press.setText(self._fmt(data.get("pressure"), "{:.3f}", fallback="---"))
 
     @staticmethod
     def _fmt(val, fmt, fallback="---"):

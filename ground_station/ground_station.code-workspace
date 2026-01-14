@@ -6,6 +6,10 @@
 		{
 			"name": "rocket",
 			"path": "../../../PlatformIO/Projects/rocket"
+		},
+		{
+			"name": "rocket_main",
+			"path": "../../../PlatformIO/Projects/rocket_main"
 		}
 	],
 	"settings": {

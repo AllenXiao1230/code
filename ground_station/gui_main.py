@@ -8,11 +8,9 @@ from PyQt5.QtWidgets import (
     QLabel,
     QGroupBox,
 )
-from PyQt5.QtCore import Qt
 
 from serial_comm import SerialWorker
-from protocol import ProtocolParser
-from state_machine import StateMachine, FlightState
+from state_machine import FlightState
 from config import FRAME_START, PACKET_LEN
 from logger import CSVLogger
 
@@ -36,11 +34,8 @@ class MainWindow(QMainWindow):
         self.resize(1200, 800)
 
         # ---- Core logic ----
-        self.parser = ProtocolParser()
-        self.fsm = StateMachine()
         self._legacy_buffer = bytearray()
         self._legacy_link_logged = False
-        self._saw_new_protocol = False
         self._mission_start_uptime = None
         self._last_uptime = 0.0
         self._boot_time_seconds = 0.0
@@ -58,8 +53,13 @@ class MainWindow(QMainWindow):
             "baro_speed": 0.0,
             "heading": 0.0,
             "sat": 0,
+            "accx": 0.0,
+            "accy": 0.0,
             "accz": 0.0,
+            "roll": 0.0,
             "pitch": 0.0,
+            "gyro_x": 0.0,
+            "gyro_y": 0.0,
             "gyro": 0.0,
             "battery": 0.0,
             "temp": 0.0,
@@ -73,7 +73,7 @@ class MainWindow(QMainWindow):
 
         # ---- UI ----
         self._init_ui()
-        self._connect_fsm_signals()
+        # Legacy-only telemetry decoding (53-byte frames).
 
     # ---------------- UI ----------------
 
@@ -166,17 +166,6 @@ class MainWindow(QMainWindow):
         self.state_panel.upload_requested.connect(self._on_state_upload)
         self.log_panel.logging_toggled.connect(self._on_logging_toggled)
 
-    # ---------------- FSM wiring ----------------
-
-    def _connect_fsm_signals(self):
-        self.fsm.attitude_updated.connect(self._on_attitude)
-        self.fsm.battery_updated.connect(self._on_battery)
-        self.fsm.altitude_updated.connect(self._on_altitude)
-        self.fsm.event_received.connect(self._on_event)
-        self.fsm.state_changed.connect(self._on_state_changed)
-        self.fsm.timestamp_updated.connect(self._on_time)
-        self.fsm.gps_updated.connect(self._on_gps)
-
     # ---------------- Serial ----------------
 
     def _start_serial(self, port: str, baudrate: int):
@@ -197,11 +186,6 @@ class MainWindow(QMainWindow):
 
     def _on_serial_data(self, raw: bytes):
         self._process_legacy_stream(raw)
-        packets = list(self.parser.feed(raw))
-        if packets:
-            self._saw_new_protocol = True
-        for payload in packets:
-            self.fsm.handle_packet(payload)
 
     def closeEvent(self, event):
         if self.serial_worker:
@@ -211,7 +195,7 @@ class MainWindow(QMainWindow):
     # ---------------- Handlers ----------------
 
     def _on_attitude(self, roll: float, pitch: float, yaw: float):
-        self.attitude_view.update_attitude(roll, pitch, yaw)
+        self.telemetry["roll"] = roll
         self.telemetry["pitch"] = pitch
         self.telemetry["gyro"] = yaw
         self.telemetry["heading"] = yaw
@@ -249,7 +233,7 @@ class MainWindow(QMainWindow):
 
         self.time_panel.update_time(mission_elapsed or 0.0)
         self.telemetry["time"] = self._boot_time_seconds
-        self._refresh_telemetry(t_plus=mission_elapsed)
+        self._refresh_telemetry()
 
     def _on_gps(self, lat: float, lon: float, alt: float):
         self.map_view.update_gps(lat, lon, alt)
@@ -258,13 +242,18 @@ class MainWindow(QMainWindow):
         self.telemetry["gps_alt"] = alt
         self._refresh_telemetry()
 
-    def _refresh_telemetry(self, t_plus=None):
-        self.telemetry_panel.update_data(self.telemetry, t_plus)
+    def _refresh_telemetry(self):
+        self.telemetry_panel.update_data(self.telemetry)
         self.speed_alt_panel.update_data(
             self.telemetry.get("gps_speed", self.telemetry.get("speed", 0.0)),
             self.telemetry.get("baro_speed", self.telemetry.get("speed", 0.0)),
             self.telemetry.get("gps_alt", self.telemetry.get("alt", 0.0)),
             self.telemetry.get("baro_alt", self.telemetry.get("alt", 0.0)),
+        )
+        self.attitude_view.update_attitude(
+            self.telemetry.get("roll", 0.0),
+            self.telemetry.get("pitch", 0.0),
+            self.telemetry.get("heading", 0.0),
         )
 
     def _on_serial_status(self, message: str):
@@ -281,17 +270,13 @@ class MainWindow(QMainWindow):
         # Placeholder: hook actual upload to rocket when protocol is defined.
         self.event_panel.add_event(f"Upload state requested: {state.name}")
 
-    # ---------------- Legacy fixed-length frames (41 bytes) ----------------
+    # ---------------- Fixed-length frames (53 bytes) ----------------
 
     def _process_legacy_stream(self, data: bytes):
         """
-        Some firmware versions emit 41-byte frames starting with 0x55 0xAA.
-        Parse them here so the UI still updates even if they don't use the
-        new ProtocolParser format.
+        Some firmware versions emit 53-byte frames starting with 0x55 0xAA.
+        Parse them here so the UI updates from fixed-length telemetry frames.
         """
-        if self._saw_new_protocol:
-            self._legacy_buffer.clear()
-            return
         if not data:
             return
 
@@ -326,7 +311,7 @@ class MainWindow(QMainWindow):
             self._handle_legacy_frame(frame)
 
     def _handle_legacy_frame(self, frame: bytes):
-        # Expected layout (41 bytes):
+        # Expected layout (53 bytes):
         # 0-1: 0x55 0xAA
         # 2: MsgType (0x01 telemetry)
         # 3-6: TimeTag ms (u32)
@@ -334,9 +319,9 @@ class MainWindow(QMainWindow):
         # 11-14: Longitude int32 (deg * 1e7)
         # 15-16: GPS Alt int16 (0.1 m)
         # 17-18: GPS Speed int16 (0.1 m/s)
-        # 19-20: GPS Heading uint16 (0.1 deg)
+        # 19-20: Yaw / Heading uint16 (0.1 deg)
         # 21: GPS Sat count uint8
-        # 22-23: AccZ int16 (0.01 g)
+        # 22-23: Roll int16 (0.01 deg) - IMU fusion output
         # 24-25: Pitch int16 (0.01 deg)
         # 26-27: GyroZ int16 (0.1 deg/s)
         # 28: StatusFlags uint8
@@ -344,8 +329,14 @@ class MainWindow(QMainWindow):
         # 30-31: Battery uint16 (mV)
         # 32-33: Temperature int16 (0.01 C)
         # 34-35: Humidity uint16 (0.1 %RH)
-        # 36-39: Baro Pressure uint32 (Pa)
-        # 40: CRC8 XOR(0..39)
+        # 36-39: Baro Pressure uint32 (Pa, UI/CSV shown as kPa)
+        # 40-41: Baro Altitude int16 (0.1 m)
+        # 42-43: AccX int16 (0.01 g)
+        # 44-45: AccY int16 (0.01 g)
+        # 46-47: AccZ int16 (0.01 g)
+        # 48-49: GyroX int16 (0.1 deg/s)
+        # 50-51: GyroY int16 (0.1 deg/s)
+        # 52: CRC8 XOR(0..51)
         if len(frame) != PACKET_LEN or frame[0] != 0x55 or frame[1] != FRAME_START:
             return
 
@@ -358,7 +349,7 @@ class MainWindow(QMainWindow):
             gps_speed_dms = struct.unpack("<h", frame[17:19])[0]
             gps_heading_ddeg = struct.unpack("<H", frame[19:21])[0]
             sat_count = frame[21]
-            accz_cg = struct.unpack("<h", frame[22:24])[0]
+            roll_cdeg = struct.unpack("<h", frame[22:24])[0]
             pitch_cdeg = struct.unpack("<h", frame[24:26])[0]
             gyro_ddeg_s = struct.unpack("<h", frame[26:28])[0]
             flight_state_raw = frame[28]
@@ -367,6 +358,12 @@ class MainWindow(QMainWindow):
             temp_c_centi = struct.unpack("<h", frame[32:34])[0]
             hum_deci = struct.unpack("<H", frame[34:36])[0]
             pressure_pa = struct.unpack("<I", frame[36:40])[0]
+            baro_alt_dm = struct.unpack("<h", frame[40:42])[0]
+            accx_cg = struct.unpack("<h", frame[42:44])[0]
+            accy_cg = struct.unpack("<h", frame[44:46])[0]
+            accz_cg = struct.unpack("<h", frame[46:48])[0]
+            gyro_x_ddeg_s = struct.unpack("<h", frame[48:50])[0]
+            gyro_y_ddeg_s = struct.unpack("<h", frame[50:52])[0]
         except Exception:
             return
 
@@ -374,28 +371,31 @@ class MainWindow(QMainWindow):
             return
 
         crc_calc = 0
-        for b in frame[:40]:
+        for b in frame[:PACKET_LEN - 1]:
             crc_calc ^= b
-        if crc_calc != frame[40]:
+        if crc_calc != frame[PACKET_LEN - 1]:
             return
 
         gps_alt_m = gps_alt_dm / 10.0
         gps_speed_ms = gps_speed_dms / 10.0
         baro_speed_ms = gps_speed_ms  # no separate baro speed provided
         heading_deg = (gps_heading_ddeg / 10.0) % 360
+        roll_deg = roll_cdeg / 100.0
         pitch_deg = pitch_cdeg / 100.0
-        roll_deg = 0.0  # roll not provided in this packet
-        accz_g = accz_cg / 100.0
         gyro_z_dps = gyro_ddeg_s / 10.0
+        gyro_x_dps = gyro_x_ddeg_s / 10.0
+        gyro_y_dps = gyro_y_ddeg_s / 10.0
         battery_v = battery_mv / 1000.0
         temp_c = temp_c_centi / 100.0
         humidity = hum_deci / 10.0
-        pressure = float(pressure_pa)
+        pressure = float(pressure_pa) / 1000.0
+        baro_alt_m = baro_alt_dm / 10.0
+        accx_g = accx_cg / 100.0
+        accy_g = accy_cg / 100.0
+        accz_g = accz_cg / 100.0
 
         if not self._legacy_link_logged:
-            self.event_panel.add_event(
-                "Detected 41-byte legacy telemetry frames; using fallback decoder."
-            )
+            self.event_panel.add_event("Detected 53-byte telemetry frames.")
             self._legacy_link_logged = True
 
         t_sec = ts_ms / 1000.0
@@ -418,9 +418,8 @@ class MainWindow(QMainWindow):
             mission_elapsed = max(0.0, t_sec - self._mission_start_uptime)
 
         self.time_panel.update_time(mission_elapsed or 0.0)
-        self.plot_panel.update_altitude(gps_alt_m)
+        self.plot_panel.update_altitude(baro_alt_m)
         self.map_view.update_gps(lat_raw / 1e7, lon_raw / 1e7, gps_alt_m)
-        self.attitude_view.update_attitude(roll_deg, pitch_deg, heading_deg)
         self.battery_panel.update_voltage(battery_v)
 
         # Update telemetry model and refresh derived panels
@@ -430,14 +429,19 @@ class MainWindow(QMainWindow):
             "lon": lon_raw / 1e7,
             "alt": gps_alt_m,
             "gps_alt": gps_alt_m,
-            "baro_alt": gps_alt_m,
+            "baro_alt": baro_alt_m,
             "speed": gps_speed_ms,
             "gps_speed": gps_speed_ms,
             "baro_speed": baro_speed_ms,
             "heading": heading_deg,
+            "accx": accx_g,
+            "accy": accy_g,
             "accz": accz_g,
+            "roll": roll_deg,
             "pitch": pitch_deg,
             "gyro": gyro_z_dps,
+            "gyro_x": gyro_x_dps,
+            "gyro_y": gyro_y_dps,
             "temp": temp_c,
             "hum": humidity,
             "pressure": pressure,
@@ -450,7 +454,7 @@ class MainWindow(QMainWindow):
         mission_elapsed = None
         if self._mission_start_uptime is not None:
             mission_elapsed = max(0.0, t_sec - self._mission_start_uptime)
-        self._refresh_telemetry(t_plus=mission_elapsed)
+        self._refresh_telemetry()
 
         if self._logger:
             try:

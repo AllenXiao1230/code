@@ -21,12 +21,12 @@ HTML_TEMPLATE = """
 <body>
 <div id="map"></div>
 <script>
-  var map = L.map('map').setView([0, 0], 2);
+  var map = L.map('map').setView([25.0330, 121.5654], 12);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19
   }).addTo(map);
 
-  var marker = L.marker([0, 0]).addTo(map);
+  var marker = L.marker([25.0330, 121.5654]).addTo(map);
   var path = [];
   var polyline = L.polyline(path, {color: 'deepskyblue', weight: 3}).addTo(map);
 

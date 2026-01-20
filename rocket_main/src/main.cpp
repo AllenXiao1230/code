@@ -2,6 +2,8 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <math.h>
+#include <RTClib.h>
+#include <Adafruit_NeoPixel.h>
 
 // 引入感測器函式庫
 #include "Adafruit_SHT31.h"
@@ -10,23 +12,74 @@
 #include "Adafruit_ADXL375.h"
 #include "ICM42688.h"
 
-// --- 定義 I2C 腳位 (請依您的 ESP32 接腳修改) ---
-// ESP32 一般預設: SDA=21, SCL=22
-// ESP32-S3 一般預設: SDA=8, SCL=9 或其他，請查閱您的板子圖
-#define I2C_SDA 8
-#define I2C_SCL 9
+// --- 腳位定義 (對應硬體表) ---
+#define I2C_A_SDA 8
+#define I2C_A_SCL 9
+#define I2C_B_SDA 11
+#define I2C_B_SCL 12
+
+#define UART_GPS_TX 21
+#define UART_GPS_RX 47
+#define UART_GPS_PPS 45
+
+#define LORA_SCK 36
+#define LORA_MISO 37
+#define LORA_MOSI 35
+#define LORA_NSS 10
+#define LORA_DIO0 39
+#define LORA_RST 14
+
+#define SD_SCK 18
+#define SD_MISO 16
+#define SD_MOSI 17
+#define SD_CS 38
+
+#define BUZZER_PIN 7
+#define BUZZER_CH 0
+#define BUZZER_RES 10
+
+#define WS2812_PIN 48
+#define WS2812_COUNT 1
+
+#define BATTERY_ADC_PIN 1
+#define DS3231_SQW_PIN 15
+#define SAFETY_SWITCH_PIN 2
+#define CHUTE_A_PIN 4
+#define CHUTE_B_PIN 5
+
+#define NOTE_DO 262
+#define NOTE_RE 294
+#define NOTE_MI 330
+#define NOTE_SOL 392
+#define NOTE_HDO 523
 
 // --- 建立感測器物件 ---
 Adafruit_SHT31 sht31 = Adafruit_SHT31();
 Adafruit_BMP3XX bmp;
 Adafruit_ADXL375 accel = Adafruit_ADXL375(12345); // ID 隨意
-ICM42688 imu(Wire, 0x68); // IMU42688 地址通常是 0x68 或 0x69
+ICM42688 imu_primary(Wire, 0x68); // IMU42688 地址通常是 0x68 或 0x69
+ICM42688 imu_alt(Wire, 0x69);
+ICM42688 *imu = &imu_primary;
+uint8_t imu_addr = 0x68;
+RTC_DS3231 rtc;
+Adafruit_NeoPixel status_led(WS2812_COUNT, WS2812_PIN, NEO_GRB + NEO_KHZ800);
 
 // --- 狀態旗標 (檢查誰活著) ---
 bool status_sht = false;
 bool status_bmp = false;
 bool status_adxl = false;
 bool status_imu = false;
+bool rtc_ready = false;
+
+// 與地面站一致的飛行狀態定義
+static const uint8_t kStateTest = 0;
+static const uint8_t kStateIdle = 1;
+static const uint8_t kStatePreflight = 2;
+static const uint8_t kStateAscent = 3;
+static const uint8_t kStateApogee = 4;
+static const uint8_t kStateDescent = 5;
+static const uint8_t kStateLanded = 6;
+static const uint8_t kStateAbort = 99;
 
 // --- 舊協議 41-byte 封包格式 ---
 static const uint8_t kFrameLen = 53;
@@ -69,6 +122,71 @@ static inline uint16_t clamp_u16(long v) {
 
 static inline float inv_sqrt(float x) {
   return 1.0f / sqrtf(x);
+}
+
+static bool i2c_probe(TwoWire &bus, uint8_t addr) {
+  bus.beginTransmission(addr);
+  return bus.endTransmission() == 0;
+}
+
+static void i2c_scan_print(TwoWire &bus, const char *label) {
+  Serial.printf("%s scan:\n", label);
+  bool found_any = false;
+  for (uint8_t addr = 0x03; addr <= 0x77; addr++) {
+    if (i2c_probe(bus, addr)) {
+      Serial.printf("  - 0x%02X\n", addr);
+      found_any = true;
+    }
+  }
+  if (!found_any) {
+    Serial.println("  (no devices)");
+  }
+}
+
+static void buzzerTone(int freq, int duration_ms) {
+  if (freq <= 0) {
+    ledcWriteTone(BUZZER_CH, 0);
+    delay(duration_ms);
+    return;
+  }
+  ledcWriteTone(BUZZER_CH, freq);
+  delay(duration_ms);
+  ledcWriteTone(BUZZER_CH, 0);
+}
+
+static void set_status_led(uint8_t state) {
+  uint32_t color = status_led.Color(0, 0, 0);
+  switch (state) {
+    case kStateTest:
+      color = status_led.Color(255, 255, 255);
+      break;
+    case kStateIdle:
+      color = status_led.Color(0, 0, 255);
+      break;
+    case kStatePreflight:
+      color = status_led.Color(0, 255, 255);
+      break;
+    case kStateAscent:
+      color = status_led.Color(0, 255, 0);
+      break;
+    case kStateApogee:
+      color = status_led.Color(255, 200, 0);
+      break;
+    case kStateDescent:
+      color = status_led.Color(255, 80, 0);
+      break;
+    case kStateLanded:
+      color = status_led.Color(120, 60, 0);
+      break;
+    case kStateAbort:
+      color = status_led.Color(255, 0, 0);
+      break;
+    default:
+      color = status_led.Color(32, 32, 32);
+      break;
+  }
+  status_led.setPixelColor(0, color);
+  status_led.show();
 }
 
 static void madgwick_update_imu(
@@ -143,9 +261,26 @@ void setup() {
   delay(1000);
   
   // 初始化 I2C
-  Wire.begin(I2C_SDA, I2C_SCL);
+  Wire.begin(I2C_A_SDA, I2C_A_SCL);
   // 可選：提高 I2C 速度到 400kHz (Fast Mode)
-  Wire.setClock(400000); 
+  Wire.setClock(400000);
+  Wire1.begin(I2C_B_SDA, I2C_B_SCL);
+  Wire1.setClock(400000);
+  i2c_scan_print(Wire, "I2C_A");
+  i2c_scan_print(Wire1, "I2C_B");
+
+  status_led.begin();
+  status_led.setBrightness(32);
+  set_status_led(kStateIdle);
+
+  pinMode(DS3231_SQW_PIN, INPUT_PULLUP);
+  rtc_ready = rtc.begin(&Wire1);
+  if (rtc_ready) {
+    if (rtc.lostPower()) {
+      rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+    }
+    rtc.writeSqwPinMode(DS3231_SquareWave1Hz);
+  }
 
   // 1. 初始化 SHT31 (溫濕度)
   if (!sht31.begin(0x44)) {   // 預設地址 0x44
@@ -171,16 +306,44 @@ void setup() {
   }
 
   // 4. 初始化 IMU42688 (陀螺儀/加速度計)
-  int imu_status = imu.begin();
-  if (imu_status < 0) {
-  } else {
-    status_imu = true;
-    // 設定 IMU 範圍 (火箭通常需要最大範圍)
-    imu.setAccelFS(ICM42688::gpm16); // ±16g
-    imu.setGyroFS(ICM42688::dps2000); // ±2000 dps
+  bool imu_present = false;
+  if (i2c_probe(Wire, 0x68)) {
+    imu = &imu_primary;
+    imu_addr = 0x68;
+    imu_present = true;
+  } else if (i2c_probe(Wire, 0x69)) {
+    imu = &imu_alt;
+    imu_addr = 0x69;
+    imu_present = true;
   }
+
+  if (imu_present) {
+    int imu_status = imu->begin();
+    if (imu_status < 0) {
+      Serial.printf("ICM42688 init failed on 0x%02X\n", imu_addr);
+    } else {
+      status_imu = true;
+      Serial.printf("ICM42688 OK on 0x%02X\n", imu_addr);
+      // 設定 IMU 範圍 (火箭通常需要最大範圍)
+      imu->setAccelFS(ICM42688::gpm16); // ±16g
+      imu->setGyroFS(ICM42688::dps2000); // ±2000 dps
+    }
+  } else {
+    Serial.println("ICM42688 not detected on 0x68/0x69");
+  }
+
+  ledcSetup(BUZZER_CH, 2000, BUZZER_RES);
+  ledcAttachPin(BUZZER_PIN, BUZZER_CH);
   
   delay(1000);
+  // DJI-style startup tone
+  buzzerTone(NOTE_DO, 120);
+  delay(20);
+  buzzerTone(NOTE_MI, 120);
+  delay(20);
+  buzzerTone(NOTE_SOL, 120);
+  delay(20);
+  buzzerTone(NOTE_HDO, 120);
 }
 
 void loop() {
@@ -227,20 +390,30 @@ void loop() {
   static float q3 = 0.0f;
   static uint32_t last_fusion_ms = 0;
   static bool fusion_init = false;
+  static uint32_t last_imu_print_ms = 0;
   if (status_imu) {
-    imu.getAGT();
-    float gx_raw = imu.gyrX();
-    float gy_raw = imu.gyrY();
-    float gz_raw = imu.gyrZ();
+    imu->getAGT();
+    float gx_raw = imu->gyrX();
+    float gy_raw = imu->gyrY();
+    float gz_raw = imu->gyrZ();
+    float ax_raw = imu->accX();
+    float ay_raw = imu->accY();
+    float az_raw = imu->accZ();
     gyro_x_dps = gx_raw;
     gyro_y_dps = gy_raw;
     gyro_z_dps = gz_raw;
 
+    if (time_ms - last_imu_print_ms >= 500) {
+      Serial.printf("ICM acc[g]=%.3f,%.3f,%.3f gyro[dps]=%.3f,%.3f,%.3f\n",
+                    ax_raw, ay_raw, az_raw, gx_raw, gy_raw, gz_raw);
+      last_imu_print_ms = time_ms;
+    }
+
     if (!fusion_init) {
       // Map to fusion axes so roll=Z, pitch=X, yaw=Y.
-      float ax_body = imu.accZ();
-      float ay_body = imu.accX();
-      float az_body = imu.accY();
+      float ax_body = az_raw;
+      float ay_body = ax_raw;
+      float az_body = ay_raw;
       float roll_acc = atan2f(ay_body, az_body);
       float pitch_acc = atan2f(-ax_body, sqrtf(ay_body * ay_body + az_body * az_body));
       float cr = cosf(roll_acc * 0.5f);
@@ -257,9 +430,9 @@ void loop() {
       float dt = (time_ms - last_fusion_ms) / 1000.0f;
       if (dt > 0.0f && dt < 1.0f) {
         // Map to fusion axes so roll=Z, pitch=X, yaw=Y.
-        float ax_body = imu.accZ();
-        float ay_body = imu.accX();
-        float az_body = imu.accY();
+        float ax_body = az_raw;
+        float ay_body = ax_raw;
+        float az_body = ay_raw;
         float gx = gz_raw;
         float gy = gx_raw;
         float gz = gy_raw;
@@ -345,7 +518,12 @@ void loop() {
   int16_t accz_cg = clamp_i16(lroundf(accz_g * 100.0f));
   int16_t gyro_x_ddeg_s = clamp_i16(lroundf(gyro_x_dps * 10.0f));
   int16_t gyro_y_ddeg_s = clamp_i16(lroundf(gyro_y_dps * 10.0f));
-  uint8_t flight_state = 1; // IDLE
+  uint8_t flight_state = kStateIdle;
+  static uint8_t last_state = 0xFF;
+  if (flight_state != last_state) {
+    set_status_led(flight_state);
+    last_state = flight_state;
+  }
   uint8_t error_code = 0;
   uint16_t battery_mv = 0;
   int16_t temp_c_centi = clamp_i16(lroundf(temp_c * 100.0f));

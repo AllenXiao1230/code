@@ -71,6 +71,17 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 - 火箭座標系：Z 軸指向鼻錐/天空，X 軸指向火箭右邊，Y 軸指向發射水平方向（前方）。
 - 姿態角定義：Roll 繞 Z 軸、Pitch 繞 X 軸、Yaw 繞 Y 軸。
 
+IMU / ADXL 軸向對應（中文說明）
+----------------------------
+- ICM42688 原始軸：以晶片座標讀取 `accX/accY/accZ`、`gyrX/gyrY/gyrZ`。
+- 姿態融合使用軸：為了符合「Roll=繞Z、Pitch=繞X、Yaw=繞Y」的定義，融合時做了軸重排：  
+  - `ax_body = accZ`、`ay_body = accX`、`az_body = accY`  
+  - `gx_body = gyrZ`、`gy_body = gyrX`、`gz_body = gyrY`
+- ADXL375 對應火箭座標系（加速度輸出）：  
+  - `AccX = -ADXL_Y`、`AccY = ADXL_X`、`AccZ = ADXL_Z`
+- Yaw 校正：啟動後第一筆姿態會作為零點（yaw 歸零）。
+- Yaw 鎖定：俯仰接近垂直時（|Pitch| ≥ 80°）暫停更新 yaw，避免數值亂跳。
+
 
 CSV 記錄
 --------

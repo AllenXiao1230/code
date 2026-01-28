@@ -66,6 +66,7 @@ class MainWindow(QMainWindow):
             "hum": 0.0,
             "pressure": 0.0,
             "status": 0,
+            "water": 0,
         }
 
         # ---- Serial worker (created on demand) ----
@@ -73,7 +74,7 @@ class MainWindow(QMainWindow):
 
         # ---- UI ----
         self._init_ui()
-        # Legacy-only telemetry decoding (53-byte frames).
+        # Legacy-only telemetry decoding (54-byte frames).
 
     # ---------------- UI ----------------
 
@@ -274,7 +275,7 @@ class MainWindow(QMainWindow):
 
     def _process_legacy_stream(self, data: bytes):
         """
-        Some firmware versions emit 53-byte frames starting with 0x55 0xAA.
+        Some firmware versions emit 54-byte frames starting with 0x55 0xAA.
         Parse them here so the UI updates from fixed-length telemetry frames.
         """
         if not data:
@@ -311,7 +312,7 @@ class MainWindow(QMainWindow):
             self._handle_legacy_frame(frame)
 
     def _handle_legacy_frame(self, frame: bytes):
-        # Expected layout (53 bytes):
+        # Expected layout (54 bytes):
         # 0-1: 0x55 0xAA
         # 2: MsgType (0x01 telemetry)
         # 3-6: TimeTag ms (u32)
@@ -336,7 +337,8 @@ class MainWindow(QMainWindow):
         # 48-49: Battery uint16 (mV)
         # 50: FlightState uint8
         # 51: ErrorCode uint8
-        # 52: CRC8 XOR(0..51)
+        # 52: WaterDetected uint8 (0/1)
+        # 53: CRC8 XOR(0..52)
         if len(frame) != PACKET_LEN or frame[0] != 0x55 or frame[1] != FRAME_START:
             return
 
@@ -364,6 +366,7 @@ class MainWindow(QMainWindow):
             battery_mv = struct.unpack("<H", frame[48:50])[0]
             flight_state_raw = frame[50]
             error_code = frame[51]
+            water_detected = frame[52]
         except Exception:
             return
 
@@ -395,7 +398,7 @@ class MainWindow(QMainWindow):
         accz_g = accz_cg / 100.0
 
         if not self._legacy_link_logged:
-            self.event_panel.add_event("Detected 53-byte telemetry frames.")
+            self.event_panel.add_event("Detected 54-byte telemetry frames.")
             self._legacy_link_logged = True
 
         t_sec = ts_ms / 1000.0
@@ -449,6 +452,7 @@ class MainWindow(QMainWindow):
             "battery": battery_v,
             "status": fs.value if fs is not None else flight_state_raw,
             "error": error_code,
+            "water": water_detected,
         })
 
         mission_elapsed = None

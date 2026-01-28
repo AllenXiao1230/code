@@ -1,7 +1,7 @@
 Rocket Ground Station
 =====================
 
-PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示、地圖軌跡、高度曲線與 CSV 記錄控制。統一採用 53-byte 固定長度封包（Header=0xAA55）的解碼，並以 T+ 任務時間呈現飛行狀態。
+PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示、地圖軌跡、高度曲線與 CSV 記錄控制。統一採用 54-byte 固定長度封包（Header=0xAA55）的解碼，並以 T+ 任務時間呈現飛行狀態。
 
 
 快速開始
@@ -24,7 +24,7 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 - 飛行狀態控制：顯示當前狀態；狀態變更為 ASCENT 時會鎖定任務 T0；IDLE 會重置任務時間。
 - 記錄控制：開始/停止 CSV 記錄（檔名 `telemetry_<timestamp>.csv`）。狀態會顯示於按鈕旁並寫入事件面板。
 - 速度 / 高度：左右分欄顯示 GPS/氣壓的速度與高度。
-- 感測器數據：顯示狀態、錯誤碼、開機時間（秒）、經緯度、偏航、衛星數、Roll/Pitch、AccX/Y/Z、GyroX/Y/Z、溫濕度與氣壓。
+- 感測器數據：顯示狀態、錯誤碼、開機時間（秒）、落水狀態、經緯度、偏航、衛星數、Roll/Pitch、AccX/Y/Z、GyroX/Y/Z、溫濕度與氣壓。
 - 地圖：Leaflet 地圖（需網路存取 tile），標記當前 GPS 位置並以折線連接歷史點。
 - 高度曲線：顯示 30 秒滑動窗口，時間軸隨時間向右移動，最新數據在右端。
 - 事件指示器：列出連線、錯誤、記錄狀態等訊息。
@@ -32,7 +32,7 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 - 3D 姿態：以 Roll/Pitch/Yaw 即時旋轉火箭模型，座標軸固定在畫面。
 
 
-遙測封包格式（53 bytes）
+遙測封包格式（54 bytes）
 ----------------------
 所有欄位為 little-endian。
 
@@ -62,7 +62,8 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 | 48–49 | 2 | Battery | `uint16` | mV |
 | 50 | 1 | FlightState | `uint8` | 0=TEST,1=IDLE,2=PREFLIGHT,3=ASCENT,4=APOGEE,5=DESCENT,6=LANDED,99=ABORT |
 | 51 | 1 | ErrorCode | `uint8` | 0=NONE,1=LoRa lost,2=GPS lost,3=IMU fail,4=Baro fail,5=Battery low,6=Sensor timeout,255=Unknown |
-| 52 | 1 | CRC8 | `uint8` | XOR(Byte 0–51) |
+| 52 | 1 | WaterDetected | `uint8` | 0=否,1=是 |
+| 53 | 1 | CRC8 | `uint8` | XOR(Byte 0–52) |
 
 收到 MsgType=0x01 且 CRC 正確才會更新 UI。TimeTag 會顯示為開機時間（秒），任務時間以 ASCENT 為 T0 顯示 T+。
 
@@ -103,7 +104,7 @@ IMU / ADXL 軸向對應（中文說明）
 CSV 記錄
 --------
 - 檔名：`telemetry_<unix_ts>.csv`
-- 欄位：`time, lat, lon, alt, gps_alt, baro_alt, speed, heading, sat, roll, pitch, accx, accy, accz, gyro_x, gyro_y, gyro_z, battery, temp, hum, pressure_kpa, status`
+- 欄位：`time, lat, lon, alt, gps_alt, baro_alt, speed, heading, sat, roll, pitch, accx, accy, accz, gyro_x, gyro_y, gyro_z, battery, temp, hum, pressure_kpa, status, water`
 - 操作：在「記錄控制」點「開始記錄」啟動，停止後自動關檔。
 
 
@@ -127,6 +128,6 @@ CSV 記錄
 開發與注意事項
 -------------
 - 地圖需要網路下載 OSM tile；無網路時地圖空白但其他功能仍可用。
-- 目前僅解碼 53-byte 固定封包；若韌體改版需同步更新 `gui_main.py` 的 `_handle_legacy_frame`。
+- 目前僅解碼 54-byte 固定封包；若韌體改版需同步更新 `gui_main.py` 的 `_handle_legacy_frame`。
 - 任務時間以 ASCENT 為 T0；切回 IDLE 會重置 T0。
 - 預設序列埠/波特率：`COM3`、115200，可在 UI 選擇或修改 `config.py`。

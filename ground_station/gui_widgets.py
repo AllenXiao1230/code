@@ -58,6 +58,7 @@ class TelemetryPanel(QWidget):
         self.lbl_state = QLabel()
         self.lbl_error = QLabel()
         self.lbl_time = QLabel()
+        self.lbl_water = QLabel()
 
         f.addWidget(QLabel("狀態"), 0, 0)
         f.addWidget(self.lbl_state, 0, 1)
@@ -65,6 +66,8 @@ class TelemetryPanel(QWidget):
         f.addWidget(self.lbl_error, 1, 1)
         f.addWidget(QLabel("時間 (秒)"), 2, 0)
         f.addWidget(self.lbl_time, 2, 1)
+        f.addWidget(QLabel("落水"), 3, 0)
+        f.addWidget(self.lbl_water, 3, 1)
 
         # ===== GPS / Yaw =====
         gps = QGroupBox("定位 / 偏航")
@@ -137,6 +140,7 @@ class TelemetryPanel(QWidget):
         self.lbl_state.setText(decode_state(data.get("status")))
         self.lbl_error.setText(decode_error(data.get("error")))
         self.lbl_time.setText(self._fmt(data.get("time"), "{:.1f}"))
+        self.lbl_water.setText("是" if data.get("water") else "否")
 
         self.lbl_lat.setText(self._fmt(data.get("lat"), "{:.7f}"))
         self.lbl_lon.setText(self._fmt(data.get("lon"), "{:.7f}"))

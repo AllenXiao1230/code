@@ -81,8 +81,8 @@ static const uint8_t kStateDescent = 5;
 static const uint8_t kStateLanded = 6;
 static const uint8_t kStateAbort = 99;
 
-// --- 舊協議 41-byte 封包格式 ---
-static const uint8_t kFrameLen = 53;
+// --- 固定長度封包格式（54 bytes） ---
+static const uint8_t kFrameLen = 54;
 static const uint8_t kFrameHeader0 = 0x55;
 static const uint8_t kFrameHeader1 = 0xAA;
 static const uint8_t kMsgTypeTelemetry = 0x01;
@@ -525,6 +525,7 @@ void loop() {
     last_state = flight_state;
   }
   uint8_t error_code = 0;
+  uint8_t water_detected = 0;
   uint16_t battery_mv = 0;
   int16_t temp_c_centi = clamp_i16(lroundf(temp_c * 100.0f));
   uint16_t hum_deci = clamp_u16(lroundf(hum * 10.0f));
@@ -556,6 +557,7 @@ void loop() {
   write_u16_le(frame, 48, battery_mv);
   frame[50] = flight_state;
   frame[51] = error_code;
+  frame[52] = water_detected;
 
   uint8_t crc = 0;
   for (int i = 0; i < kFrameLen - 1; i++) {

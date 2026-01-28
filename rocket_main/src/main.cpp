@@ -1,7 +1,11 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <SPI.h>
+#include <LoRa.h>
+#include <SD.h>
 #include <math.h>
+#include <string.h>
+#include <stdlib.h>
 #include <RTClib.h>
 #include <Adafruit_NeoPixel.h>
 
@@ -12,40 +16,56 @@
 #include "Adafruit_ADXL375.h"
 #include "ICM42688.h"
 
+// Set to 1 for Serial debug logs. Keep 0 when Serial is used for binary packets.
+#define DEBUG_SERIAL 0
+#if DEBUG_SERIAL
+#define DBG_PRINTF(...) Serial.printf(__VA_ARGS__)
+#define DBG_PRINTLN(msg) Serial.println(msg)
+#else
+#define DBG_PRINTF(...) do {} while (0)
+#define DBG_PRINTLN(msg) do {} while (0)
+#endif
+
 // --- 腳位定義 (對應硬體表) ---
-#define I2C_A_SDA 8
-#define I2C_A_SCL 9
-#define I2C_B_SDA 11
-#define I2C_B_SCL 12
+#define I2C_A_SDA 20
+#define I2C_A_SCL 19
+#define I2C_B_SDA 9
+#define I2C_B_SCL 10
 
-#define UART_GPS_TX 21
-#define UART_GPS_RX 47
-#define UART_GPS_PPS 45
+#define UART_GPS_TX 45
+#define UART_GPS_RX 35
+#define UART_GPS_PPS 47
+#define UART_GPS_BAUD 230400
 
-#define LORA_SCK 36
-#define LORA_MISO 37
-#define LORA_MOSI 35
-#define LORA_NSS 10
-#define LORA_DIO0 39
-#define LORA_RST 14
+#define LORA_SCK 42
+#define LORA_MISO 41
+#define LORA_MOSI 40
+#define LORA_NSS 39
+#define LORA_RST 38
+#define LORA_DIO0 37
+#define LORA_DIO1 36
+#define LORA_FREQ 433E6
+#define LORA_SYNC_WORD 0x12
+#define LORA_TX_POWER 17
 
-#define SD_SCK 18
-#define SD_MISO 16
-#define SD_MOSI 17
-#define SD_CS 38
+#define SD_CS 11
+#define SD_MOSI 12
+#define SD_SCK 13
+#define SD_MISO 14
 
-#define BUZZER_PIN 7
+#define BUZZER_PIN 8
 #define BUZZER_CH 0
 #define BUZZER_RES 10
 
 #define WS2812_PIN 48
 #define WS2812_COUNT 1
 
-#define BATTERY_ADC_PIN 1
-#define DS3231_SQW_PIN 15
-#define SAFETY_SWITCH_PIN 2
-#define CHUTE_A_PIN 4
-#define CHUTE_B_PIN 5
+#define BATTERY_ADC_PIN 4
+#define DS3231_SQW_PIN 3
+#define WATER_DETECT_PIN 15
+#define SAFETY_SWITCH_PIN 21
+#define CHUTE_A_PIN 5
+#define CHUTE_B_PIN 6
 
 #define NOTE_DO 262
 #define NOTE_RE 294
@@ -63,6 +83,12 @@ ICM42688 *imu = &imu_primary;
 uint8_t imu_addr = 0x68;
 RTC_DS3231 rtc;
 Adafruit_NeoPixel status_led(WS2812_COUNT, WS2812_PIN, NEO_GRB + NEO_KHZ800);
+HardwareSerial GPSSerial(1);
+SPIClass loraSPI(HSPI);
+SPIClass sdSPI(VSPI);
+File sd_log;
+bool lora_ready = false;
+bool sd_ready = false;
 
 // --- 狀態旗標 (檢查誰活著) ---
 bool status_sht = false;
@@ -81,12 +107,72 @@ static const uint8_t kStateDescent = 5;
 static const uint8_t kStateLanded = 6;
 static const uint8_t kStateAbort = 99;
 
-// --- 固定長度封包格式（54 bytes） ---
-static const uint8_t kFrameLen = 54;
+// --- 固定長度封包格式（58 bytes） ---
+static const uint8_t kFrameLen = 58;
 static const uint8_t kFrameHeader0 = 0x55;
 static const uint8_t kFrameHeader1 = 0xAA;
 static const uint8_t kMsgTypeTelemetry = 0x01;
 static const float kG = 9.80665f;
+static const float kBatteryRTop = 200000.0f;  // ohms (to battery)
+static const float kBatteryRBottom = 100000.0f; // ohms (to GND)
+static const float kBatteryDivider = kBatteryRBottom / (kBatteryRTop + kBatteryRBottom);
+
+static int32_t gps_lat_raw = 0;
+static int32_t gps_lon_raw = 0;
+static int16_t gps_alt_dm = 0;
+static int16_t gps_speed_dms = 0;
+static uint8_t gps_sat_count = 0;
+static uint32_t gps_last_fix_ms = 0;
+static const uint32_t kGpsTimeoutMs = 2000;
+static bool gps_fix_valid = false;
+
+static void write_sd_csv_header() {
+  if (!sd_log) {
+    return;
+  }
+  sd_log.println("time_ms,rtc,lat,lon,gps_alt,baro_alt,speed,heading,sat,roll,pitch,accx,accy,accz,gyro_x,gyro_y,gyro_z,battery,temp,hum,pressure_pa,status,error,water");
+}
+
+static void write_sd_csv_line(uint32_t time_ms,
+                              uint32_t rtc_unix,
+                              float lat_deg,
+                              float lon_deg,
+                              float gps_alt_m,
+                              float baro_alt_m,
+                              float speed_ms,
+                              float heading_deg,
+                              uint8_t sat,
+                              float roll_deg,
+                              float pitch_deg,
+                              float accx_g,
+                              float accy_g,
+                              float accz_g,
+                              float gyro_x_dps,
+                              float gyro_y_dps,
+                              float gyro_z_dps,
+                              float battery_v,
+                              float temp_c,
+                              float hum,
+                              float pressure_pa,
+                              uint8_t status,
+                              uint8_t error,
+                              uint8_t water) {
+  if (!sd_log) {
+    return;
+  }
+  char line[256];
+  int n = snprintf(line, sizeof(line),
+                   "%lu,%lu,%.7f,%.7f,%.1f,%.1f,%.1f,%.1f,%u,%.2f,%.2f,%.2f,%.2f,%.2f,%.1f,%.1f,%.1f,%.3f,%.2f,%.1f,%.0f,%u,%u,%u\n",
+                   static_cast<unsigned long>(time_ms),
+                   static_cast<unsigned long>(rtc_unix),
+                   lat_deg, lon_deg, gps_alt_m, baro_alt_m, speed_ms, heading_deg, sat,
+                   roll_deg, pitch_deg, accx_g, accy_g, accz_g, gyro_x_dps, gyro_y_dps, gyro_z_dps,
+                   battery_v, temp_c, hum, pressure_pa,
+                   status, error, water);
+  if (n > 0) {
+    sd_log.write(reinterpret_cast<const uint8_t *>(line), static_cast<size_t>(n));
+  }
+}
 
 static inline void write_u16_le(uint8_t *buf, int idx, uint16_t v) {
   buf[idx] = static_cast<uint8_t>(v & 0xFF);
@@ -120,6 +206,201 @@ static inline uint16_t clamp_u16(long v) {
   return static_cast<uint16_t>(v);
 }
 
+static uint16_t read_battery_mv() {
+  uint32_t adc_mv = analogReadMilliVolts(BATTERY_ADC_PIN);
+  if (adc_mv == 0) {
+    return 0;
+  }
+  float batt_v = (adc_mv / 1000.0f) / kBatteryDivider;
+  return clamp_u16(lroundf(batt_v * 1000.0f));
+}
+
+static float parse_nmea_coord(const char *field) {
+  if (!field || !*field) {
+    return NAN;
+  }
+  double val = atof(field);
+  int deg = static_cast<int>(val / 100.0);
+  double minutes = val - (deg * 100.0);
+  double dec = deg + minutes / 60.0;
+  return static_cast<float>(dec);
+}
+
+static int hex_nibble(char c) {
+  if (c >= '0' && c <= '9') return c - '0';
+  if (c >= 'A' && c <= 'F') return c - 'A' + 10;
+  if (c >= 'a' && c <= 'f') return c - 'a' + 10;
+  return -1;
+}
+
+static bool nmea_checksum_ok(const char *line) {
+  if (!line || line[0] != '$') {
+    return false;
+  }
+  const char *star = strchr(line, '*');
+  if (!star || star - line < 1) {
+    return false;
+  }
+  uint8_t sum = 0;
+  for (const char *p = line + 1; p < star; ++p) {
+    sum ^= static_cast<uint8_t>(*p);
+  }
+  int hi = hex_nibble(star[1]);
+  int lo = hex_nibble(star[2]);
+  if (hi < 0 || lo < 0) {
+    return false;
+  }
+  uint8_t expected = static_cast<uint8_t>((hi << 4) | lo);
+  return sum == expected;
+}
+
+static void handle_gps_line(char *line) {
+  if (!line || line[0] != '$') {
+    return;
+  }
+  if (!nmea_checksum_ok(line)) {
+    return;
+  }
+  char *save = nullptr;
+  char *type = strtok_r(line, ",", &save);
+  if (!type) {
+    return;
+  }
+  bool is_rmc = (strstr(type, "RMC") != nullptr);
+  bool is_gga = (strstr(type, "GGA") != nullptr);
+  if (!is_rmc && !is_gga) {
+    return;
+  }
+
+  if (is_rmc) {
+    // RMC: time, status, lat, N/S, lon, E/W, speed(knots), ...
+    char *time_f = strtok_r(nullptr, ",", &save);
+    char *status_f = strtok_r(nullptr, ",", &save);
+    char *lat_f = strtok_r(nullptr, ",", &save);
+    char *ns_f = strtok_r(nullptr, ",", &save);
+    char *lon_f = strtok_r(nullptr, ",", &save);
+    char *ew_f = strtok_r(nullptr, ",", &save);
+    char *speed_f = strtok_r(nullptr, ",", &save);
+    (void)time_f;
+    if (status_f && status_f[0] == 'A') {
+      float lat = parse_nmea_coord(lat_f);
+      float lon = parse_nmea_coord(lon_f);
+      if (!isnan(lat) && ns_f && ns_f[0] == 'S') {
+        lat = -lat;
+      }
+      if (!isnan(lon) && ew_f && ew_f[0] == 'W') {
+        lon = -lon;
+      }
+      if (!isnan(lat) && !isnan(lon)) {
+        gps_lat_raw = static_cast<int32_t>(lroundf(lat * 1e7f));
+        gps_lon_raw = static_cast<int32_t>(lroundf(lon * 1e7f));
+        gps_last_fix_ms = millis();
+        gps_fix_valid = true;
+      }
+      if (speed_f && *speed_f) {
+        float speed_kn = static_cast<float>(atof(speed_f));
+        float speed_ms = speed_kn * 0.514444f;
+        gps_speed_dms = clamp_i16(lroundf(speed_ms * 10.0f));
+        gps_last_fix_ms = millis();
+        gps_fix_valid = true;
+      }
+    }
+    return;
+  }
+
+  if (is_gga) {
+    // GGA: time, lat, N/S, lon, E/W, fix, sats, hdop, alt(m), ...
+    char *time_f = strtok_r(nullptr, ",", &save);
+    char *lat_f = strtok_r(nullptr, ",", &save);
+    char *ns_f = strtok_r(nullptr, ",", &save);
+    char *lon_f = strtok_r(nullptr, ",", &save);
+    char *ew_f = strtok_r(nullptr, ",", &save);
+    char *fix_f = strtok_r(nullptr, ",", &save);
+    char *sat_f = strtok_r(nullptr, ",", &save);
+    char *hdop_f = strtok_r(nullptr, ",", &save);
+    char *alt_f = strtok_r(nullptr, ",", &save);
+    (void)time_f;
+    (void)hdop_f;
+    if (fix_f && fix_f[0] > '0') {
+      float lat = parse_nmea_coord(lat_f);
+      float lon = parse_nmea_coord(lon_f);
+      if (!isnan(lat) && ns_f && ns_f[0] == 'S') {
+        lat = -lat;
+      }
+      if (!isnan(lon) && ew_f && ew_f[0] == 'W') {
+        lon = -lon;
+      }
+      if (!isnan(lat) && !isnan(lon)) {
+        gps_lat_raw = static_cast<int32_t>(lroundf(lat * 1e7f));
+        gps_lon_raw = static_cast<int32_t>(lroundf(lon * 1e7f));
+        gps_last_fix_ms = millis();
+        gps_fix_valid = true;
+      }
+      if (sat_f && *sat_f) {
+        gps_sat_count = static_cast<uint8_t>(atoi(sat_f));
+        gps_last_fix_ms = millis();
+        gps_fix_valid = true;
+      }
+      if (alt_f && *alt_f) {
+        float alt_m = static_cast<float>(atof(alt_f));
+        gps_alt_dm = clamp_i16(lroundf(alt_m * 10.0f));
+        gps_last_fix_ms = millis();
+        gps_fix_valid = true;
+      }
+    }
+  }
+}
+
+static void process_gps_stream() {
+  static char line[128];
+  static uint8_t idx = 0;
+  while (GPSSerial.available()) {
+    char c = static_cast<char>(GPSSerial.read());
+    if (c == '\n') {
+      line[idx] = '\0';
+      if (idx > 0) {
+        handle_gps_line(line);
+      }
+      idx = 0;
+      continue;
+    }
+    if (c == '\r') {
+      continue;
+    }
+    if (idx < sizeof(line) - 1) {
+      line[idx++] = c;
+    } else {
+      idx = 0;
+    }
+  }
+}
+
+static void handle_serial_rtc_sync() {
+  static char line[64];
+  static uint8_t idx = 0;
+  while (Serial.available()) {
+    char c = static_cast<char>(Serial.read());
+    if (c == '\n' || c == '\r') {
+      if (idx == 0) {
+        continue;
+      }
+      line[idx] = '\0';
+      if (strncmp(line, "RTC_SYNC:", 9) == 0) {
+        uint32_t epoch = static_cast<uint32_t>(strtoul(line + 9, nullptr, 10));
+        if (epoch > 0 && rtc_ready) {
+          rtc.adjust(DateTime(epoch));
+          DBG_PRINTF("RTC synced: %lu\n", static_cast<unsigned long>(epoch));
+        }
+      }
+      idx = 0;
+    } else {
+      if (idx < sizeof(line) - 1) {
+        line[idx++] = c;
+      }
+    }
+  }
+}
+
 static inline float inv_sqrt(float x) {
   return 1.0f / sqrtf(x);
 }
@@ -130,16 +411,16 @@ static bool i2c_probe(TwoWire &bus, uint8_t addr) {
 }
 
 static void i2c_scan_print(TwoWire &bus, const char *label) {
-  Serial.printf("%s scan:\n", label);
+  DBG_PRINTF("%s scan:\n", label);
   bool found_any = false;
   for (uint8_t addr = 0x03; addr <= 0x77; addr++) {
     if (i2c_probe(bus, addr)) {
-      Serial.printf("  - 0x%02X\n", addr);
+      DBG_PRINTF("  - 0x%02X\n", addr);
       found_any = true;
     }
   }
   if (!found_any) {
-    Serial.println("  (no devices)");
+    DBG_PRINTLN("  (no devices)");
   }
 }
 
@@ -269,10 +550,47 @@ void setup() {
   i2c_scan_print(Wire, "I2C_A");
   i2c_scan_print(Wire1, "I2C_B");
 
+  // LoRa init (SPI bus + radio)
+  pinMode(LORA_NSS, OUTPUT);
+  digitalWrite(LORA_NSS, HIGH);
+  pinMode(LORA_RST, OUTPUT);
+  digitalWrite(LORA_RST, HIGH);
+  pinMode(LORA_DIO0, INPUT);
+  pinMode(LORA_DIO1, INPUT);
+  loraSPI.begin(LORA_SCK, LORA_MISO, LORA_MOSI, LORA_NSS);
+  LoRa.setSPI(loraSPI);
+  LoRa.setPins(LORA_NSS, LORA_RST, LORA_DIO0);
+  lora_ready = LoRa.begin(LORA_FREQ);
+  if (lora_ready) {
+    LoRa.setSyncWord(LORA_SYNC_WORD);
+    LoRa.setTxPower(LORA_TX_POWER);
+    LoRa.setSpreadingFactor(7);
+    LoRa.setSignalBandwidth(125E3);
+    LoRa.setCodingRate4(5);
+    DBG_PRINTLN("LoRa OK");
+  } else {
+    DBG_PRINTLN("LoRa init failed");
+  }
+
+  // SD init (dedicated SPI bus)
+  pinMode(SD_CS, OUTPUT);
+  digitalWrite(SD_CS, HIGH);
+  sdSPI.begin(SD_SCK, SD_MISO, SD_MOSI, SD_CS);
+  sd_ready = SD.begin(SD_CS, sdSPI);
+  if (sd_ready) {
+    sd_log = SD.open("/telemetry.csv", FILE_APPEND);
+    if (!sd_log) {
+      sd_ready = false;
+    } else if (sd_log.size() == 0) {
+      write_sd_csv_header();
+    }
+  }
+
   status_led.begin();
   status_led.setBrightness(32);
   set_status_led(kStateIdle);
 
+  pinMode(WATER_DETECT_PIN, INPUT);
   pinMode(DS3231_SQW_PIN, INPUT_PULLUP);
   rtc_ready = rtc.begin(&Wire1);
   if (rtc_ready) {
@@ -320,20 +638,26 @@ void setup() {
   if (imu_present) {
     int imu_status = imu->begin();
     if (imu_status < 0) {
-      Serial.printf("ICM42688 init failed on 0x%02X\n", imu_addr);
+      DBG_PRINTF("ICM42688 init failed on 0x%02X\n", imu_addr);
     } else {
       status_imu = true;
-      Serial.printf("ICM42688 OK on 0x%02X\n", imu_addr);
+      DBG_PRINTF("ICM42688 OK on 0x%02X\n", imu_addr);
       // 設定 IMU 範圍 (火箭通常需要最大範圍)
       imu->setAccelFS(ICM42688::gpm16); // ±16g
       imu->setGyroFS(ICM42688::dps2000); // ±2000 dps
     }
   } else {
-    Serial.println("ICM42688 not detected on 0x68/0x69");
+    DBG_PRINTLN("ICM42688 not detected on 0x68/0x69");
   }
 
   ledcSetup(BUZZER_CH, 2000, BUZZER_RES);
   ledcAttachPin(BUZZER_PIN, BUZZER_CH);
+
+  analogReadResolution(12);
+  analogSetPinAttenuation(BATTERY_ADC_PIN, ADC_11db);
+
+  GPSSerial.begin(UART_GPS_BAUD, SERIAL_8N1, UART_GPS_RX, UART_GPS_TX);
+  pinMode(UART_GPS_PPS, INPUT);
   
   delay(1000);
   // DJI-style startup tone
@@ -348,6 +672,12 @@ void setup() {
 
 void loop() {
   uint32_t time_ms = millis();
+  handle_serial_rtc_sync();
+  process_gps_stream();
+  if (gps_last_fix_ms > 0 && time_ms - gps_last_fix_ms > kGpsTimeoutMs) {
+    gps_fix_valid = false;
+    gps_sat_count = 0;
+  }
 
   float temp_c = 0.0f;
   float hum = 0.0f;
@@ -404,8 +734,8 @@ void loop() {
     gyro_z_dps = gz_raw;
 
     if (time_ms - last_imu_print_ms >= 500) {
-      Serial.printf("ICM acc[g]=%.3f,%.3f,%.3f gyro[dps]=%.3f,%.3f,%.3f\n",
-                    ax_raw, ay_raw, az_raw, gx_raw, gy_raw, gz_raw);
+      DBG_PRINTF("ICM acc[g]=%.3f,%.3f,%.3f gyro[dps]=%.3f,%.3f,%.3f\n",
+                 ax_raw, ay_raw, az_raw, gx_raw, gy_raw, gz_raw);
       last_imu_print_ms = time_ms;
     }
 
@@ -504,12 +834,12 @@ void loop() {
   roll_deg = roll_filt;
   pitch_deg = pitch_filt;
 
-  int32_t lat_raw = 0;
-  int32_t lon_raw = 0;
-  int16_t gps_alt_dm = clamp_i16(lroundf(baro_alt_m * 10.0f));
+  int32_t lat_raw = gps_lat_raw;
+  int32_t lon_raw = gps_lon_raw;
+  int16_t gps_alt_dm_local = gps_alt_dm;
   int16_t baro_alt_dm = clamp_i16(lroundf(baro_alt_m * 10.0f));
-  int16_t gps_speed_dms = 0;
-  uint8_t sat_count = 0;
+  int16_t gps_speed_dms_local = gps_speed_dms;
+  uint8_t sat_count = gps_fix_valid ? gps_sat_count : 0;
   int16_t roll_cdeg = clamp_i16(lroundf(roll_deg * 100.0f));
   int16_t pitch_cdeg = clamp_i16(lroundf(pitch_deg * 100.0f));
   int16_t gyro_ddeg_s = clamp_i16(lroundf(gyro_z_dps * 10.0f));
@@ -525,8 +855,12 @@ void loop() {
     last_state = flight_state;
   }
   uint8_t error_code = 0;
-  uint8_t water_detected = 0;
-  uint16_t battery_mv = 0;
+  uint8_t water_detected = digitalRead(WATER_DETECT_PIN) ? 1 : 0;
+  uint32_t rtc_unix = 0;
+  if (rtc_ready) {
+    rtc_unix = rtc.now().unixtime();
+  }
+  uint16_t battery_mv = read_battery_mv();
   int16_t temp_c_centi = clamp_i16(lroundf(temp_c * 100.0f));
   uint16_t hum_deci = clamp_u16(lroundf(hum * 10.0f));
   uint32_t pressure_u32 = (pressure_pa < 0.0f) ? 0 : static_cast<uint32_t>(lroundf(pressure_pa));
@@ -536,34 +870,77 @@ void loop() {
   frame[1] = kFrameHeader1;
   frame[2] = kMsgTypeTelemetry;
   write_u32_le(frame, 3, time_ms);
-  write_i32_le(frame, 7, lat_raw);
-  write_i32_le(frame, 11, lon_raw);
-  write_i16_le(frame, 15, gps_alt_dm);
-  write_i16_le(frame, 17, gps_speed_dms);
-  frame[19] = sat_count;
-  write_i16_le(frame, 20, roll_cdeg);
-  write_i16_le(frame, 22, pitch_cdeg);
-  write_u16_le(frame, 24, gps_heading_ddeg);
-  write_i16_le(frame, 26, gyro_x_ddeg_s);
-  write_i16_le(frame, 28, gyro_y_ddeg_s);
-  write_i16_le(frame, 30, gyro_ddeg_s);
-  write_i16_le(frame, 32, accx_cg);
-  write_i16_le(frame, 34, accy_cg);
-  write_i16_le(frame, 36, accz_cg);
-  write_u32_le(frame, 38, pressure_u32);
-  write_i16_le(frame, 42, baro_alt_dm);
-  write_i16_le(frame, 44, temp_c_centi);
-  write_u16_le(frame, 46, hum_deci);
-  write_u16_le(frame, 48, battery_mv);
-  frame[50] = flight_state;
-  frame[51] = error_code;
-  frame[52] = water_detected;
+  write_u32_le(frame, 7, rtc_unix);
+  write_i32_le(frame, 11, lat_raw);
+  write_i32_le(frame, 15, lon_raw);
+  write_i16_le(frame, 19, gps_alt_dm_local);
+  write_i16_le(frame, 21, gps_speed_dms_local);
+  frame[23] = sat_count;
+  write_i16_le(frame, 24, roll_cdeg);
+  write_i16_le(frame, 26, pitch_cdeg);
+  write_u16_le(frame, 28, gps_heading_ddeg);
+  write_i16_le(frame, 30, gyro_x_ddeg_s);
+  write_i16_le(frame, 32, gyro_y_ddeg_s);
+  write_i16_le(frame, 34, gyro_ddeg_s);
+  write_i16_le(frame, 36, accx_cg);
+  write_i16_le(frame, 38, accy_cg);
+  write_i16_le(frame, 40, accz_cg);
+  write_u32_le(frame, 42, pressure_u32);
+  write_i16_le(frame, 46, baro_alt_dm);
+  write_i16_le(frame, 48, temp_c_centi);
+  write_u16_le(frame, 50, hum_deci);
+  write_u16_le(frame, 52, battery_mv);
+  frame[54] = flight_state;
+  frame[55] = error_code;
+  frame[56] = water_detected;
 
   uint8_t crc = 0;
   for (int i = 0; i < kFrameLen - 1; i++) {
     crc ^= frame[i];
   }
   frame[kFrameLen - 1] = crc;
+
+  if (lora_ready) {
+    LoRa.beginPacket();
+    LoRa.write(frame, kFrameLen);
+    LoRa.endPacket();
+  }
+
+  if (sd_ready && sd_log) {
+    float lat_deg = gps_lat_raw / 1e7f;
+    float lon_deg = gps_lon_raw / 1e7f;
+    float gps_alt_m = gps_alt_dm_local / 10.0f;
+    float speed_ms = gps_speed_dms_local / 10.0f;
+    float heading_deg = gps_heading_ddeg / 10.0f;
+    write_sd_csv_line(
+        time_ms,
+        rtc_unix,
+        lat_deg,
+        lon_deg,
+        gps_alt_m,
+        baro_alt_m,
+        speed_ms,
+        heading_deg,
+        sat_count,
+        roll_deg,
+        pitch_deg,
+        accx_g,
+        accy_g,
+        accz_g,
+        gyro_x_dps,
+        gyro_y_dps,
+        gyro_z_dps,
+        battery_mv / 1000.0f,
+        temp_c,
+        hum,
+        pressure_pa,
+        flight_state,
+        error_code,
+        water_detected);
+    if (time_ms % 1000 < 100) {
+      sd_log.flush();
+    }
+  }
 
   Serial.write(frame, kFrameLen);
 

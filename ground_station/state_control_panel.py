@@ -10,6 +10,7 @@ class StateControlPanel(QWidget):
     """
 
     upload_requested = pyqtSignal(FlightState)
+    rtc_sync_requested = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -27,10 +28,13 @@ class StateControlPanel(QWidget):
 
         self.upload_btn = QPushButton("Upload")
         self.upload_btn.clicked.connect(self._emit_upload)
+        self.rtc_btn = QPushButton("Sync RTC")
+        self.rtc_btn.clicked.connect(self._emit_rtc_sync)
 
         row = QHBoxLayout()
         row.addWidget(self.combo)
         row.addWidget(self.upload_btn)
+        row.addWidget(self.rtc_btn)
 
         layout.addWidget(self.label)
         layout.addLayout(row)
@@ -55,3 +59,6 @@ class StateControlPanel(QWidget):
         state = self.combo.currentData()
         if isinstance(state, FlightState):
             self.upload_requested.emit(state)
+
+    def _emit_rtc_sync(self):
+        self.rtc_sync_requested.emit()

@@ -58,7 +58,6 @@ class TelemetryPanel(QWidget):
         self.lbl_state = QLabel()
         self.lbl_error = QLabel()
         self.lbl_time = QLabel()
-        self.lbl_water = QLabel()
 
         f.addWidget(QLabel("狀態"), 0, 0)
         f.addWidget(self.lbl_state, 0, 1)
@@ -66,8 +65,6 @@ class TelemetryPanel(QWidget):
         f.addWidget(self.lbl_error, 1, 1)
         f.addWidget(QLabel("時間 (秒)"), 2, 0)
         f.addWidget(self.lbl_time, 2, 1)
-        f.addWidget(QLabel("落水"), 3, 0)
-        f.addWidget(self.lbl_water, 3, 1)
 
         # ===== GPS / Yaw =====
         gps = QGroupBox("定位 / 偏航")
@@ -87,42 +84,46 @@ class TelemetryPanel(QWidget):
             g.addWidget(QLabel(n), i, 0)
             g.addWidget(l, i, 1)
 
-        # ===== IMU =====
+        # ===== Sensors (2x2) =====
+        sensors_grid = QGridLayout()
+        sensors_grid.setHorizontalSpacing(8)
+        sensors_grid.setVerticalSpacing(8)
+
         imu = QGroupBox("姿態 / IMU")
         i = QGridLayout(imu)
         self.lbl_roll = QLabel()
         self.lbl_pitch = QLabel()
-        self.lbl_accx = QLabel()
-        self.lbl_accy = QLabel()
-        self.lbl_accz = QLabel()
         self.lbl_gx = QLabel()
         self.lbl_gy = QLabel()
         self.lbl_gz = QLabel()
-
         i.addWidget(QLabel("滾轉 (IMU, 度)"), 0, 0)
         i.addWidget(self.lbl_roll, 0, 1)
         i.addWidget(QLabel("俯仰 (IMU, 度)"), 1, 0)
         i.addWidget(self.lbl_pitch, 1, 1)
-        i.addWidget(QLabel("加速度X (ADXL, g)"), 2, 0)
-        i.addWidget(self.lbl_accx, 2, 1)
-        i.addWidget(QLabel("加速度Y (ADXL, g)"), 3, 0)
-        i.addWidget(self.lbl_accy, 3, 1)
-        i.addWidget(QLabel("加速度Z (ADXL, g)"), 4, 0)
-        i.addWidget(self.lbl_accz, 4, 1)
-        i.addWidget(QLabel("陀螺X (ICM, 度/秒)"), 5, 0)
-        i.addWidget(self.lbl_gx, 5, 1)
-        i.addWidget(QLabel("陀螺Y (ICM, 度/秒)"), 6, 0)
-        i.addWidget(self.lbl_gy, 6, 1)
-        i.addWidget(QLabel("陀螺Z (ICM, 度/秒)"), 7, 0)
-        i.addWidget(self.lbl_gz, 7, 1)
+        i.addWidget(QLabel("陀螺X (ICM, 度/秒)"), 2, 0)
+        i.addWidget(self.lbl_gx, 2, 1)
+        i.addWidget(QLabel("陀螺Y (ICM, 度/秒)"), 3, 0)
+        i.addWidget(self.lbl_gy, 3, 1)
+        i.addWidget(QLabel("陀螺Z (ICM, 度/秒)"), 4, 0)
+        i.addWidget(self.lbl_gz, 4, 1)
 
-        # ===== Power =====
-        pwr = QGroupBox("環境感測")
-        p = QGridLayout(pwr)
+        accel = QGroupBox("加速度 / ADXL")
+        a = QGridLayout(accel)
+        self.lbl_accx = QLabel()
+        self.lbl_accy = QLabel()
+        self.lbl_accz = QLabel()
+        a.addWidget(QLabel("加速度X (g)"), 0, 0)
+        a.addWidget(self.lbl_accx, 0, 1)
+        a.addWidget(QLabel("加速度Y (g)"), 1, 0)
+        a.addWidget(self.lbl_accy, 1, 1)
+        a.addWidget(QLabel("加速度Z (g)"), 2, 0)
+        a.addWidget(self.lbl_accz, 2, 1)
+
+        env = QGroupBox("環境感測")
+        p = QGridLayout(env)
         self.lbl_temp = QLabel()
         self.lbl_hum = QLabel()
         self.lbl_press = QLabel()
-
         p.addWidget(QLabel("溫度 (°C)"), 0, 0)
         p.addWidget(self.lbl_temp, 0, 1)
         p.addWidget(QLabel("濕度 (%)"), 1, 0)
@@ -130,10 +131,23 @@ class TelemetryPanel(QWidget):
         p.addWidget(QLabel("氣壓 (kPa)"), 2, 0)
         p.addWidget(self.lbl_press, 2, 1)
 
+        sys = QGroupBox("狀態 / 系統")
+        s = QGridLayout(sys)
+        self.lbl_rtc = QLabel()
+        self.lbl_water = QLabel()
+        s.addWidget(QLabel("RTC (Unix)"), 0, 0)
+        s.addWidget(self.lbl_rtc, 0, 1)
+        s.addWidget(QLabel("落水"), 1, 0)
+        s.addWidget(self.lbl_water, 1, 1)
+
+        sensors_grid.addWidget(imu, 0, 0)
+        sensors_grid.addWidget(accel, 0, 1)
+        sensors_grid.addWidget(env, 1, 0)
+        sensors_grid.addWidget(sys, 1, 1)
+
         layout.addWidget(fs, 0, 0)
-        layout.addWidget(gps, 1, 0)
-        layout.addWidget(imu, 2, 0)
-        layout.addWidget(pwr, 3, 0)
+        layout.addWidget(gps, 0, 1)
+        layout.addLayout(sensors_grid, 1, 0, 1, 2)
 
     def update_data(self, d):
         data = d or {}
@@ -141,6 +155,7 @@ class TelemetryPanel(QWidget):
         self.lbl_error.setText(decode_error(data.get("error")))
         self.lbl_time.setText(self._fmt(data.get("time"), "{:.1f}"))
         self.lbl_water.setText("是" if data.get("water") else "否")
+        self.lbl_rtc.setText(self._fmt(data.get("rtc"), "{}", fallback="---"))
 
         self.lbl_lat.setText(self._fmt(data.get("lat"), "{:.7f}"))
         self.lbl_lon.setText(self._fmt(data.get("lon"), "{:.7f}"))
@@ -149,12 +164,12 @@ class TelemetryPanel(QWidget):
 
         self.lbl_roll.setText(self._fmt(data.get("roll"), "{:.2f}"))
         self.lbl_pitch.setText(self._fmt(data.get("pitch"), "{:.2f}"))
+        self.lbl_gx.setText(self._fmt(data.get("gyro_x"), "{:.1f}"))
+        self.lbl_gy.setText(self._fmt(data.get("gyro_y"), "{:.1f}"))
+        self.lbl_gz.setText(self._fmt(data.get("gyro_z"), "{:.1f}"))
         self.lbl_accx.setText(self._fmt(data.get("accx"), "{:.2f}"))
         self.lbl_accy.setText(self._fmt(data.get("accy"), "{:.2f}"))
         self.lbl_accz.setText(self._fmt(data.get("accz"), "{:.2f}"))
-        self.lbl_gx.setText(self._fmt(data.get("gyro_x"), "{:.1f}"))
-        self.lbl_gy.setText(self._fmt(data.get("gyro_y"), "{:.1f}"))
-        self.lbl_gz.setText(self._fmt(data.get("gyro"), "{:.1f}"))
 
         self.lbl_temp.setText(self._fmt(data.get("temp"), "{:.2f}"))
         self.lbl_hum.setText(self._fmt(data.get("hum"), "{:.1f}"))

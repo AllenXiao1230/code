@@ -46,7 +46,6 @@ class MainWindow(QMainWindow):
         self._logger = None
         self.telemetry = {
             "time": 0.0,
-            "rtc": 0,
             "lat": 0.0,
             "lon": 0.0,
             "alt": 0.0,
@@ -66,8 +65,6 @@ class MainWindow(QMainWindow):
             "gyro_y": 0.0,
             "gyro_z": 0.0,
             "battery": 0.0,
-            "temp": 0.0,
-            "hum": 0.0,
             "pressure": 0.0,
             "status": 0,
             "water": 0,
@@ -78,7 +75,7 @@ class MainWindow(QMainWindow):
 
         # ---- UI ----
         self._init_ui()
-        # Legacy-only telemetry decoding (58-byte frames).
+        # Fixed-length telemetry decoding (50-byte frames).
 
     # ---------------- UI ----------------
 
@@ -293,11 +290,11 @@ class MainWindow(QMainWindow):
         self.serial_worker.write(cmd)
         self.event_panel.add_event(f"RTC sync sent: {epoch}")
 
-    # ---------------- Fixed-length frames (58 bytes) ----------------
+    # ---------------- Fixed-length frames (50 bytes) ----------------
 
     def _process_legacy_stream(self, data: bytes):
         """
-        Some firmware versions emit 58-byte frames starting with 0x55 0xAA.
+        Fixed 50-byte frames starting with 0x55 0xAA.
         Parse them here so the UI updates from fixed-length telemetry frames.
         """
         if not data:
@@ -334,65 +331,57 @@ class MainWindow(QMainWindow):
             self._handle_legacy_frame(frame)
 
     def _handle_legacy_frame(self, frame: bytes):
-        # Expected layout (58 bytes):
+        # Expected layout (50 bytes):
         # 0-1: 0x55 0xAA
         # 2: MsgType (0x01 telemetry)
         # 3-6: TimeTag ms (u32)
         # 7-10: Latitude int32 (deg * 1e7)
         # 11-14: Longitude int32 (deg * 1e7)
-        # 7-10: RTC Unix Time uint32 (seconds)
-        # 11-14: Latitude int32 (deg * 1e7)
-        # 15-18: Longitude int32 (deg * 1e7)
-        # 19-20: GPS Alt int16 (0.1 m)
-        # 21-22: GPS Speed int16 (0.1 m/s)
-        # 23: GPS Sat count uint8
-        # 24-25: Roll int16 (0.01 deg) - IMU fusion output
-        # 26-27: Pitch int16 (0.01 deg)
-        # 28-29: Yaw uint16 (0.1 deg) - IMU fusion output
-        # 30-31: GyroX int16 (0.1 deg/s)
-        # 32-33: GyroY int16 (0.1 deg/s)
-        # 34-35: GyroZ int16 (0.1 deg/s)
-        # 36-37: AccX int16 (0.01 g)
-        # 38-39: AccY int16 (0.01 g)
-        # 40-41: AccZ int16 (0.01 g)
-        # 42-45: Baro Pressure uint32 (Pa, UI/CSV shown as kPa)
-        # 46-47: Baro Altitude int16 (0.1 m)
-        # 48-49: Temperature int16 (0.01 C)
-        # 50-51: Humidity uint16 (0.1 %RH)
-        # 52-53: Battery uint16 (mV)
-        # 54: FlightState uint8
-        # 55: ErrorCode uint8
-        # 56: WaterDetected uint8 (0/1)
-        # 57: CRC8 XOR(0..56)
+        # 15-16: GPS Alt int16 (0.1 m)
+        # 17-18: GPS Speed int16 (0.1 m/s)
+        # 19: GPS Sat count uint8
+        # 20-21: Roll int16 (0.01 deg) - IMU fusion output
+        # 22-23: Pitch int16 (0.01 deg)
+        # 24-25: Yaw uint16 (0.1 deg) - IMU fusion output
+        # 26-27: GyroX int16 (0.1 deg/s)
+        # 28-29: GyroY int16 (0.1 deg/s)
+        # 30-31: GyroZ int16 (0.1 deg/s)
+        # 32-33: AccX int16 (0.01 g)
+        # 34-35: AccY int16 (0.01 g)
+        # 36-37: AccZ int16 (0.01 g)
+        # 38-41: Baro Pressure uint32 (Pa, UI/CSV shown as kPa)
+        # 42-43: Baro Altitude int16 (0.1 m)
+        # 44-45: Battery uint16 (mV)
+        # 46: FlightState uint8
+        # 47: ErrorCode uint8
+        # 48: WaterDetected uint8 (0/1)
+        # 49: CRC8 XOR(0..48)
         if len(frame) != PACKET_LEN or frame[0] != 0x55 or frame[1] != FRAME_START:
             return
 
         try:
             pkt_type = frame[2]
             ts_ms = int.from_bytes(frame[3:7], "little")
-            rtc_unix = struct.unpack("<I", frame[7:11])[0]
-            lat_raw = struct.unpack("<i", frame[11:15])[0]
-            lon_raw = struct.unpack("<i", frame[15:19])[0]
-            gps_alt_dm = struct.unpack("<h", frame[19:21])[0]
-            gps_speed_dms = struct.unpack("<h", frame[21:23])[0]
-            sat_count = frame[23]
-            roll_cdeg = struct.unpack("<h", frame[24:26])[0]
-            pitch_cdeg = struct.unpack("<h", frame[26:28])[0]
-            yaw_ddeg = struct.unpack("<H", frame[28:30])[0]
-            gyro_x_ddeg_s = struct.unpack("<h", frame[30:32])[0]
-            gyro_y_ddeg_s = struct.unpack("<h", frame[32:34])[0]
-            gyro_ddeg_s = struct.unpack("<h", frame[34:36])[0]
-            accx_cg = struct.unpack("<h", frame[36:38])[0]
-            accy_cg = struct.unpack("<h", frame[38:40])[0]
-            accz_cg = struct.unpack("<h", frame[40:42])[0]
-            pressure_pa = struct.unpack("<I", frame[42:46])[0]
-            baro_alt_dm = struct.unpack("<h", frame[46:48])[0]
-            temp_c_centi = struct.unpack("<h", frame[48:50])[0]
-            hum_deci = struct.unpack("<H", frame[50:52])[0]
-            battery_mv = struct.unpack("<H", frame[52:54])[0]
-            flight_state_raw = frame[54]
-            error_code = frame[55]
-            water_detected = frame[56]
+            lat_raw = struct.unpack("<i", frame[7:11])[0]
+            lon_raw = struct.unpack("<i", frame[11:15])[0]
+            gps_alt_dm = struct.unpack("<h", frame[15:17])[0]
+            gps_speed_dms = struct.unpack("<h", frame[17:19])[0]
+            sat_count = frame[19]
+            roll_cdeg = struct.unpack("<h", frame[20:22])[0]
+            pitch_cdeg = struct.unpack("<h", frame[22:24])[0]
+            yaw_ddeg = struct.unpack("<H", frame[24:26])[0]
+            gyro_x_ddeg_s = struct.unpack("<h", frame[26:28])[0]
+            gyro_y_ddeg_s = struct.unpack("<h", frame[28:30])[0]
+            gyro_ddeg_s = struct.unpack("<h", frame[30:32])[0]
+            accx_cg = struct.unpack("<h", frame[32:34])[0]
+            accy_cg = struct.unpack("<h", frame[34:36])[0]
+            accz_cg = struct.unpack("<h", frame[36:38])[0]
+            pressure_pa = struct.unpack("<I", frame[38:42])[0]
+            baro_alt_dm = struct.unpack("<h", frame[42:44])[0]
+            battery_mv = struct.unpack("<H", frame[44:46])[0]
+            flight_state_raw = frame[46]
+            error_code = frame[47]
+            water_detected = frame[48]
         except Exception:
             return
 
@@ -415,8 +404,6 @@ class MainWindow(QMainWindow):
         gyro_x_dps = gyro_x_ddeg_s / 10.0
         gyro_y_dps = gyro_y_ddeg_s / 10.0
         battery_v = battery_mv / 1000.0
-        temp_c = temp_c_centi / 100.0
-        humidity = hum_deci / 10.0
         pressure = float(pressure_pa) / 1000.0
         baro_alt_m = baro_alt_dm / 10.0
         accx_g = accx_cg / 100.0
@@ -424,7 +411,7 @@ class MainWindow(QMainWindow):
         accz_g = accz_cg / 100.0
 
         if not self._legacy_link_logged:
-            self.event_panel.add_event("Detected 58-byte telemetry frames.")
+            self.event_panel.add_event("Detected 50-byte telemetry frames.")
             self._legacy_link_logged = True
 
         t_sec = ts_ms / 1000.0
@@ -454,7 +441,6 @@ class MainWindow(QMainWindow):
         # Update telemetry model and refresh derived panels
         self.telemetry.update({
             "time": self._boot_time_seconds,
-            "rtc": rtc_unix,
             "lat": lat_raw / 1e7,
             "lon": lon_raw / 1e7,
             "alt": gps_alt_m,
@@ -472,8 +458,6 @@ class MainWindow(QMainWindow):
             "gyro_z": gyro_z_dps,
             "gyro_x": gyro_x_dps,
             "gyro_y": gyro_y_dps,
-            "temp": temp_c,
-            "hum": humidity,
             "pressure": pressure,
             "sat": sat_count,
             "battery": battery_v,

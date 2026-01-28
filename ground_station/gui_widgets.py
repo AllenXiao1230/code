@@ -121,24 +121,15 @@ class TelemetryPanel(QWidget):
 
         env = QGroupBox("環境感測")
         p = QGridLayout(env)
-        self.lbl_temp = QLabel()
-        self.lbl_hum = QLabel()
         self.lbl_press = QLabel()
-        p.addWidget(QLabel("溫度 (°C)"), 0, 0)
-        p.addWidget(self.lbl_temp, 0, 1)
-        p.addWidget(QLabel("濕度 (%)"), 1, 0)
-        p.addWidget(self.lbl_hum, 1, 1)
-        p.addWidget(QLabel("氣壓 (kPa)"), 2, 0)
-        p.addWidget(self.lbl_press, 2, 1)
+        p.addWidget(QLabel("氣壓 (kPa)"), 0, 0)
+        p.addWidget(self.lbl_press, 0, 1)
 
         sys = QGroupBox("狀態 / 系統")
         s = QGridLayout(sys)
-        self.lbl_rtc = QLabel()
         self.lbl_water = QLabel()
-        s.addWidget(QLabel("RTC (Unix)"), 0, 0)
-        s.addWidget(self.lbl_rtc, 0, 1)
-        s.addWidget(QLabel("落水"), 1, 0)
-        s.addWidget(self.lbl_water, 1, 1)
+        s.addWidget(QLabel("落水"), 0, 0)
+        s.addWidget(self.lbl_water, 0, 1)
 
         sensors_grid.addWidget(imu, 0, 0)
         sensors_grid.addWidget(accel, 0, 1)
@@ -155,7 +146,6 @@ class TelemetryPanel(QWidget):
         self.lbl_error.setText(decode_error(data.get("error")))
         self.lbl_time.setText(self._fmt(data.get("time"), "{:.1f}"))
         self.lbl_water.setText("是" if data.get("water") else "否")
-        self.lbl_rtc.setText(self._fmt(data.get("rtc"), "{}", fallback="---"))
 
         self.lbl_lat.setText(self._fmt(data.get("lat"), "{:.7f}"))
         self.lbl_lon.setText(self._fmt(data.get("lon"), "{:.7f}"))
@@ -171,8 +161,6 @@ class TelemetryPanel(QWidget):
         self.lbl_accy.setText(self._fmt(data.get("accy"), "{:.2f}"))
         self.lbl_accz.setText(self._fmt(data.get("accz"), "{:.2f}"))
 
-        self.lbl_temp.setText(self._fmt(data.get("temp"), "{:.2f}"))
-        self.lbl_hum.setText(self._fmt(data.get("hum"), "{:.1f}"))
         self.lbl_press.setText(self._fmt(data.get("pressure"), "{:.3f}", fallback="---"))
 
     @staticmethod

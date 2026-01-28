@@ -44,9 +44,13 @@
 #define LORA_RST 38
 #define LORA_DIO0 37
 #define LORA_DIO1 36
-#define LORA_FREQ 433E6
+#define LORA_FREQ 433250000
 #define LORA_SYNC_WORD 0x12
-#define LORA_TX_POWER 17
+#define LORA_TX_POWER 22
+#define LORA_BW 125E3
+#define LORA_SF 9
+#define LORA_CR 7
+#define LORA_PREAMBLE_LEN 8
 
 #define SD_CS 11
 #define SD_MOSI 12
@@ -563,10 +567,12 @@ void setup() {
   lora_ready = LoRa.begin(LORA_FREQ);
   if (lora_ready) {
     LoRa.setSyncWord(LORA_SYNC_WORD);
-    LoRa.setTxPower(LORA_TX_POWER);
-    LoRa.setSpreadingFactor(7);
-    LoRa.setSignalBandwidth(125E3);
-    LoRa.setCodingRate4(5);
+    LoRa.setTxPower(LORA_TX_POWER, PA_OUTPUT_PA_BOOST_PIN);
+    LoRa.setSpreadingFactor(LORA_SF);
+    LoRa.setSignalBandwidth(LORA_BW);
+    LoRa.setCodingRate4(LORA_CR);
+    LoRa.setPreambleLength(LORA_PREAMBLE_LEN);
+    LoRa.enableCrc();
     DBG_PRINTLN("LoRa OK");
   } else {
     DBG_PRINTLN("LoRa init failed");

@@ -40,3 +40,19 @@ Notes
 - GPS baud rate: 230400
 - Battery divider: 200k (top to VBAT) / 100k (bottom to GND)
 - DEBUG_SERIAL should remain 0 when Serial is used for binary packets.
+
+RF / Modem Settings (SX1276 / SX1278)
+------------------------------------
+| Item | Setting | Notes |
+| --- | ------- | ----- |
+| Frequency | 433.250 MHz | Taiwan ISM, avoids busy 433.92 MHz |
+| Bandwidth | 125 kHz | Doppler tolerance, stable link |
+| Spreading Factor | SF9 | Balanced for high-speed motion |
+| Coding Rate | 4/7 | Better interference immunity |
+| Preamble Length | 8 | Default, enough for sync |
+| CRC | Enable | Required for flight telemetry |
+| Header Mode | Explicit | Avoids mis-detected packets |
+| IQ Inversion | Disable | Normal point-to-point |
+| TX Power | 22 dBm | Max for rocket node |
+| PA Boost | Enable | Required on SX1276 |
+| LNA Gain | Auto / Max | Improves weak-signal RX |

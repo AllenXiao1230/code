@@ -37,6 +37,10 @@
 #define UART_GPS_PPS 47
 #define UART_GPS_BAUD 230400
 
+#define UART_SUB_TX 17
+#define UART_SUB_RX 18
+#define UART_SUB_BAUD 115200
+
 #define LORA_SCK 42
 #define LORA_MISO 41
 #define LORA_MOSI 40
@@ -88,6 +92,7 @@ uint8_t imu_addr = 0x68;
 RTC_DS3231 rtc;
 Adafruit_NeoPixel status_led(WS2812_COUNT, WS2812_PIN, NEO_GRB + NEO_KHZ800);
 HardwareSerial GPSSerial(1);
+HardwareSerial BackupSerial(2);
 SPIClass loraSPI(HSPI);
 SPIClass sdSPI(VSPI);
 File sd_log;
@@ -111,15 +116,32 @@ static const uint8_t kStateDescent = 5;
 static const uint8_t kStateLanded = 6;
 static const uint8_t kStateAbort = 99;
 
-// --- 固定長度封包格式（44 bytes） ---
-static const uint8_t kFrameLen = 44;
+// --- 固定長度封包格式（47 bytes） ---
+static const uint8_t kFrameLen = 47;
 static const uint8_t kFrameHeader0 = 0x55;
 static const uint8_t kFrameHeader1 = 0xAA;
-static const uint8_t kMsgTypeTelemetry = 0x01;
 static const float kG = 9.80665f;
 static const float kBatteryRTop = 200000.0f;  // ohms (to battery)
 static const float kBatteryRBottom = 100000.0f; // ohms (to GND)
 static const float kBatteryDivider = kBatteryRBottom / (kBatteryRTop + kBatteryRBottom);
+
+// Flight state machine thresholds (document-defined)
+static const float kLiftoffAccelG = 3.0f;
+static const float kLiftoffVSpeedMs = 10.0f;
+static const float kDrogueAltMinM = 3000.0f;
+static const float kDrogueVSpeedMaxMs = 5.0f;
+static const float kMainAltMaxM = 500.0f;
+static const float kMainVSpeedMaxMs = 5.0f;
+static const float kLandingAltMaxM = 30.0f;
+static const float kLandingVSpeedMinMs = 90.0f;
+static const float kApogeeDetectVSpeedMs = -0.5f;
+static const uint32_t kLiftoffHoldMs = 500;
+static const uint32_t kDrogueHoldMs = 500;
+static const uint32_t kMainHoldMs = 500;
+static const uint32_t kLandingHoldMs = 500;
+static const uint32_t kAfterApogeeMs = 500;
+static const float kDrogueTimeS = 25.0f;
+static const float kMainTimeS = 190.0f;
 
 static int32_t gps_lat_raw = 0;
 static int32_t gps_lon_raw = 0;
@@ -130,11 +152,24 @@ static uint32_t gps_last_fix_ms = 0;
 static const uint32_t kGpsTimeoutMs = 2000;
 static bool gps_fix_valid = false;
 
+static uint8_t flight_state = kStateIdle;
+static uint32_t liftoff_ms = 0;
+static bool apogee_seen = false;
+static uint32_t apogee_ms = 0;
+static uint32_t liftoff_cond_ms = 0;
+static uint32_t drogue_cond_ms = 0;
+static uint32_t main_cond_ms = 0;
+static uint32_t landing_cond_ms = 0;
+static bool main_deployed = false;
+static uint32_t last_heartbeat_ms = 0;
+static float alt_zero_m = 0.0f;
+static bool alt_zero_set = false;
+
 static void write_sd_csv_header() {
   if (!sd_log) {
     return;
   }
-  sd_log.println("time_ms,rtc,lat,lon,gps_alt,baro_alt,speed,heading,sat,roll,pitch,accx,accy,accz,gyro_x,gyro_y,gyro_z,battery,temp,hum,pressure_pa,status,error,water");
+  sd_log.println("time_ms,rtc,lat,lon,gps_alt,baro_alt,speed,heading,sat,roll,pitch,accx,accy,accz,gyro_x,gyro_y,gyro_z,battery,servo_power_mv,servo_angle_deg,temp,hum,pressure_pa,status,error,water");
 }
 
 static void write_sd_csv_line(uint32_t time_ms,
@@ -155,6 +190,8 @@ static void write_sd_csv_line(uint32_t time_ms,
                               float gyro_y_dps,
                               float gyro_z_dps,
                               float battery_v,
+                              float servo_power_mv,
+                              float servo_angle_deg,
                               float temp_c,
                               float hum,
                               float pressure_pa,
@@ -166,12 +203,12 @@ static void write_sd_csv_line(uint32_t time_ms,
   }
   char line[256];
   int n = snprintf(line, sizeof(line),
-                   "%lu,%lu,%.7f,%.7f,%.1f,%.1f,%.1f,%.1f,%u,%.2f,%.2f,%.2f,%.2f,%.2f,%.1f,%.1f,%.1f,%.3f,%.2f,%.1f,%.0f,%u,%u,%u\n",
+                   "%lu,%lu,%.7f,%.7f,%.1f,%.1f,%.1f,%.1f,%u,%.2f,%.2f,%.2f,%.2f,%.2f,%.1f,%.1f,%.1f,%.3f,%.0f,%.1f,%.2f,%.1f,%.0f,%u,%u,%u\n",
                    static_cast<unsigned long>(time_ms),
                    static_cast<unsigned long>(rtc_unix),
                    lat_deg, lon_deg, gps_alt_m, baro_alt_m, speed_ms, heading_deg, sat,
                    roll_deg, pitch_deg, accx_g, accy_g, accz_g, gyro_x_dps, gyro_y_dps, gyro_z_dps,
-                   battery_v, temp_c, hum, pressure_pa,
+                   battery_v, servo_power_mv, servo_angle_deg, temp_c, hum, pressure_pa,
                    status, error, water);
   if (n > 0) {
     sd_log.write(reinterpret_cast<const uint8_t *>(line), static_cast<size_t>(n));
@@ -208,6 +245,17 @@ static inline uint16_t clamp_u16(long v) {
   if (v < 0) return 0;
   if (v > 65535) return 65535;
   return static_cast<uint16_t>(v);
+}
+
+static bool condition_hold(bool cond, uint32_t &start_ms, uint32_t now_ms, uint32_t hold_ms) {
+  if (cond) {
+    if (start_ms == 0) {
+      start_ms = now_ms;
+    }
+    return (now_ms - start_ms) >= hold_ms;
+  }
+  start_ms = 0;
+  return false;
 }
 
 static uint16_t read_battery_mv() {
@@ -554,6 +602,8 @@ void setup() {
   i2c_scan_print(Wire, "I2C_A");
   i2c_scan_print(Wire1, "I2C_B");
 
+  pinMode(SAFETY_SWITCH_PIN, INPUT_PULLUP);
+
   // LoRa init (SPI bus + radio)
   pinMode(LORA_NSS, OUTPUT);
   digitalWrite(LORA_NSS, HIGH);
@@ -664,6 +714,8 @@ void setup() {
 
   GPSSerial.begin(UART_GPS_BAUD, SERIAL_8N1, UART_GPS_RX, UART_GPS_TX);
   pinMode(UART_GPS_PPS, INPUT);
+
+  BackupSerial.begin(UART_SUB_BAUD, SERIAL_8N1, UART_SUB_RX, UART_SUB_TX);
   
   delay(1000);
   // DJI-style startup tone
@@ -678,6 +730,12 @@ void setup() {
 
 void loop() {
   uint32_t time_ms = millis();
+  if (time_ms - last_heartbeat_ms >= 100) {
+    BackupSerial.write('H');
+    BackupSerial.write('B');
+    BackupSerial.write('\n');
+    last_heartbeat_ms = time_ms;
+  }
   handle_serial_rtc_sync();
   process_gps_stream();
   if (gps_last_fix_ms > 0 && time_ms - gps_last_fix_ms > kGpsTimeoutMs) {
@@ -694,9 +752,11 @@ void loop() {
 
   float pressure_pa = 0.0f;
   float baro_alt_m = 0.0f;
+  bool baro_valid = false;
   if (status_bmp && bmp.performReading()) {
     pressure_pa = bmp.pressure;
     baro_alt_m = bmp.readAltitude(1013.25);
+    baro_valid = true;
   }
 
   float accx_g = 0.0f;
@@ -840,6 +900,128 @@ void loop() {
   roll_deg = roll_filt;
   pitch_deg = pitch_filt;
 
+  float accel_g = sqrtf(accx_g * accx_g + accy_g * accy_g + accz_g * accz_g);
+
+  float alt_m = 0.0f;
+  bool alt_valid = false;
+  if (baro_valid) {
+    alt_m = baro_alt_m;
+    alt_valid = true;
+  } else if (gps_fix_valid) {
+    alt_m = gps_alt_dm / 10.0f;
+    alt_valid = true;
+  }
+
+  static float last_alt_m = 0.0f;
+  static uint32_t last_alt_ms = 0;
+  static float vert_speed_ms = 0.0f;
+  static bool vert_speed_valid = false;
+  if (alt_valid) {
+    if (last_alt_ms != 0 && time_ms > last_alt_ms) {
+      float dt = (time_ms - last_alt_ms) / 1000.0f;
+      if (dt > 0.01f && dt < 1.0f) {
+        float vs_inst = (alt_m - last_alt_m) / dt;
+        if (!vert_speed_valid) {
+          vert_speed_ms = vs_inst;
+        } else {
+          const float vs_alpha = 0.2f;
+          vert_speed_ms = vert_speed_ms + vs_alpha * (vs_inst - vert_speed_ms);
+        }
+        vert_speed_valid = true;
+      }
+    }
+    last_alt_m = alt_m;
+    last_alt_ms = time_ms;
+  }
+  if (last_alt_ms > 0 && (time_ms - last_alt_ms) > 1000) {
+    vert_speed_valid = false;
+  }
+
+  float alt_rel_m = alt_m;
+  if (alt_zero_set) {
+    alt_rel_m = alt_m - alt_zero_m;
+  }
+
+  uint8_t water_detected = digitalRead(WATER_DETECT_PIN) ? 1 : 0;
+  bool safety_armed = (digitalRead(SAFETY_SWITCH_PIN) == HIGH);
+  float flight_time_s = (liftoff_ms > 0) ? (time_ms - liftoff_ms) / 1000.0f : 0.0f;
+
+  switch (flight_state) {
+    case kStateIdle: {
+      liftoff_ms = 0;
+      apogee_seen = false;
+      apogee_ms = 0;
+      main_deployed = false;
+      alt_zero_set = false;
+      liftoff_cond_ms = 0;
+      drogue_cond_ms = 0;
+      main_cond_ms = 0;
+      landing_cond_ms = 0;
+      if (safety_armed) {
+        flight_state = kStatePreflight;
+      }
+      break;
+    }
+    case kStatePreflight: {
+      if (!alt_zero_set && alt_valid) {
+        alt_zero_m = alt_m;
+        alt_zero_set = true;
+      }
+      if (!safety_armed) {
+        flight_state = kStateIdle;
+        break;
+      }
+      bool liftoff_cond = (status_adxl && accel_g > kLiftoffAccelG) ||
+                          (vert_speed_valid && vert_speed_ms > kLiftoffVSpeedMs);
+      if (condition_hold(liftoff_cond, liftoff_cond_ms, time_ms, kLiftoffHoldMs)) {
+        liftoff_ms = time_ms;
+        apogee_seen = false;
+        apogee_ms = 0;
+        main_deployed = false;
+        drogue_cond_ms = 0;
+        main_cond_ms = 0;
+        landing_cond_ms = 0;
+        flight_state = kStateAscent;
+      }
+      break;
+    }
+    case kStateAscent: {
+      if (!apogee_seen && vert_speed_valid && vert_speed_ms < kApogeeDetectVSpeedMs) {
+        apogee_seen = true;
+        apogee_ms = time_ms;
+      }
+      bool apogee_ok = apogee_seen && (time_ms - apogee_ms >= kAfterApogeeMs);
+      bool drogue_cond = ((alt_valid && vert_speed_valid &&
+                           alt_rel_m > kDrogueAltMinM && vert_speed_ms < kDrogueVSpeedMaxMs) ||
+                          (flight_time_s > kDrogueTimeS));
+      if (apogee_ok && condition_hold(drogue_cond, drogue_cond_ms, time_ms, kDrogueHoldMs)) {
+        flight_state = kStateDescent;
+        main_cond_ms = 0;
+        landing_cond_ms = 0;
+      }
+      break;
+    }
+    case kStateDescent: {
+      bool main_cond = ((alt_valid && vert_speed_valid &&
+                         alt_rel_m < kMainAltMaxM && vert_speed_ms < kMainVSpeedMaxMs) ||
+                        (flight_time_s > kMainTimeS));
+      if (!main_deployed &&
+          condition_hold(main_cond, main_cond_ms, time_ms, kMainHoldMs)) {
+        main_deployed = true;
+      }
+      bool landing_cond = ((alt_valid && alt_rel_m < kLandingAltMaxM) ||
+                           (water_detected == 1) ||
+                           (vert_speed_valid && vert_speed_ms > kLandingVSpeedMinMs));
+      if (condition_hold(landing_cond, landing_cond_ms, time_ms, kLandingHoldMs)) {
+        flight_state = kStateLanded;
+      }
+      break;
+    }
+    case kStateLanded:
+    default:
+      break;
+  }
+
   int32_t lat_raw = gps_lat_raw;
   int32_t lon_raw = gps_lon_raw;
   int16_t gps_alt_dm_local = gps_alt_dm;
@@ -854,46 +1036,47 @@ void loop() {
   int16_t accz_cg = clamp_i16(lroundf(accz_g * 100.0f));
   int16_t gyro_x_ddeg_s = clamp_i16(lroundf(gyro_x_dps * 10.0f));
   int16_t gyro_y_ddeg_s = clamp_i16(lroundf(gyro_y_dps * 10.0f));
-  uint8_t flight_state = kStateIdle;
   static uint8_t last_state = 0xFF;
   if (flight_state != last_state) {
     set_status_led(flight_state);
     last_state = flight_state;
   }
   uint8_t error_code = 0;
-  uint8_t water_detected = digitalRead(WATER_DETECT_PIN) ? 1 : 0;
   uint32_t rtc_unix = 0;
   if (rtc_ready) {
     rtc_unix = rtc.now().unixtime();
   }
   uint16_t battery_mv = read_battery_mv();
+  uint16_t servo_power_mv = 0; // TODO: read servo power rail
+  int16_t servo_angle_ddeg = 0; // TODO: read servo angle (0.1 deg)
   uint32_t pressure_u32 = (pressure_pa < 0.0f) ? 0 : static_cast<uint32_t>(lroundf(pressure_pa));
 
   uint8_t frame[kFrameLen];
   frame[0] = kFrameHeader0;
   frame[1] = kFrameHeader1;
-  frame[2] = kMsgTypeTelemetry;
   uint16_t time_0p1s = static_cast<uint16_t>((time_ms / 100) & 0xFFFF);
-  write_u16_le(frame, 3, time_0p1s);
-  write_i32_le(frame, 5, lat_raw);
-  write_i32_le(frame, 9, lon_raw);
-  write_i16_le(frame, 13, gps_alt_dm_local);
-  write_i16_le(frame, 15, gps_speed_dms_local);
-  frame[17] = sat_count;
-  write_i16_le(frame, 18, roll_cdeg);
-  write_i16_le(frame, 20, pitch_cdeg);
-  write_u16_le(frame, 22, gps_heading_ddeg);
-  write_i16_le(frame, 24, gyro_x_ddeg_s);
-  write_i16_le(frame, 26, gyro_y_ddeg_s);
-  write_i16_le(frame, 28, gyro_ddeg_s);
-  write_i16_le(frame, 30, accx_cg);
-  write_i16_le(frame, 32, accy_cg);
-  write_i16_le(frame, 34, accz_cg);
-  write_i16_le(frame, 36, baro_alt_dm);
-  write_u16_le(frame, 38, battery_mv);
-  frame[40] = flight_state;
-  frame[41] = error_code;
-  frame[42] = water_detected;
+  write_u16_le(frame, 2, time_0p1s);
+  write_i32_le(frame, 4, lat_raw);
+  write_i32_le(frame, 8, lon_raw);
+  write_i16_le(frame, 12, gps_alt_dm_local);
+  write_i16_le(frame, 14, gps_speed_dms_local);
+  frame[16] = sat_count;
+  write_i16_le(frame, 17, roll_cdeg);
+  write_i16_le(frame, 19, pitch_cdeg);
+  write_u16_le(frame, 21, gps_heading_ddeg);
+  write_i16_le(frame, 23, gyro_x_ddeg_s);
+  write_i16_le(frame, 25, gyro_y_ddeg_s);
+  write_i16_le(frame, 27, gyro_ddeg_s);
+  write_i16_le(frame, 29, accx_cg);
+  write_i16_le(frame, 31, accy_cg);
+  write_i16_le(frame, 33, accz_cg);
+  write_i16_le(frame, 35, baro_alt_dm);
+  write_u16_le(frame, 37, battery_mv);
+  write_u16_le(frame, 39, servo_power_mv);
+  write_i16_le(frame, 41, servo_angle_ddeg);
+  frame[43] = flight_state;
+  frame[44] = error_code;
+  frame[45] = water_detected;
 
   uint8_t crc = 0;
   for (int i = 0; i < kFrameLen - 1; i++) {
@@ -932,6 +1115,8 @@ void loop() {
         gyro_y_dps,
         gyro_z_dps,
         battery_mv / 1000.0f,
+        static_cast<float>(servo_power_mv),
+        servo_angle_ddeg / 10.0f,
         temp_c,
         hum,
         pressure_pa,

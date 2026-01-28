@@ -7,7 +7,7 @@ class CSVLogger:
         self.w.writerow([
             "time","lat","lon","alt","gps_alt","baro_alt","speed","heading",
             "sat","roll","pitch","accx","accy","accz","gyro_x","gyro_y","gyro_z",
-            "battery","status","water"
+            "battery","servo_power","servo_angle","status","water"
         ])
 
     def log(self, d):
@@ -15,7 +15,7 @@ class CSVLogger:
             d["time"], d["lat"], d["lon"], d["alt"], d["gps_alt"], d["baro_alt"],
             d["speed"], d["heading"], d["sat"], d["roll"], d["pitch"],
             d["accx"], d["accy"], d["accz"], d["gyro_x"], d["gyro_y"], d["gyro_z"],
-            d["battery"], d["status"], d.get("water", 0)
+            d["battery"], d.get("servo_power", 0.0), d.get("servo_angle", 0.0), d["status"], d.get("water", 0)
         ])
 
     def close(self):

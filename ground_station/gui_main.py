@@ -64,6 +64,8 @@ class MainWindow(QMainWindow):
             "gyro_x": 0.0,
             "gyro_y": 0.0,
             "gyro_z": 0.0,
+            "servo_power": 0.0,
+            "servo_angle": 0.0,
             "battery": 0.0,
             "status": 0,
             "water": 0,
@@ -74,7 +76,7 @@ class MainWindow(QMainWindow):
 
         # ---- UI ----
         self._init_ui()
-        # Fixed-length telemetry decoding (44-byte frames).
+        # Fixed-length telemetry decoding (47-byte frames).
 
     # ---------------- UI ----------------
 
@@ -289,11 +291,11 @@ class MainWindow(QMainWindow):
         self.serial_worker.write(cmd)
         self.event_panel.add_event(f"RTC sync sent: {epoch}")
 
-    # ---------------- Fixed-length frames (44 bytes) ----------------
+    # ---------------- Fixed-length frames (47 bytes) ----------------
 
     def _process_legacy_stream(self, data: bytes):
         """
-        Fixed 44-byte frames starting with 0x55 0xAA.
+        Fixed 47-byte frames starting with 0x55 0xAA.
         Parse them here so the UI updates from fixed-length telemetry frames.
         """
         if not data:
@@ -330,59 +332,58 @@ class MainWindow(QMainWindow):
             self._handle_legacy_frame(frame)
 
     def _handle_legacy_frame(self, frame: bytes):
-        # Expected layout (44 bytes):
+        # Expected layout (47 bytes):
         # 0-1: 0x55 0xAA
-        # 2: MsgType (0x01 telemetry)
-        # 3-4: TimeTag uint16 (0.1 s)
-        # 5-8: Latitude int32 (deg * 1e7)
-        # 9-12: Longitude int32 (deg * 1e7)
-        # 13-14: GPS Alt int16 (0.1 m)
-        # 15-16: GPS Speed int16 (0.1 m/s)
-        # 17: GPS Sat count uint8
-        # 18-19: Roll int16 (0.01 deg) - IMU fusion output
-        # 20-21: Pitch int16 (0.01 deg)
-        # 22-23: Yaw uint16 (0.1 deg) - IMU fusion output
-        # 24-25: GyroX int16 (0.1 deg/s)
-        # 26-27: GyroY int16 (0.1 deg/s)
-        # 28-29: GyroZ int16 (0.1 deg/s)
-        # 30-31: AccX int16 (0.01 g)
-        # 32-33: AccY int16 (0.01 g)
-        # 34-35: AccZ int16 (0.01 g)
-        # 36-37: Baro Altitude int16 (0.1 m)
-        # 38-39: Battery uint16 (mV)
-        # 40: FlightState uint8
-        # 41: ErrorCode uint8
-        # 42: WaterDetected uint8 (0/1)
-        # 43: CRC8 XOR(0..42)
+        # 2-3: TimeTag uint16 (0.1 s)
+        # 4-7: Latitude int32 (deg * 1e7)
+        # 8-11: Longitude int32 (deg * 1e7)
+        # 12-13: GPS Alt int16 (0.1 m)
+        # 14-15: GPS Speed int16 (0.1 m/s)
+        # 16: GPS Sat count uint8
+        # 17-18: Roll int16 (0.01 deg) - IMU fusion output
+        # 19-20: Pitch int16 (0.01 deg)
+        # 21-22: Yaw uint16 (0.1 deg) - IMU fusion output
+        # 23-24: GyroX int16 (0.1 deg/s)
+        # 25-26: GyroY int16 (0.1 deg/s)
+        # 27-28: GyroZ int16 (0.1 deg/s)
+        # 29-30: AccX int16 (0.01 g)
+        # 31-32: AccY int16 (0.01 g)
+        # 33-34: AccZ int16 (0.01 g)
+        # 35-36: Baro Altitude int16 (0.1 m)
+        # 37-38: Battery uint16 (mV)
+        # 39-40: Servo Power uint16 (mV)
+        # 41-42: Servo Angle int16 (0.1 deg)
+        # 43: FlightState uint8
+        # 44: ErrorCode uint8
+        # 45: WaterDetected uint8 (0/1)
+        # 46: CRC8 XOR(0..45)
         if len(frame) != PACKET_LEN or frame[0] != 0x55 or frame[1] != FRAME_START:
             return
 
         try:
-            pkt_type = frame[2]
-            ts_ds = struct.unpack("<H", frame[3:5])[0]
-            lat_raw = struct.unpack("<i", frame[5:9])[0]
-            lon_raw = struct.unpack("<i", frame[9:13])[0]
-            gps_alt_dm = struct.unpack("<h", frame[13:15])[0]
-            gps_speed_dms = struct.unpack("<h", frame[15:17])[0]
-            sat_count = frame[17]
-            roll_cdeg = struct.unpack("<h", frame[18:20])[0]
-            pitch_cdeg = struct.unpack("<h", frame[20:22])[0]
-            yaw_ddeg = struct.unpack("<H", frame[22:24])[0]
-            gyro_x_ddeg_s = struct.unpack("<h", frame[24:26])[0]
-            gyro_y_ddeg_s = struct.unpack("<h", frame[26:28])[0]
-            gyro_ddeg_s = struct.unpack("<h", frame[28:30])[0]
-            accx_cg = struct.unpack("<h", frame[30:32])[0]
-            accy_cg = struct.unpack("<h", frame[32:34])[0]
-            accz_cg = struct.unpack("<h", frame[34:36])[0]
-            baro_alt_dm = struct.unpack("<h", frame[36:38])[0]
-            battery_mv = struct.unpack("<H", frame[38:40])[0]
-            flight_state_raw = frame[40]
-            error_code = frame[41]
-            water_detected = frame[42]
+            ts_ds = struct.unpack("<H", frame[2:4])[0]
+            lat_raw = struct.unpack("<i", frame[4:8])[0]
+            lon_raw = struct.unpack("<i", frame[8:12])[0]
+            gps_alt_dm = struct.unpack("<h", frame[12:14])[0]
+            gps_speed_dms = struct.unpack("<h", frame[14:16])[0]
+            sat_count = frame[16]
+            roll_cdeg = struct.unpack("<h", frame[17:19])[0]
+            pitch_cdeg = struct.unpack("<h", frame[19:21])[0]
+            yaw_ddeg = struct.unpack("<H", frame[21:23])[0]
+            gyro_x_ddeg_s = struct.unpack("<h", frame[23:25])[0]
+            gyro_y_ddeg_s = struct.unpack("<h", frame[25:27])[0]
+            gyro_ddeg_s = struct.unpack("<h", frame[27:29])[0]
+            accx_cg = struct.unpack("<h", frame[29:31])[0]
+            accy_cg = struct.unpack("<h", frame[31:33])[0]
+            accz_cg = struct.unpack("<h", frame[33:35])[0]
+            baro_alt_dm = struct.unpack("<h", frame[35:37])[0]
+            battery_mv = struct.unpack("<H", frame[37:39])[0]
+            servo_power_mv = struct.unpack("<H", frame[39:41])[0]
+            servo_angle_ddeg = struct.unpack("<h", frame[41:43])[0]
+            flight_state_raw = frame[43]
+            error_code = frame[44]
+            water_detected = frame[45]
         except Exception:
-            return
-
-        if pkt_type != 0x01:
             return
 
         crc_calc = 0
@@ -401,13 +402,15 @@ class MainWindow(QMainWindow):
         gyro_x_dps = gyro_x_ddeg_s / 10.0
         gyro_y_dps = gyro_y_ddeg_s / 10.0
         battery_v = battery_mv / 1000.0
+        servo_power_v = servo_power_mv / 1000.0
+        servo_angle_deg = servo_angle_ddeg / 10.0
         baro_alt_m = baro_alt_dm / 10.0
         accx_g = accx_cg / 100.0
         accy_g = accy_cg / 100.0
         accz_g = accz_cg / 100.0
 
         if not self._legacy_link_logged:
-            self.event_panel.add_event("Detected 44-byte telemetry frames.")
+            self.event_panel.add_event("Detected 47-byte telemetry frames.")
             self._legacy_link_logged = True
 
         t_sec = ts_ds / 10.0
@@ -454,6 +457,8 @@ class MainWindow(QMainWindow):
             "gyro_z": gyro_z_dps,
             "gyro_x": gyro_x_dps,
             "gyro_y": gyro_y_dps,
+            "servo_power": servo_power_v,
+            "servo_angle": servo_angle_deg,
             "sat": sat_count,
             "battery": battery_v,
             "status": fs.value if fs is not None else flight_state_raw,

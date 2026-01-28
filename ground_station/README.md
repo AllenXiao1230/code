@@ -36,34 +36,34 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 ----------------------
 所有欄位為 little-endian。
 
-| Byte Offset | 長度 | 欄位名稱 | 型態 | 單位 / 說明 |
+| Byte Offset | 長度 | 欄位名稱 | 型態 | 單位 / 說明 | 中文說明 / 用途 |
 | ----------- | ---- | -------- | ---- | ----------- |
-| 0–1 | 2 | Header | `uint16` | 固定 `0xAA55`（bytes: `0x55 0xAA`） |
-| 2 | 1 | MsgType | `uint8` | `0x01` = Telemetry |
-| 3–6 | 4 | TimeTag | `uint32` | 開機後 ms |
-| 7–10 | 4 | Latitude (GPS) | `int32` | deg × 1e7 |
-| 11–14 | 4 | Longitude (GPS) | `int32` | deg × 1e7 |
-| 15–16 | 2 | GPS Altitude (GPS) | `int16` | 0.1 m |
-| 17–18 | 2 | GPS Speed (GPS) | `int16` | 0.1 m/s |
-| 19 | 1 | GPS Sat Count (GPS) | `uint8` | 顆 |
-| 20–21 | 2 | Roll (IMU) | `int16` | 0.01 deg |
-| 22–23 | 2 | Pitch (IMU) | `int16` | 0.01 deg |
-| 24–25 | 2 | Yaw (IMU) | `uint16` | 0.1 deg |
-| 26–27 | 2 | GyroX (IMU) | `int16` | 0.1 deg/s |
-| 28–29 | 2 | GyroY (IMU) | `int16` | 0.1 deg/s |
-| 30–31 | 2 | GyroZ (IMU) | `int16` | 0.1 deg/s |
-| 32–33 | 2 | AccX (ADXL) | `int16` | 0.01 g |
-| 34–35 | 2 | AccY (ADXL) | `int16` | 0.01 g |
-| 36–37 | 2 | AccZ (ADXL) | `int16` | 0.01 g |
-| 38–41 | 4 | Baro Pressure (BMP) | `uint32` | Pa（UI/CSV 轉為 kPa 顯示） |
-| 42–43 | 2 | Baro Altitude (BMP) | `int16` | 0.1 m |
-| 44–45 | 2 | Temperature (SHT) | `int16` | 0.01 °C |
-| 46–47 | 2 | Humidity (SHT) | `uint16` | 0.1 %RH |
-| 48–49 | 2 | Battery | `uint16` | mV |
-| 50 | 1 | FlightState | `uint8` | 0=TEST,1=IDLE,2=PREFLIGHT,3=ASCENT,4=APOGEE,5=DESCENT,6=LANDED,99=ABORT |
-| 51 | 1 | ErrorCode | `uint8` | 0=NONE,1=LoRa lost,2=GPS lost,3=IMU fail,4=Baro fail,5=Battery low,6=Sensor timeout,255=Unknown |
-| 52 | 1 | WaterDetected | `uint8` | 0=否,1=是 |
-| 53 | 1 | CRC8 | `uint8` | XOR(Byte 0–52) |
+| 0–1 | 2 | Header | `uint16` | 固定 `0xAA55`（bytes: `0x55 0xAA`） | 封包同步頭，用於對齊資料流 |
+| 2 | 1 | MsgType | `uint8` | `0x01` = Telemetry | 訊息類型，0x01 表示遙測 |
+| 3–6 | 4 | TimeTag | `uint32` | 開機後 ms | 開機後時間戳，用於時間軸/對齊 |
+| 7–10 | 4 | Latitude (GPS) | `int32` | deg × 1e7 | GPS 緯度，地圖定位用 |
+| 11–14 | 4 | Longitude (GPS) | `int32` | deg × 1e7 | GPS 經度，地圖定位用 |
+| 15–16 | 2 | GPS Altitude (GPS) | `int16` | 0.1 m | GPS 高度 |
+| 17–18 | 2 | GPS Speed (GPS) | `int16` | 0.1 m/s | GPS 速度 |
+| 19 | 1 | GPS Sat Count (GPS) | `uint8` | 顆 | 可用衛星數 |
+| 20–21 | 2 | Roll (IMU) | `int16` | 0.01 deg | 滾轉角，姿態顯示用 |
+| 22–23 | 2 | Pitch (IMU) | `int16` | 0.01 deg | 俯仰角，姿態顯示用 |
+| 24–25 | 2 | Yaw (IMU) | `uint16` | 0.1 deg | 偏航角，姿態顯示/航向 |
+| 26–27 | 2 | GyroX (IMU) | `int16` | 0.1 deg/s | X 軸角速度 |
+| 28–29 | 2 | GyroY (IMU) | `int16` | 0.1 deg/s | Y 軸角速度 |
+| 30–31 | 2 | GyroZ (IMU) | `int16` | 0.1 deg/s | Z 軸角速度 |
+| 32–33 | 2 | AccX (ADXL) | `int16` | 0.01 g | X 軸加速度（高 G） |
+| 34–35 | 2 | AccY (ADXL) | `int16` | 0.01 g | Y 軸加速度（高 G） |
+| 36–37 | 2 | AccZ (ADXL) | `int16` | 0.01 g | Z 軸加速度（高 G） |
+| 38–41 | 4 | Baro Pressure (BMP) | `uint32` | Pa（UI/CSV 轉為 kPa 顯示） | 氣壓值，用於高度/氣壓顯示 |
+| 42–43 | 2 | Baro Altitude (BMP) | `int16` | 0.1 m | 氣壓高度，用於高度曲線 |
+| 44–45 | 2 | Temperature (SHT) | `int16` | 0.01 °C | 溫度 |
+| 46–47 | 2 | Humidity (SHT) | `uint16` | 0.1 %RH | 濕度 |
+| 48–49 | 2 | Battery | `uint16` | mV | 電池電壓 |
+| 50 | 1 | FlightState | `uint8` | 0=TEST,1=IDLE,2=PREFLIGHT,3=ASCENT,4=APOGEE,5=DESCENT,6=LANDED,99=ABORT | 飛行狀態 |
+| 51 | 1 | ErrorCode | `uint8` | 0=NONE,1=LoRa lost,2=GPS lost,3=IMU fail,4=Baro fail,5=Battery low,6=Sensor timeout,255=Unknown | 錯誤代碼 |
+| 52 | 1 | WaterDetected | `uint8` | 0=否,1=是 | 落水判斷旗標 |
+| 53 | 1 | CRC8 | `uint8` | XOR(Byte 0–52) | 校驗碼 |
 
 收到 MsgType=0x01 且 CRC 正確才會更新 UI。TimeTag 會顯示為開機時間（秒），任務時間以 ASCENT 為 T0 顯示 T+。
 

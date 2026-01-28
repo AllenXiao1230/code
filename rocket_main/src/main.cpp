@@ -107,8 +107,8 @@ static const uint8_t kStateDescent = 5;
 static const uint8_t kStateLanded = 6;
 static const uint8_t kStateAbort = 99;
 
-// --- 固定長度封包格式（50 bytes） ---
-static const uint8_t kFrameLen = 50;
+// --- 固定長度封包格式（44 bytes） ---
+static const uint8_t kFrameLen = 44;
 static const uint8_t kFrameHeader0 = 0x55;
 static const uint8_t kFrameHeader1 = 0xAA;
 static const uint8_t kMsgTypeTelemetry = 0x01;
@@ -867,27 +867,27 @@ void loop() {
   frame[0] = kFrameHeader0;
   frame[1] = kFrameHeader1;
   frame[2] = kMsgTypeTelemetry;
-  write_u32_le(frame, 3, time_ms);
-  write_i32_le(frame, 7, lat_raw);
-  write_i32_le(frame, 11, lon_raw);
-  write_i16_le(frame, 15, gps_alt_dm_local);
-  write_i16_le(frame, 17, gps_speed_dms_local);
-  frame[19] = sat_count;
-  write_i16_le(frame, 20, roll_cdeg);
-  write_i16_le(frame, 22, pitch_cdeg);
-  write_u16_le(frame, 24, gps_heading_ddeg);
-  write_i16_le(frame, 26, gyro_x_ddeg_s);
-  write_i16_le(frame, 28, gyro_y_ddeg_s);
-  write_i16_le(frame, 30, gyro_ddeg_s);
-  write_i16_le(frame, 32, accx_cg);
-  write_i16_le(frame, 34, accy_cg);
-  write_i16_le(frame, 36, accz_cg);
-  write_u32_le(frame, 38, pressure_u32);
-  write_i16_le(frame, 42, baro_alt_dm);
-  write_u16_le(frame, 44, battery_mv);
-  frame[46] = flight_state;
-  frame[47] = error_code;
-  frame[48] = water_detected;
+  uint16_t time_0p1s = static_cast<uint16_t>((time_ms / 100) & 0xFFFF);
+  write_u16_le(frame, 3, time_0p1s);
+  write_i32_le(frame, 5, lat_raw);
+  write_i32_le(frame, 9, lon_raw);
+  write_i16_le(frame, 13, gps_alt_dm_local);
+  write_i16_le(frame, 15, gps_speed_dms_local);
+  frame[17] = sat_count;
+  write_i16_le(frame, 18, roll_cdeg);
+  write_i16_le(frame, 20, pitch_cdeg);
+  write_u16_le(frame, 22, gps_heading_ddeg);
+  write_i16_le(frame, 24, gyro_x_ddeg_s);
+  write_i16_le(frame, 26, gyro_y_ddeg_s);
+  write_i16_le(frame, 28, gyro_ddeg_s);
+  write_i16_le(frame, 30, accx_cg);
+  write_i16_le(frame, 32, accy_cg);
+  write_i16_le(frame, 34, accz_cg);
+  write_i16_le(frame, 36, baro_alt_dm);
+  write_u16_le(frame, 38, battery_mv);
+  frame[40] = flight_state;
+  frame[41] = error_code;
+  frame[42] = water_detected;
 
   uint8_t crc = 0;
   for (int i = 0; i < kFrameLen - 1; i++) {

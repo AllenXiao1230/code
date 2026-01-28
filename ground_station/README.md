@@ -1,7 +1,7 @@
 Rocket Ground Station
 =====================
 
-PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示、地圖軌跡、高度曲線與 CSV 記錄控制。統一採用 50-byte 固定長度封包（Header=0xAA55）的解碼，並以 T+ 任務時間呈現飛行狀態。
+PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示、地圖軌跡、高度曲線與 CSV 記錄控制。統一採用 44-byte 固定長度封包（Header=0xAA55）的解碼，並以 T+ 任務時間呈現飛行狀態。
 
 
 快速開始
@@ -25,7 +25,7 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 - Sync RTC：將電腦當前時間送到火箭端 RTC（需串口已連線）。
 - 記錄控制：開始/停止 CSV 記錄（檔名 `telemetry_<timestamp>.csv`）。狀態會顯示於按鈕旁並寫入事件面板。
 - 速度 / 高度：左右分欄顯示 GPS/氣壓的速度與高度。
-- 感測器數據：顯示狀態、錯誤碼、開機時間（秒）、落水狀態、經緯度、偏航、衛星數、Roll/Pitch、AccX/Y/Z、GyroX/Y/Z、氣壓。
+- 感測器數據：顯示狀態、錯誤碼、開機時間（秒）、落水狀態、經緯度、偏航、衛星數、Roll/Pitch、AccX/Y/Z、GyroX/Y/Z。
 - 地圖：Leaflet 地圖（需網路存取 tile），標記當前 GPS 位置並以折線連接歷史點。
 - 高度曲線：顯示 30 秒滑動窗口，時間軸隨時間向右移動，最新數據在右端。
 - 事件指示器：列出連線、錯誤、記錄狀態等訊息。
@@ -33,7 +33,7 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 - 3D 姿態：以 Roll/Pitch/Yaw 即時旋轉火箭模型，座標軸固定在畫面。
 
 
-遙測封包格式（50 bytes）
+遙測封包格式（44 bytes）
 ----------------------
 所有欄位為 little-endian。
 
@@ -41,28 +41,27 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 | ----------- | ---- | -------- | ---- | ----------- | -------------- |
 | 0–1 | 2 | Header | `uint16` | 固定 `0xAA55`（bytes: `0x55 0xAA`） | 封包同步頭，用於對齊資料流 |
 | 2 | 1 | MsgType | `uint8` | `0x01` = Telemetry | 訊息類型，0x01 表示遙測 |
-| 3–6 | 4 | TimeTag | `uint32` | 開機後 ms | 開機後時間戳，用於時間軸/對齊 |
-| 7–10 | 4 | Latitude (GPS) | `int32` | deg × 1e7 | GPS 緯度，地圖定位用 |
-| 11–14 | 4 | Longitude (GPS) | `int32` | deg × 1e7 | GPS 經度，地圖定位用 |
-| 15–16 | 2 | GPS Altitude (GPS) | `int16` | 0.1 m | GPS 高度 |
-| 17–18 | 2 | GPS Speed (GPS) | `int16` | 0.1 m/s | GPS 速度 |
-| 19 | 1 | GPS Sat Count (GPS) | `uint8` | 顆 | 可用衛星數 |
-| 20–21 | 2 | Roll (IMU) | `int16` | 0.01 deg | 滾轉角，姿態顯示用 |
-| 22–23 | 2 | Pitch (IMU) | `int16` | 0.01 deg | 俯仰角，姿態顯示用 |
-| 24–25 | 2 | Yaw (IMU) | `uint16` | 0.1 deg | 偏航角，姿態顯示/航向 |
-| 26–27 | 2 | GyroX (IMU) | `int16` | 0.1 deg/s | X 軸角速度 |
-| 28–29 | 2 | GyroY (IMU) | `int16` | 0.1 deg/s | Y 軸角速度 |
-| 30–31 | 2 | GyroZ (IMU) | `int16` | 0.1 deg/s | Z 軸角速度 |
-| 32–33 | 2 | AccX (ADXL) | `int16` | 0.01 g | X 軸加速度（高 G） |
-| 34–35 | 2 | AccY (ADXL) | `int16` | 0.01 g | Y 軸加速度（高 G） |
-| 36–37 | 2 | AccZ (ADXL) | `int16` | 0.01 g | Z 軸加速度（高 G） |
-| 38–41 | 4 | Baro Pressure (BMP) | `uint32` | Pa（UI/CSV 轉為 kPa 顯示） | 氣壓值，用於高度/氣壓顯示 |
-| 42–43 | 2 | Baro Altitude (BMP) | `int16` | 0.1 m | 氣壓高度，用於高度曲線 |
-| 44–45 | 2 | Battery | `uint16` | mV | 電池電壓 |
-| 46 | 1 | FlightState | `uint8` | 0=TEST,1=IDLE,2=PREFLIGHT,3=ASCENT,4=APOGEE,5=DESCENT,6=LANDED,99=ABORT | 飛行狀態 |
-| 47 | 1 | ErrorCode | `uint8` | 0=NONE,1=LoRa lost,2=GPS lost,3=IMU fail,4=Baro fail,5=Battery low,6=Sensor timeout,255=Unknown | 錯誤代碼 |
-| 48 | 1 | WaterDetected | `uint8` | 0=否,1=是 | 落水判斷旗標 |
-| 49 | 1 | CRC8 | `uint8` | XOR(Byte 0–48) | 校驗碼 |
+| 3–4 | 2 | TimeTag | `uint16` | 0.1 s | 開機後時間戳（0.1 秒） |
+| 5–8 | 4 | Latitude (GPS) | `int32` | deg × 1e7 | GPS 緯度，地圖定位用 |
+| 9–12 | 4 | Longitude (GPS) | `int32` | deg × 1e7 | GPS 經度，地圖定位用 |
+| 13–14 | 2 | GPS Altitude (GPS) | `int16` | 0.1 m | GPS 高度 |
+| 15–16 | 2 | GPS Speed (GPS) | `int16` | 0.1 m/s | GPS 速度 |
+| 17 | 1 | GPS Sat Count (GPS) | `uint8` | 顆 | 可用衛星數 |
+| 18–19 | 2 | Roll (IMU) | `int16` | 0.01 deg | 滾轉角，姿態顯示用 |
+| 20–21 | 2 | Pitch (IMU) | `int16` | 0.01 deg | 俯仰角，姿態顯示用 |
+| 22–23 | 2 | Yaw (IMU) | `uint16` | 0.1 deg | 偏航角，姿態顯示/航向 |
+| 24–25 | 2 | GyroX (IMU) | `int16` | 0.1 deg/s | X 軸角速度 |
+| 26–27 | 2 | GyroY (IMU) | `int16` | 0.1 deg/s | Y 軸角速度 |
+| 28–29 | 2 | GyroZ (IMU) | `int16` | 0.1 deg/s | Z 軸角速度 |
+| 30–31 | 2 | AccX (ADXL) | `int16` | 0.01 g | X 軸加速度（高 G） |
+| 32–33 | 2 | AccY (ADXL) | `int16` | 0.01 g | Y 軸加速度（高 G） |
+| 34–35 | 2 | AccZ (ADXL) | `int16` | 0.01 g | Z 軸加速度（高 G） |
+| 36–37 | 2 | Baro Altitude (BMP) | `int16` | 0.1 m | 氣壓高度，用於高度曲線 |
+| 38–39 | 2 | Battery | `uint16` | mV | 電池電壓 |
+| 40 | 1 | FlightState | `uint8` | 0=TEST,1=IDLE,2=PREFLIGHT,3=ASCENT,4=APOGEE,5=DESCENT,6=LANDED,99=ABORT | 飛行狀態 |
+| 41 | 1 | ErrorCode | `uint8` | 0=NONE,1=LoRa lost,2=GPS lost,3=IMU fail,4=Baro fail,5=Battery low,6=Sensor timeout,255=Unknown | 錯誤代碼 |
+| 42 | 1 | WaterDetected | `uint8` | 0=否,1=是 | 落水判斷旗標 |
+| 43 | 1 | CRC8 | `uint8` | XOR(Byte 0–42) | 校驗碼 |
 
 收到 MsgType=0x01 且 CRC 正確才會更新 UI。TimeTag 會顯示為開機時間（秒），任務時間以 ASCENT 為 T0 顯示 T+。
 
@@ -72,6 +71,7 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 - ADXL375：提供加速度 AccX/Y/Z（高 G 加速度）。
 - BMP390：提供氣壓（Pa）與氣壓高度（m）。
 - SHT31：提供溫度/濕度（僅記錄於機內 SD，不在遙測封包中）。
+- BMP390：氣壓僅記錄於機內 SD，不在遙測封包中。
 - RTC（DS3231）：提供 Unix 時間戳（秒），僅存於機內 SD 記錄，可由地面站同步。
 - RTC 同步格式：地面站送出 `RTC_SYNC:<unix>`（ASCII，換行結尾），火箭端收到後更新 RTC。
 - GPS：經緯度/速度/高度/衛星數（目前韌體端多數仍為 0，待接入 GPS 串流）。
@@ -105,7 +105,7 @@ IMU / ADXL 軸向對應（中文說明）
 CSV 記錄
 --------
 - 檔名：`telemetry_<unix_ts>.csv`
-- 欄位：`time, lat, lon, alt, gps_alt, baro_alt, speed, heading, sat, roll, pitch, accx, accy, accz, gyro_x, gyro_y, gyro_z, battery, pressure_kpa, status, water`
+- 欄位：`time, lat, lon, alt, gps_alt, baro_alt, speed, heading, sat, roll, pitch, accx, accy, accz, gyro_x, gyro_y, gyro_z, battery, status, water`
 - 操作：在「記錄控制」點「開始記錄」啟動，停止後自動關檔。
 
 
@@ -129,7 +129,7 @@ CSV 記錄
 開發與注意事項
 -------------
 - 地圖需要網路下載 OSM tile；無網路時地圖空白但其他功能仍可用。
-- 目前僅解碼 50-byte 固定封包；若韌體改版需同步更新 `gui_main.py` 的 `_handle_legacy_frame`。
+- 目前僅解碼 44-byte 固定封包；若韌體改版需同步更新 `gui_main.py` 的 `_handle_legacy_frame`。
 - 任務時間以 ASCENT 為 T0；切回 IDLE 會重置 T0。
 - 預設序列埠/波特率：`COM3`、115200，可在 UI 選擇或修改 `config.py`。
 - 若韌體仍以 Serial 傳封包，請在 `rocket_main/src/main.cpp` 設定 `DEBUG_SERIAL = 0`，避免文字除錯輸出干擾封包；切換 LoRa 後可再開啟除錯。

@@ -58,6 +58,7 @@ class TelemetryPanel(QWidget):
         self.lbl_state = QLabel()
         self.lbl_error = QLabel()
         self.lbl_time = QLabel()
+        self.lbl_water = QLabel()
 
         f.addWidget(QLabel("狀態"), 0, 0)
         f.addWidget(self.lbl_state, 0, 1)
@@ -65,6 +66,8 @@ class TelemetryPanel(QWidget):
         f.addWidget(self.lbl_error, 1, 1)
         f.addWidget(QLabel("時間 (秒)"), 2, 0)
         f.addWidget(self.lbl_time, 2, 1)
+        f.addWidget(QLabel("落水"), 3, 0)
+        f.addWidget(self.lbl_water, 3, 1)
 
         # ===== GPS / Yaw =====
         gps = QGroupBox("定位 / 偏航")
@@ -119,22 +122,8 @@ class TelemetryPanel(QWidget):
         a.addWidget(QLabel("加速度Z (g)"), 2, 0)
         a.addWidget(self.lbl_accz, 2, 1)
 
-        env = QGroupBox("環境感測")
-        p = QGridLayout(env)
-        self.lbl_press = QLabel()
-        p.addWidget(QLabel("氣壓 (kPa)"), 0, 0)
-        p.addWidget(self.lbl_press, 0, 1)
-
-        sys = QGroupBox("狀態 / 系統")
-        s = QGridLayout(sys)
-        self.lbl_water = QLabel()
-        s.addWidget(QLabel("落水"), 0, 0)
-        s.addWidget(self.lbl_water, 0, 1)
-
         sensors_grid.addWidget(imu, 0, 0)
         sensors_grid.addWidget(accel, 0, 1)
-        sensors_grid.addWidget(env, 1, 0)
-        sensors_grid.addWidget(sys, 1, 1)
 
         layout.addWidget(fs, 0, 0)
         layout.addWidget(gps, 0, 1)
@@ -161,7 +150,6 @@ class TelemetryPanel(QWidget):
         self.lbl_accy.setText(self._fmt(data.get("accy"), "{:.2f}"))
         self.lbl_accz.setText(self._fmt(data.get("accz"), "{:.2f}"))
 
-        self.lbl_press.setText(self._fmt(data.get("pressure"), "{:.3f}", fallback="---"))
 
     @staticmethod
     def _fmt(val, fmt, fallback="---"):

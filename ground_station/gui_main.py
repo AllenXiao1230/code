@@ -319,23 +319,23 @@ class MainWindow(QMainWindow):
         # 11-14: Longitude int32 (deg * 1e7)
         # 15-16: GPS Alt int16 (0.1 m)
         # 17-18: GPS Speed int16 (0.1 m/s)
-        # 19-20: Yaw / Heading uint16 (0.1 deg)
-        # 21: GPS Sat count uint8
-        # 22-23: Roll int16 (0.01 deg) - IMU fusion output
-        # 24-25: Pitch int16 (0.01 deg)
-        # 26-27: GyroZ int16 (0.1 deg/s)
-        # 28: StatusFlags uint8
-        # 29: SubError uint8
-        # 30-31: Battery uint16 (mV)
-        # 32-33: Temperature int16 (0.01 C)
-        # 34-35: Humidity uint16 (0.1 %RH)
-        # 36-39: Baro Pressure uint32 (Pa, UI/CSV shown as kPa)
-        # 40-41: Baro Altitude int16 (0.1 m)
-        # 42-43: AccX int16 (0.01 g)
-        # 44-45: AccY int16 (0.01 g)
-        # 46-47: AccZ int16 (0.01 g)
-        # 48-49: GyroX int16 (0.1 deg/s)
-        # 50-51: GyroY int16 (0.1 deg/s)
+        # 19: GPS Sat count uint8
+        # 20-21: Roll int16 (0.01 deg) - IMU fusion output
+        # 22-23: Pitch int16 (0.01 deg)
+        # 24-25: Yaw uint16 (0.1 deg) - IMU fusion output
+        # 26-27: GyroX int16 (0.1 deg/s)
+        # 28-29: GyroY int16 (0.1 deg/s)
+        # 30-31: GyroZ int16 (0.1 deg/s)
+        # 32-33: AccX int16 (0.01 g)
+        # 34-35: AccY int16 (0.01 g)
+        # 36-37: AccZ int16 (0.01 g)
+        # 38-41: Baro Pressure uint32 (Pa, UI/CSV shown as kPa)
+        # 42-43: Baro Altitude int16 (0.1 m)
+        # 44-45: Temperature int16 (0.01 C)
+        # 46-47: Humidity uint16 (0.1 %RH)
+        # 48-49: Battery uint16 (mV)
+        # 50: FlightState uint8
+        # 51: ErrorCode uint8
         # 52: CRC8 XOR(0..51)
         if len(frame) != PACKET_LEN or frame[0] != 0x55 or frame[1] != FRAME_START:
             return
@@ -347,23 +347,23 @@ class MainWindow(QMainWindow):
             lon_raw = struct.unpack("<i", frame[11:15])[0]
             gps_alt_dm = struct.unpack("<h", frame[15:17])[0]
             gps_speed_dms = struct.unpack("<h", frame[17:19])[0]
-            gps_heading_ddeg = struct.unpack("<H", frame[19:21])[0]
-            sat_count = frame[21]
-            roll_cdeg = struct.unpack("<h", frame[22:24])[0]
-            pitch_cdeg = struct.unpack("<h", frame[24:26])[0]
-            gyro_ddeg_s = struct.unpack("<h", frame[26:28])[0]
-            flight_state_raw = frame[28]
-            error_code = frame[29]
-            battery_mv = struct.unpack("<H", frame[30:32])[0]
-            temp_c_centi = struct.unpack("<h", frame[32:34])[0]
-            hum_deci = struct.unpack("<H", frame[34:36])[0]
-            pressure_pa = struct.unpack("<I", frame[36:40])[0]
-            baro_alt_dm = struct.unpack("<h", frame[40:42])[0]
-            accx_cg = struct.unpack("<h", frame[42:44])[0]
-            accy_cg = struct.unpack("<h", frame[44:46])[0]
-            accz_cg = struct.unpack("<h", frame[46:48])[0]
-            gyro_x_ddeg_s = struct.unpack("<h", frame[48:50])[0]
-            gyro_y_ddeg_s = struct.unpack("<h", frame[50:52])[0]
+            sat_count = frame[19]
+            roll_cdeg = struct.unpack("<h", frame[20:22])[0]
+            pitch_cdeg = struct.unpack("<h", frame[22:24])[0]
+            yaw_ddeg = struct.unpack("<H", frame[24:26])[0]
+            gyro_x_ddeg_s = struct.unpack("<h", frame[26:28])[0]
+            gyro_y_ddeg_s = struct.unpack("<h", frame[28:30])[0]
+            gyro_ddeg_s = struct.unpack("<h", frame[30:32])[0]
+            accx_cg = struct.unpack("<h", frame[32:34])[0]
+            accy_cg = struct.unpack("<h", frame[34:36])[0]
+            accz_cg = struct.unpack("<h", frame[36:38])[0]
+            pressure_pa = struct.unpack("<I", frame[38:42])[0]
+            baro_alt_dm = struct.unpack("<h", frame[42:44])[0]
+            temp_c_centi = struct.unpack("<h", frame[44:46])[0]
+            hum_deci = struct.unpack("<H", frame[46:48])[0]
+            battery_mv = struct.unpack("<H", frame[48:50])[0]
+            flight_state_raw = frame[50]
+            error_code = frame[51]
         except Exception:
             return
 
@@ -379,7 +379,7 @@ class MainWindow(QMainWindow):
         gps_alt_m = gps_alt_dm / 10.0
         gps_speed_ms = gps_speed_dms / 10.0
         baro_speed_ms = gps_speed_ms  # no separate baro speed provided
-        heading_deg = (gps_heading_ddeg / 10.0) % 360
+        heading_deg = (yaw_ddeg / 10.0) % 360
         roll_deg = roll_cdeg / 100.0
         pitch_deg = pitch_cdeg / 100.0
         gyro_z_dps = gyro_ddeg_s / 10.0

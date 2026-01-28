@@ -29,6 +29,7 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 - 高度曲線：顯示 30 秒滑動窗口，時間軸隨時間向右移動，最新數據在右端。
 - 事件指示器：列出連線、錯誤、記錄狀態等訊息。
 - 電壓/時間：電池電壓、任務時間（T+ 格式）。
+- 3D 姿態：以 Roll/Pitch/Yaw 即時旋轉火箭模型，座標軸固定在畫面。
 
 
 遙測封包格式（53 bytes）
@@ -40,30 +41,46 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 | 0–1 | 2 | Header | `uint16` | 固定 `0xAA55`（bytes: `0x55 0xAA`） |
 | 2 | 1 | MsgType | `uint8` | `0x01` = Telemetry |
 | 3–6 | 4 | TimeTag | `uint32` | 開機後 ms |
-| 7–10 | 4 | Latitude | `int32` | deg × 1e7 |
-| 11–14 | 4 | Longitude | `int32` | deg × 1e7 |
-| 15–16 | 2 | GPS Altitude | `int16` | 0.1 m |
-| 17–18 | 2 | GPS Speed | `int16` | 0.1 m/s |
-| 19–20 | 2 | Yaw / Heading | `uint16` | 0.1 deg（IMU Yaw） |
-| 21 | 1 | GPS Sat Count | `uint8` | 顆 |
-| 22–23 | 2 | Roll | `int16` | 0.01 deg（IMU 姿態融合輸出） |
-| 24–25 | 2 | Pitch | `int16` | 0.01 deg |
-| 26–27 | 2 | GyroZ | `int16` | 0.1 deg/s |
-| 28 | 1 | FlightState | `uint8` | 0=TEST,1=IDLE,2=PREFLIGHT,3=ASCENT,4=APOGEE,5=DESCENT,6=LANDED,99=ABORT |
-| 29 | 1 | ErrorCode | `uint8` | 0=NONE,1=LoRa lost,2=GPS lost,3=IMU fail,4=Baro fail,5=Battery low,6=Sensor timeout,255=Unknown |
-| 30–31 | 2 | Battery | `uint16` | mV |
-| 32–33 | 2 | Temperature | `int16` | 0.01 °C |
-| 34–35 | 2 | Humidity | `uint16` | 0.1 %RH |
-| 36–39 | 4 | Baro Pressure | `uint32` | Pa（UI/CSV 轉為 kPa 顯示） |
-| 40–41 | 2 | Baro Altitude | `int16` | 0.1 m |
-| 42–43 | 2 | AccX | `int16` | 0.01 g |
-| 44–45 | 2 | AccY | `int16` | 0.01 g |
-| 46–47 | 2 | AccZ | `int16` | 0.01 g |
-| 48–49 | 2 | GyroX | `int16` | 0.1 deg/s |
-| 50–51 | 2 | GyroY | `int16` | 0.1 deg/s |
+| 7–10 | 4 | Latitude (GPS) | `int32` | deg × 1e7 |
+| 11–14 | 4 | Longitude (GPS) | `int32` | deg × 1e7 |
+| 15–16 | 2 | GPS Altitude (GPS) | `int16` | 0.1 m |
+| 17–18 | 2 | GPS Speed (GPS) | `int16` | 0.1 m/s |
+| 19 | 1 | GPS Sat Count (GPS) | `uint8` | 顆 |
+| 20–21 | 2 | Roll (IMU) | `int16` | 0.01 deg |
+| 22–23 | 2 | Pitch (IMU) | `int16` | 0.01 deg |
+| 24–25 | 2 | Yaw (IMU) | `uint16` | 0.1 deg |
+| 26–27 | 2 | GyroX (IMU) | `int16` | 0.1 deg/s |
+| 28–29 | 2 | GyroY (IMU) | `int16` | 0.1 deg/s |
+| 30–31 | 2 | GyroZ (IMU) | `int16` | 0.1 deg/s |
+| 32–33 | 2 | AccX (ADXL) | `int16` | 0.01 g |
+| 34–35 | 2 | AccY (ADXL) | `int16` | 0.01 g |
+| 36–37 | 2 | AccZ (ADXL) | `int16` | 0.01 g |
+| 38–41 | 4 | Baro Pressure (BMP) | `uint32` | Pa（UI/CSV 轉為 kPa 顯示） |
+| 42–43 | 2 | Baro Altitude (BMP) | `int16` | 0.1 m |
+| 44–45 | 2 | Temperature (SHT) | `int16` | 0.01 °C |
+| 46–47 | 2 | Humidity (SHT) | `uint16` | 0.1 %RH |
+| 48–49 | 2 | Battery | `uint16` | mV |
+| 50 | 1 | FlightState | `uint8` | 0=TEST,1=IDLE,2=PREFLIGHT,3=ASCENT,4=APOGEE,5=DESCENT,6=LANDED,99=ABORT |
+| 51 | 1 | ErrorCode | `uint8` | 0=NONE,1=LoRa lost,2=GPS lost,3=IMU fail,4=Baro fail,5=Battery low,6=Sensor timeout,255=Unknown |
 | 52 | 1 | CRC8 | `uint8` | XOR(Byte 0–51) |
 
 收到 MsgType=0x01 且 CRC 正確才會更新 UI。TimeTag 會顯示為開機時間（秒），任務時間以 ASCENT 為 T0 顯示 T+。
+
+資料來源與目前實作
+----------------
+- IMU（ICM42688）：提供姿態融合輸出（Roll/Pitch/Yaw）與 GyroX/Y/Z。
+- ADXL375：提供加速度 AccX/Y/Z（高 G 加速度）。
+- BMP390：提供氣壓（Pa）與氣壓高度（m）。
+- SHT31：提供溫度/濕度。
+- GPS：經緯度/速度/高度/衛星數（目前韌體端多數仍為 0，待接入 GPS 串流）。
+- Battery：目前韌體端預留（mV），若接入 ADC 需填值。
+
+姿態融合與穩定化
+----------------
+- 姿態融合：使用 Madgwick IMU（gyro + accel）計算 Roll/Pitch/Yaw。
+- Yaw 歸零：啟動後第一筆姿態視為零點（yaw offset）。
+- Yaw 鎖定：當 |Pitch| ≥ 80° 時暫停更新 yaw，避免接近垂直的 Euler 亂跳。
+- Roll/Pitch 平滑：韌體端低通濾波（目前 `smooth_alpha = 0.2`）。
 
 
 座標系 / 姿態定義

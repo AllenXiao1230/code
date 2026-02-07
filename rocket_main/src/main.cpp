@@ -15,6 +15,7 @@
 #include "Adafruit_Sensor.h"
 #include "Adafruit_ADXL375.h"
 #include "ICM42688.h"
+#include "error_codes.h"
 
 // Set to 1 for Serial debug logs. Keep 0 when Serial is used for binary packets.
 #define DEBUG_SERIAL 0
@@ -124,6 +125,8 @@ static const float kG = 9.80665f;
 static const float kBatteryRTop = 200000.0f;  // ohms (to battery)
 static const float kBatteryRBottom = 100000.0f; // ohms (to GND)
 static const float kBatteryDivider = kBatteryRBottom / (kBatteryRTop + kBatteryRBottom);
+// Set to 0 to disable low-battery error.
+static const uint16_t kBatteryLowMv = 0;
 
 // Flight state machine thresholds (document-defined)
 static const float kLiftoffAccelG = 3.0f;
@@ -1041,7 +1044,6 @@ void loop() {
     set_status_led(flight_state);
     last_state = flight_state;
   }
-  uint8_t error_code = 0;
   uint32_t rtc_unix = 0;
   if (rtc_ready) {
     rtc_unix = rtc.now().unixtime();
@@ -1050,6 +1052,31 @@ void loop() {
   uint16_t servo_power_mv = 0; // TODO: read servo power rail
   int16_t servo_angle_ddeg = 0; // TODO: read servo angle (0.1 deg)
   uint32_t pressure_u32 = (pressure_pa < 0.0f) ? 0 : static_cast<uint32_t>(lroundf(pressure_pa));
+  uint8_t error_code = 0;
+  if (!lora_ready) {
+    error_code |= kErrLoRaInit;
+  }
+  if (!sd_ready) {
+    error_code |= kErrSdInit;
+  }
+  if (!rtc_ready) {
+    error_code |= kErrRtcInit;
+  }
+  if (!status_bmp) {
+    error_code |= kErrBaroInit;
+  }
+  if (!status_imu) {
+    error_code |= kErrImuInit;
+  }
+  if (!status_adxl) {
+    error_code |= kErrAdxlInit;
+  }
+  if (flight_state >= kStatePreflight && !gps_fix_valid) {
+    error_code |= kErrGpsNoFix;
+  }
+  if (battery_mv == 0 || (kBatteryLowMv > 0 && battery_mv < kBatteryLowMv)) {
+    error_code |= kErrBattery;
+  }
 
   uint8_t frame[kFrameLen];
   frame[0] = kFrameHeader0;

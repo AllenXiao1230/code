@@ -1,5 +1,5 @@
 # state_machine.py
-from enum import IntEnum, auto
+from enum import IntEnum
 from PyQt5.QtCore import QObject, pyqtSignal
 import struct
 import time
@@ -16,15 +16,16 @@ class FlightState(IntEnum):
     ABORT = 99
 
 
-class ErrorCode(IntEnum):
-    ERR_NONE = 0
-    ERR_LORA_LOST = 1
-    ERR_GPS_LOST = 2
-    ERR_IMU_FAIL = 3
-    ERR_BARO_FAIL = 4
-    ERR_BATTERY_LOW = 5
-    ERR_SENSOR_TIMEOUT = 6
-    ERR_UNKNOWN = 255
+class ErrorBit(IntEnum):
+    NONE = 0
+    LORA_INIT = 1 << 0
+    SD_INIT = 1 << 1
+    RTC_INIT = 1 << 2
+    BARO_INIT = 1 << 3
+    IMU_INIT = 1 << 4
+    ADXL_INIT = 1 << 5
+    GPS_NO_FIX = 1 << 6
+    BATTERY = 1 << 7
 
 
 class StateMachine(QObject):
@@ -159,19 +160,20 @@ def decode_state(status: int) -> str:
 def decode_error(err: int) -> str:
     if err is None:
         return "OK"
-    try:
-        code = ErrorCode(err)
-    except Exception:
-        return f"ERR:{err}"
+    if err == 0:
+        return "OK"
 
-    names = {
-        ErrorCode.ERR_NONE: "OK",
-        ErrorCode.ERR_LORA_LOST: "LoRa 斷線",
-        ErrorCode.ERR_GPS_LOST: "GPS 斷訊",
-        ErrorCode.ERR_IMU_FAIL: "IMU 故障",
-        ErrorCode.ERR_BARO_FAIL: "氣壓計故障",
-        ErrorCode.ERR_BATTERY_LOW: "電池電量低",
-        ErrorCode.ERR_SENSOR_TIMEOUT: "感測逾時",
-        ErrorCode.ERR_UNKNOWN: "未知錯誤",
-    }
-    return names.get(code, code.name)
+    codes = [
+        (ErrorBit.LORA_INIT, "LORA"),
+        (ErrorBit.SD_INIT, "SD"),
+        (ErrorBit.RTC_INIT, "RTC"),
+        (ErrorBit.BARO_INIT, "BARO"),
+        (ErrorBit.IMU_INIT, "IMU"),
+        (ErrorBit.ADXL_INIT, "ADXL"),
+        (ErrorBit.GPS_NO_FIX, "GPS"),
+        (ErrorBit.BATTERY, "BAT"),
+    ]
+    labels = [label for bit, label in codes if err & int(bit)]
+    if not labels:
+        return f"ERR:0x{err:02X}"
+    return " | ".join(labels)

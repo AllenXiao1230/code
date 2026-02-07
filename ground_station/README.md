@@ -60,9 +60,22 @@ PyQt5 製作的火箭地面站 GUI，包含序列埠連線、即時遙測顯示�
 | 39–40 | 2 | Servo Power | `uint16` | mV | 伺服馬達電源電壓 |
 | 41–42 | 2 | Servo Angle | `int16` | 0.1 deg | 伺服角度 |
 | 43 | 1 | FlightState | `uint8` | 0=TEST,1=IDLE,2=PREFLIGHT,3=ASCENT,4=APOGEE,5=DESCENT,6=LANDED,99=ABORT | 飛行狀態 |
-| 44 | 1 | ErrorCode | `uint8` | 0=NONE,1=LoRa lost,2=GPS lost,3=IMU fail,4=Baro fail,5=Battery low,6=Sensor timeout,255=Unknown | 錯誤代碼 |
+| 44 | 1 | ErrorCode | `uint8` | Bitmask（可多值同時存在），見下表 | 錯誤代碼 |
 | 45 | 1 | WaterDetected | `uint8` | 0=否,1=是 | 落水判斷旗標 |
 | 46 | 1 | CRC8 | `uint8` | XOR(Byte 0–45) | 校驗碼 |
+
+ErrorCode（bitmask）
+-------------------
+| Bit | Hex | 條件 | 說明 |
+| --- | --- | ---- | ---- |
+| 0 | 0x01 | `lora_ready == false` | LoRa 初始化失敗 |
+| 1 | 0x02 | `sd_ready == false` | SD 初始化失敗 |
+| 2 | 0x04 | `rtc_ready == false` | RTC 初始化失敗 |
+| 3 | 0x08 | `status_bmp == false` | BMP390 初始化失敗 |
+| 4 | 0x10 | `status_imu == false` | IMU 初始化失敗 |
+| 5 | 0x20 | `status_adxl == false` | ADXL375 初始化失敗 |
+| 6 | 0x40 | `flight_state >= PREFLIGHT && !gps_fix_valid` | GPS 無定位/逾時 |
+| 7 | 0x80 | `battery_mv == 0` 或（低於門檻） | 電池低電/ADC 無效 |
 
 收到 CRC 正確才會更新 UI。TimeTag 會顯示為開機時間（秒），任務時間以 ASCENT 為 T0 顯示 T+。
 

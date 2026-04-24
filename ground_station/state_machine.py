@@ -1,8 +1,7 @@
 # state_machine.py
 from enum import IntEnum
 from PyQt5.QtCore import QObject, pyqtSignal
-import struct
-import time
+from protocol import FrameDecodeError, decode_frame
 
 
 class FlightState(IntEnum):
@@ -30,8 +29,7 @@ class ErrorBit(IntEnum):
 
 class StateMachine(QObject):
     """
-    Central flight state machine.
-    All decoded packets MUST go through here.
+    Telemetry signal bridge for decoded 47-byte frames.
     """
 
     # ---- Signals for UI / Logger / Plot ----
@@ -46,90 +44,43 @@ class StateMachine(QObject):
     def __init__(self):
         super().__init__()
         self.state = FlightState.IDLE
-        self.boot_time = time.time()
+        self._last_error = None
 
     # ---------- Public API ----------
 
-    def handle_packet(self, payload: bytes):
+    def handle_packet(self, frame: bytes):
         """
-        Entry point for all telemetry packets.
+        Entry point for 47-byte telemetry frames.
         """
-        if not payload:
+        if not frame:
             return
 
-        packet_type = payload[0]
-
-        if packet_type == 0x01:
-            self._handle_attitude(payload)
-        elif packet_type == 0x02:
-            self._handle_battery(payload)
-        elif packet_type == 0x03:
-            self._handle_altitude(payload)
-        elif packet_type == 0x04:
-            self._handle_event(payload)
-        elif packet_type == 0x05:
-            self._handle_state_change(payload)
-        elif packet_type == 0x06:
-            self._handle_gps(payload)
-
-        self._update_time()
-
-    # ---------- Packet Handlers ----------
-
-    def _handle_attitude(self, data: bytes):
-        # [0x01][roll][pitch][yaw] (float32 x3)
         try:
-            roll, pitch, yaw = struct.unpack("<fff", data[1:13])
-            self.attitude_updated.emit(roll, pitch, yaw)
-        except struct.error:
-            pass
+            packet = decode_frame(frame)
+        except FrameDecodeError:
+            return
 
-    def _handle_battery(self, data: bytes):
-        # [0x02][voltage] (float32)
         try:
-            (voltage,) = struct.unpack("<f", data[1:5])
-            self.battery_updated.emit(voltage)
-        except struct.error:
-            pass
-
-    def _handle_altitude(self, data: bytes):
-        # [0x03][altitude] (float32)
-        try:
-            (altitude,) = struct.unpack("<f", data[1:5])
-            self.altitude_updated.emit(altitude)
-        except struct.error:
-            pass
-
-    def _handle_event(self, data: bytes):
-        # [0x04][ascii message...]
-        try:
-            msg = data[1:].decode(errors="ignore")
-            self.event_received.emit(msg)
+            new_state = FlightState(packet.flight_state)
         except Exception:
-            pass
+            new_state = None
 
-    def _handle_state_change(self, data: bytes):
-        # [0x05][state_id]
-        try:
-            new_state = FlightState(data[1])
-            if new_state != self.state:
-                self.state = new_state
-                self.state_changed.emit(self.state)
-        except Exception:
-            pass
+        if new_state is not None and new_state != self.state:
+            self.state = new_state
+            self.state_changed.emit(self.state)
 
-    def _handle_gps(self, data: bytes):
-        # [0x06][lat][lon][alt] (float32 x3)
-        try:
-            lat, lon, alt = struct.unpack("<fff", data[1:13])
-            self.gps_updated.emit(lat, lon, alt)
-        except struct.error:
-            pass
+        altitude_m = packet.baro_alt_m if packet.has_baro_alt else packet.gps_alt_m
+        self.attitude_updated.emit(packet.roll_deg, packet.pitch_deg, packet.heading_deg)
+        self.battery_updated.emit(packet.battery_v)
+        self.altitude_updated.emit(altitude_m)
+        self.gps_updated.emit(packet.lat_deg, packet.lon_deg, packet.gps_alt_m)
 
-    # ---------- Time ----------
+        if packet.error_code != self._last_error:
+            self._last_error = packet.error_code
+            if packet.error_code:
+                self.event_received.emit(f"Error: {decode_error(packet.error_code)}")
 
-    def _update_time(self):
-        self.timestamp_updated.emit(time.time() - self.boot_time)
+        self.timestamp_updated.emit(packet.time_s)
 
 
 def decode_state(status: int) -> str:

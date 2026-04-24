@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photo Booth 4:3 Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#0f1115;
+      --panel:#1b202b;
+      --stroke:#2a3140;
+      --text:#e9edf1;
+      --muted:#a8b3c7;
+      --accent:#2be081;
+      --accent-light:#33ff99;
+    }
+    body {
+      font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+      margin:0;
+      padding:16px;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    #app { max-width: 800px; margin: 0 auto; display:grid; gap:24px; }
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      margin-top: 0;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+    .card {
+      background:var(--panel);
+      border-radius:16px;
+      padding:24px;
+      border:1px solid var(--stroke);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    .row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom: 16px; }
+    label {
+      display:flex;
+      gap:8px;
+      align-items:center;
+      background:var(--bg);
+      padding:8px 12px;
+      border-radius:12px;
+      border:1px solid var(--stroke);
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    label:focus-within { border-color: var(--accent); }
+    select, input {
+      background:transparent;
+      color:var(--text);
+      border:none;
+      font-family: inherit;
+      font-size: 1em;
+      outline: none;
+    }
+    button {
+      padding:12px 20px;
+      border:0;
+      border-radius:12px;
+      cursor:pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight:bold;
+      transition: all 0.2s ease-out;
+      letter-spacing: 0.5px;
+    }
+    button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    button:active:not(:disabled) { transform: translateY(0); box-shadow: none; }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-main { background:var(--accent); color:#052012; }
+    .btn-main:hover:not(:disabled) { background: var(--accent-light); }
+    .btn-sub { background:#384155; color:#e9edf1; }
+    .btn-sub:hover:not(:disabled) { background: #4a556e; }
+
+    .page { display:none; }
+    .page.show {
+      display:block;
+      animation: fadeIn 0.4s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    canvas {
+      width:100%;
+      height:auto;
+      background:#111;
+      border-radius:12px;
+      display:block;
+      border:1px solid var(--stroke);
+    }
+    .canvasWrap { position:relative; overflow:hidden; border-radius:12px; }
+    .overlay {
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      pointer-events:none; font-weight:900; font-size:120px; color:#fff;
+      text-shadow: 0 0 30px rgba(0,0,0,0.8); opacity:0; z-index:10;
+      transition: opacity 0.2s ease;
+    }
+    .overlay.show { opacity: 1; }
+    .flash { position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none; z-index:20; }
+    .flash.on { animation: flashAnim 0.15s ease-out; }
+    @keyframes flashAnim { from { opacity: 1; } to { opacity: 0; } }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div id="status" class="card" style="font-size:13px; color:var(--accent)">系統就緒：請初始化鏡頭</div>
+
+  <div class="card page show" id="page1">
+    <h2>1. 設備設定</h2>
+    <div class="row">
+      <button class="btn-main" id="btnInit">1. 啟動鏡頭權限</button>
+      <select id="cameraSelect" disabled><option>等待初始化...</option></select>
+      <button class="btn-main" id="btnStart" disabled>2. 開啟預覽</button>
+    </div>
+    <div class="row">
+      <label>相框樣式 <select id="frameSelect"></select></label>
+      <label>排版樣式 <select id="layoutSelect"></select></label>
+    </div>
+    <button class="btn-main" id="toStep2" disabled style="width:100%">進入拍照模式 →</button>
+  </div>
+
+  <div class="card page" id="page2">
+    <div class="row">
+      <label>倒數 <input id="countdown" type="number" value="3" style="width:40px"/></label>
+      <label>間隔(ms) <input id="interval" type="number" value="600" style="width:70px"/></label>
+      <label>鏡像 <select id="mirrorMode"><option value="true">開啟</option><option value="false">關閉</option></select></label>
+      <button class="btn-main" id="btnShoot">📸 開始 4 連拍</button>
+    </div>
+    <div class="canvasWrap">
+      <canvas id="liveCanvas"></canvas>
+      <div id="countOverlay" class="overlay">3</div>
+      <div id="flash" class="flash"></div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <button class="btn-sub" id="back1">返回設定</button>
+      <div style="flex:1"></div>
+      <button class="btn-main" id="toStep3" disabled>查看成品 →</button>
+    </div>
+  </div>
+
+  <div class="card page" id="page3">
+    <canvas id="collage"></canvas>
+    <div class="row" style="margin-top:10px">
+      <button class="btn-sub" id="retake">重拍</button>
+      <button class="btn-main" id="download">保存到裝置</button>
+    </div>
+  </div>
+
+  <video id="video" autoplay playsinline muted style="display:none;"></video>
+  <canvas id="shot" style="display:none;"></canvas>
+</div>
+
+<script>
+  const el = (id) => document.getElementById(id);
+
+  // ✅ 這張畫布是「整張輸出成品」的大小
+  // 你每張照片是 4:3（w:h = 4:3），但「四連拍垂直」整張會很長
+  const OUTPUT_W = 1200;
+  const OUTPUT_H = 3600;  // ✅ 足夠放下 4_strip_v (含 padding + gap)
+
+  // ✅ 讓「照片之間有間隔」+「每張照片有白邊」更像拍貼機
+  const PHOTO_GAP = 70;      // 格子之間間隔（越大越疏）
+  const PHOTO_INSET = 18;    // 每張照片內縮白邊（越大白邊越厚）
+
+  let photos = [];
+  let currentStep = 1;
+  let stream = null;
+  let audioCtx = null;
+
+  let activeFrameId = "preset_white";
+  let activeLayoutId = "4_strip_v";
+
+  const frames = new Map();   // id -> ImageBitmap
+  const layouts = new Map();  // id -> {name, func}
+
+  function getLayoutSlots() {
+    const layout = layouts.get(activeLayoutId);
+    if (layout && typeof layout.func === 'function') return layout.func();
+    return layouts.get("4_strip_v").func();
+  }
+
+  // ===== 音效（簡單 beep + shutter）=====
+  async function playSfx(type) {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') await audioCtx.resume();
+
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    // 先把音量設低，再淡出（避免爆音）
+    gain.gain.setValueAtTime(0.12, now);
+
+    if (type === 'beep') {
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(880, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.10);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.11);
+    } else {
+      // shutter：低頻 click
+      osc.type = "square";
+      osc.frequency.setValueAtTime(160, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.19);
+    }
+  }
+
+  // ===== 畫圖：cover 填滿裁切 + 可鏡像 =====
+  function drawCover(ctx, img, x, y, w, h, mirror) {
+    if (!img || (img instanceof HTMLVideoElement && img.readyState < 2)) return;
+
+    const iw = img.videoWidth || img.width;
+    const ih = img.videoHeight || img.height;
+    if (!iw || !ih) return;
+
+    const scale = Math.max(w / iw, h / ih);
+    const dw = iw * scale;
+    const dh = ih * scale;
+    const dx = (w - dw) / 2;
+    const dy = (h - dh) / 2;
+
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.beginPath();
+    ctx.rect(0, 0, w, h);
+    ctx.clip();
+
+    if (mirror) {
+      ctx.translate(w, 0);
+      ctx.scale(-1, 1);
+    }
+
+    ctx.drawImage(img, dx, dy, dw, dh);
+    ctx.restore();
+  }
+
+  // ===== Live Preview：把 video 直接塞進下一個 slot =====
+  function renderLive() {
+    if (currentStep !== 2) return;
+
+    const canvas = el('liveCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = OUTPUT_W;
+    canvas.height = OUTPUT_H;
+
+    // 背景
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, OUTPUT_W, OUTPUT_H);
+
+    const slots = getLayoutSlots();
+    const isMirror = el('mirrorMode').value === "true";
+
+    slots.forEach((s, i) => {
+      // slot 底（照片紙）
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(s.x, s.y, s.w, s.h);
+      ctx.strokeStyle = "rgba(0,0,0,0.10)";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(s.x+1, s.y+1, s.w-2, s.h-2);
+
+      // inset 後的內容區（照片實際繪製區）
+      const ix = s.x + (s.inset ?? PHOTO_INSET);
+      const iy = s.y + (s.inset ?? PHOTO_INSET);
+      const iw = s.w - 2 * (s.inset ?? PHOTO_INSET);
+      const ih = s.h - 2 * (s.inset ?? PHOTO_INSET);
+
+      if (photos[i]) {
+        drawCover(ctx, photos[i], ix, iy, iw, ih, false);
+      } else if (i === photos.length && stream) {
+        drawCover(ctx, el('video'), ix, iy, iw, ih, isMirror);
+        ctx.strokeStyle = "#2be081";
+        ctx.lineWidth = 10;
+        ctx.strokeRect(s.x, s.y, s.w, s.h);
+      } else {
+        // placeholder
+        ctx.fillStyle = "#f0f0f0";
+        ctx.fillRect(ix, iy, iw, ih);
+      }
+    });
+
+    const frame = frames.get(activeFrameId);
+    if (frame) ctx.drawImage(frame, 0, 0);
+
+    requestAnimationFrame(renderLive);
+  }
+
+  // ===== Layouts（slot 都帶 inset）=====
+  function initLayouts() {
+    layouts.set('4_strip_v', {
+      name: "四連拍-垂直",
+      func: () => {
+        const padding = 60;
+        const gap = PHOTO_GAP; // ✅ 照片之間間隔
+        const cellW = OUTPUT_W - (padding * 2);
+        const cellH = cellW * 0.75; // 4:3
+
+        return Array.from({length: 4}, (_, i) => ({
+          x: padding,
+          y: padding + i * (cellH + gap),
+          w: cellW,
+          h: cellH,
+          inset: PHOTO_INSET
+        }));
+      }
+    });
+
+    layouts.set('2x2_grid', {
+      name: "2x2 方格",
+      func: () => {
+        const padding = 60;
+        const gap = PHOTO_GAP;
+        const cellW = (OUTPUT_W - padding * 2 - gap) / 2;
+        const cellH = cellW * 0.75;
+
+        const totalH = padding * 2 + cellH * 2 + gap;
+        const startY = Math.max(60, (OUTPUT_H - totalH) / 2);
+
+        return [
+          { x: padding, y: startY, w: cellW, h: cellH, inset: PHOTO_INSET },
+          { x: padding + cellW + gap, y: startY, w: cellW, h: cellH, inset: PHOTO_INSET },
+          { x: padding, y: startY + cellH + gap, w: cellW, h: cellH, inset: PHOTO_INSET },
+          { x: padding + cellW + gap, y: startY + cellH + gap, w: cellW, h: cellH, inset: PHOTO_INSET }
+        ];
+      }
+    });
+
+    layouts.set('1_big_3_small_v', {
+      name: "一大三小",
+      func: () => {
+        const padding = 60;
+        const gap = PHOTO_GAP;
+
+        const bigW = OUTPUT_W - padding * 2;
+        const bigH = bigW * 0.75;
+
+        const smallW = (OUTPUT_W - padding * 2 - gap * 2) / 3;
+        const smallH = smallW * 0.75;
+
+        const topY = padding + bigH + gap;
+
+        return [
+          { x: padding, y: padding, w: bigW, h: bigH, inset: PHOTO_INSET },
+          { x: padding, y: topY, w: smallW, h: smallH, inset: PHOTO_INSET },
+          { x: padding + smallW + gap, y: topY, w: smallW, h: smallH, inset: PHOTO_INSET },
+          { x: padding + (smallW + gap) * 2, y: topY, w: smallW, h: smallH, inset: PHOTO_INSET }
+        ];
+      }
+    });
+
+    el('layoutSelect').innerHTML = [...layouts.entries()]
+      .map(([id, layout]) => `<option value="${id}">${layout.name}</option>`)
+      .join('');
+    el('layoutSelect').value = activeLayoutId;
+  }
+
+  // ===== Frames =====
+  async function initFrames() {
+    const fDefs = [
+      { id: "preset_white", name: "簡約白", color: "white" },
+      { id: "preset_pink",  name: "甜美粉", color: "#ffd1dc" },
+      { id: "preset_black", name: "經典黑", color: "black" },
+      { id: "preset_blue",  name: "天空藍", color: "#87CEEB" }
+    ];
+
+    const select = el('frameSelect');
+    select.innerHTML = "";
+
+    for (const d of fDefs) {
+      const c = document.createElement('canvas');
+      c.width = OUTPUT_W;
+      c.height = OUTPUT_H;
+
+      const ctx = c.getContext('2d');
+
+      // 透明相框層（只畫邊框）
+      ctx.clearRect(0, 0, OUTPUT_W, OUTPUT_H);
+
+      ctx.strokeStyle = d.color;
+      ctx.lineWidth = 40;
+      ctx.strokeRect(20, 20, OUTPUT_W - 40, OUTPUT_H - 40);
+
+      const bmp = await createImageBitmap(c);
+      frames.set(d.id, bmp);
+      select.innerHTML += `<option value="${d.id}">${d.name}</option>`;
+    }
+
+    select.value = activeFrameId;
+  }
+
+  // ===== Camera =====
+  async function stopStream() {
+    if (stream) stream.getTracks().forEach(t => t.stop());
+    stream = null;
+    el('video').srcObject = null;
+  }
+
+  el('btnInit').onclick = async () => {
+    try {
+      // 先拿權限，才能 enumerateDevices 看到 label
+      const s = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      s.getTracks().forEach(t => t.stop());
+
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const cams = devices.filter(d => d.kind === 'videoinput');
+
+      el('cameraSelect').innerHTML = cams
+        .map((c, i) => `<option value="${c.deviceId}">${c.label || ('Camera ' + (i+1))}</option>`)
+        .join('');
+
+      el('cameraSelect').disabled = false;
+      el('btnStart').disabled = false;
+      el('status').textContent = "權限已取得，請開啟預覽";
+    } catch (e) {
+      console.error(e);
+      el('status').textContent = "錯誤：無法存取相機（請確認 https/權限）";
+    }
+  };
+
+  el('btnStart').onclick = async () => {
+    try {
+      await stopStream();
+      const deviceId = el('cameraSelect').value;
+
+      stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          deviceId: deviceId ? { exact: deviceId } : undefined,
+          width: { ideal: 1280 },
+          height: { ideal: 960 } // 4:3
+        },
+        audio: false
+      });
+
+      el('video').srcObject = stream;
+      el('video').onloadedmetadata = () => {
+        el('toStep2').disabled = false;
+        el('status').textContent = "預覽已就緒";
+      };
+    } catch (e) {
+      console.error(e);
+      el('status').textContent = "錯誤：開啟相機失敗（可能被占用或不支援）";
+    }
+  };
+
+  // ===== Shooting =====
+  el('btnShoot').onclick = async () => {
+    el('btnShoot').disabled = true;
+
+    // 釋放舊 ImageBitmap
+    photos.forEach(p => p?.close && p.close());
+    photos = [];
+
+    const count = Math.max(1, parseInt(el('countdown').value || "3", 10));
+    const gapMs = Math.max(200, parseInt(el('interval').value || "600", 10));
+    const isMirror = el('mirrorMode').value === "true";
+
+    try {
+      // 喚醒音訊（iOS 常見需求）
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') await audioCtx.resume();
+
+      for (let i = 0; i < 4; i++) {
+        for (let s = count; s > 0; s--) {
+          el('countOverlay').textContent = s;
+          el('countOverlay').classList.add('show');
+          await playSfx('beep');
+          await new Promise(r => setTimeout(r, 800));
+        }
+        el('countOverlay').classList.remove('show');
+
+        await playSfx('shutter');
+        el('flash').classList.add('on');
+        setTimeout(() => el('flash').classList.remove('on'), 150);
+
+        const shotCanvas = el('shot');
+        const v = el('video');
+
+        shotCanvas.width = v.videoWidth || 1280;
+        shotCanvas.height = v.videoHeight || 960;
+
+        const shotCtx = shotCanvas.getContext('2d');
+        shotCtx.setTransform(1,0,0,1,0,0);
+        shotCtx.clearRect(0,0,shotCanvas.width,shotCanvas.height);
+
+        if (isMirror) {
+          shotCtx.translate(shotCanvas.width, 0);
+          shotCtx.scale(-1, 1);
+        }
+        shotCtx.drawImage(v, 0, 0);
+
+        photos.push(await createImageBitmap(shotCanvas));
+        await new Promise(r => setTimeout(r, gapMs));
+      }
+
+      el('toStep3').disabled = false;
+      el('status').textContent = "拍攝完成 ✅";
+    } catch (e) {
+      console.error(e);
+      el('status').textContent = "拍攝失敗（請確認相機狀態/權限）";
+    } finally {
+      el('btnShoot').disabled = false;
+    }
+  };
+
+  // ===== Pages =====
+  function showPage(n) {
+    currentStep = n;
+    document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('show', i + 1 === n));
+
+    if (n === 2) {
+      renderLive();
+    }
+
+    if (n === 3) {
+      const canvas = el('collage');
+      const ctx = canvas.getContext('2d');
+      canvas.width = OUTPUT_W;
+      canvas.height = OUTPUT_H;
+
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, OUTPUT_W, OUTPUT_H);
+
+      const slots = getLayoutSlots();
+      photos.forEach((p, i) => {
+        const s = slots[i];
+        if (!s) return;
+
+        // slot 底（照片紙）
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(s.x, s.y, s.w, s.h);
+        ctx.strokeStyle = "rgba(0,0,0,0.10)";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(s.x+1, s.y+1, s.w-2, s.h-2);
+
+        const ix = s.x + (s.inset ?? PHOTO_INSET);
+        const iy = s.y + (s.inset ?? PHOTO_INSET);
+        const iw = s.w - 2 * (s.inset ?? PHOTO_INSET);
+        const ih = s.h - 2 * (s.inset ?? PHOTO_INSET);
+        drawCover(ctx, p, ix, iy, iw, ih, false);
+      });
+
+      const frame = frames.get(activeFrameId);
+      if (frame) ctx.drawImage(frame, 0, 0);
+    }
+  }
+
+  el('toStep2').onclick = () => showPage(2);
+  el('back1').onclick = () => showPage(1);
+  el('toStep3').onclick = () => showPage(3);
+  el('retake').onclick = () => { photos = []; el('toStep3').disabled = true; showPage(2); };
+
+  // ✅ 只保留一份 onchange 綁定
+  el('frameSelect').onchange = (e) => activeFrameId = e.target.value;
+  el('layoutSelect').onchange = (e) => activeLayoutId = e.target.value;
+
+  el('download').onclick = () => {
+    const a = document.createElement('a');
+    a.download = `photo-${Date.now()}.png`;
+    a.href = el('collage').toDataURL('image/png');
+    a.click();
+  };
+
+  // ===== init =====
+  (async function init() {
+    initLayouts();
+    await initFrames();
+  })();
+</script>
+</body>
+</html>

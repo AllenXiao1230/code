@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "ground_station"
+		},
+		{
+			"path": "rocket_main"
+		},
+		{
+			"name": "rocket_main2",
+			"path": "rocket_main2"
+		}
+	],
+	"settings": {}
+}

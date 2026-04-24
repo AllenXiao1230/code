@@ -1,6 +1,15 @@
 Rocket Main Firmware
 ====================
 
+Build / upload (main firmware):
+```bash
+pio run -e esp32-s3-devkitc-1-n16r8
+pio run -e esp32-s3-devkitc-1-n16r8 -t upload
+pio device monitor -b 115200
+```
+
+GPS parsing is integrated in `src/main.cpp` (no separate GPS test firmware file).
+
 Board Pin Map
 -------------
 | Pin | Function | Signal | Notes |
@@ -20,10 +29,10 @@ Board Pin Map
 | 20 | I2C #1 SDA | I2C | IMU / ADXL / BMP |
 | 19 | I2C #1 SCL | I2C | IMU / ADXL / BMP |
 | 4 | Battery ADC | VBAT -> ADC | Divider into ADC |
-| 5 | Cam 1 | SIG | Pulse trigger Cam 1 |
-| 6 | Cam 2 | SIG | Pulse trigger Cam 2 |
+| 5 | Camera A Trigger | SIG | Pulse trigger Camera A |
+| 6 | Camera B Trigger | SIG | Pulse trigger Camera B |
 | 15 | Water Detect | SIG | High = water |
-| 16 | PWM | PWM | Servo |
+| 16 | Separation Servo | PWM | Compartment separation servo drive |
 | 17 | UART TX | UART | Connect to sub-board RX |
 | 18 | UART RX | UART | Connect to sub-board TX |
 | 8 | Buzzer | SIG | Active buzzer |
@@ -41,18 +50,8 @@ Notes
 - Battery divider: 200k (top to VBAT) / 100k (bottom to GND)
 - DEBUG_SERIAL should remain 0 when Serial is used for binary packets.
 
-RF / Modem Settings (SX1276 / SX1278)
-------------------------------------
-| Item | Setting | Notes |
-| --- | ------- | ----- |
-| Frequency | 433.250 MHz | Taiwan ISM, avoids busy 433.92 MHz |
-| Bandwidth | 125 kHz | Doppler tolerance, stable link |
-| Spreading Factor | SF9 | Balanced for high-speed motion |
-| Coding Rate | 4/7 | Better interference immunity |
-| Preamble Length | 8 | Default, enough for sync |
-| CRC | Enable | Required for flight telemetry |
-| Header Mode | Explicit | Avoids mis-detected packets |
-| IQ Inversion | Disable | Normal point-to-point |
-| TX Power | 22 dBm | Max for rocket node |
-| PA Boost | Enable | Required on SX1276 |
-| LNA Gain | Auto / Max | Improves weak-signal RX |
+GPS Notes
+---------
+- GPS UART pin mapping: `RX=45`, `TX=35`, `PPS=47`
+- Supported auto-scan baud list: `230400`, `115200`, `57600`, `38400`, `9600`
+- If no NMEA is parsed, check GPS TX/RX crossing and common GND first.

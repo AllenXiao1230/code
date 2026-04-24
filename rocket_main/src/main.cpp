@@ -17,11 +17,24 @@
 #include "ICM42688.h"
 #include "error_codes.h"
 
-// Set to 1 for Serial debug logs. Keep 0 when Serial is used for binary packets.
+#ifndef ARDUINO_USB_MODE
+#define ARDUINO_USB_MODE 0
+#endif
+#ifndef ARDUINO_USB_CDC_ON_BOOT
+#define ARDUINO_USB_CDC_ON_BOOT 0
+#endif
+#if ARDUINO_USB_CDC_ON_BOOT != 0
+#error "USB CDC must be disabled. Use UART0 (COM) for telemetry."
+#endif
+
+// On ESP32-S3 with ARDUINO_USB_CDC_ON_BOOT=0, Serial maps to UART0 (COM).
+#define GS_SERIAL_PORT Serial
+
+// Set to 1 for debug logs over UART0. Keep 0 when UART0 is used for binary packets.
 #define DEBUG_SERIAL 0
 #if DEBUG_SERIAL
-#define DBG_PRINTF(...) Serial.printf(__VA_ARGS__)
-#define DBG_PRINTLN(msg) Serial.println(msg)
+#define DBG_PRINTF(...) GS_SERIAL_PORT.printf(__VA_ARGS__)
+#define DBG_PRINTLN(msg) GS_SERIAL_PORT.println(msg)
 #else
 #define DBG_PRINTF(...) do {} while (0)
 #define DBG_PRINTLN(msg) do {} while (0)
@@ -33,8 +46,8 @@
 #define I2C_B_SDA 9
 #define I2C_B_SCL 10
 
-#define UART_GPS_TX 45
-#define UART_GPS_RX 35
+#define UART_GPS_TX 35
+#define UART_GPS_RX 45
 #define UART_GPS_PPS 47
 #define UART_GPS_BAUD 230400
 
@@ -73,8 +86,9 @@
 #define DS3231_SQW_PIN 3
 #define WATER_DETECT_PIN 15
 #define SAFETY_SWITCH_PIN 21
-#define CHUTE_A_PIN 5
-#define CHUTE_B_PIN 6
+#define SEPARATION_SERVO_PIN 16
+#define CAMERA_A_TRIGGER_PIN 5
+#define CAMERA_B_TRIGGER_PIN 6
 
 #define NOTE_DO 262
 #define NOTE_RE 294
@@ -83,19 +97,29 @@
 #define NOTE_HDO 523
 
 // --- 建立感測器物件 ---
-Adafruit_SHT31 sht31 = Adafruit_SHT31();
+Adafruit_SHT31 sht31(&Wire1);
 Adafruit_BMP3XX bmp;
-Adafruit_ADXL375 accel = Adafruit_ADXL375(12345); // ID 隨意
-ICM42688 imu_primary(Wire, 0x68); // IMU42688 地址通常是 0x68 或 0x69
-ICM42688 imu_alt(Wire, 0x69);
-ICM42688 *imu = &imu_primary;
+Adafruit_ADXL375 accel_a(12345, &Wire);
+Adafruit_ADXL375 accel_b(12345, &Wire1);
+Adafruit_ADXL375 *accel = &accel_a;
+ICM42688 imu_a_68(Wire, 0x68);   // IMU42688 地址通常是 0x68 或 0x69
+ICM42688 imu_a_69(Wire, 0x69);
+ICM42688 imu_b_68(Wire1, 0x68);
+ICM42688 imu_b_69(Wire1, 0x69);
+ICM42688 *imu = &imu_a_68;
 uint8_t imu_addr = 0x68;
+const char *imu_bus_label = "I2C_A";
+const char *adxl_bus_label = "I2C_A";
 RTC_DS3231 rtc;
 Adafruit_NeoPixel status_led(WS2812_COUNT, WS2812_PIN, NEO_GRB + NEO_KHZ800);
 HardwareSerial GPSSerial(1);
 HardwareSerial BackupSerial(2);
 SPIClass loraSPI(HSPI);
+#if defined(VSPI)
 SPIClass sdSPI(VSPI);
+#else
+SPIClass sdSPI(FSPI);
+#endif
 File sd_log;
 bool lora_ready = false;
 bool sd_ready = false;
@@ -136,7 +160,7 @@ static const float kDrogueVSpeedMaxMs = 5.0f;
 static const float kMainAltMaxM = 500.0f;
 static const float kMainVSpeedMaxMs = 5.0f;
 static const float kLandingAltMaxM = 30.0f;
-static const float kLandingVSpeedMinMs = 90.0f;
+static const float kLandingVSpeedMaxMs = 5.0f;
 static const float kApogeeDetectVSpeedMs = -0.5f;
 static const uint32_t kLiftoffHoldMs = 500;
 static const uint32_t kDrogueHoldMs = 500;
@@ -145,15 +169,58 @@ static const uint32_t kLandingHoldMs = 500;
 static const uint32_t kAfterApogeeMs = 500;
 static const float kDrogueTimeS = 25.0f;
 static const float kMainTimeS = 190.0f;
+static const uint8_t kRtcSyncLineLen = 64;
+static const uint32_t kGroundStationBaud = 115200;
+static const bool kEnableBmp390 = false;
+static const bool kEnableStartupTone = false;
+static const int16_t kInvalidBaroAltDm = -32768;
+static const uint32_t kI2cClockHz = 100000;
+static const uint32_t kI2cClockFallbackHz1 = 50000;
+static const uint32_t kI2cClockFallbackHz2 = 25000;
+static const uint16_t kI2cTimeoutMs = 20;
+static const uint8_t kAdxlAltAddress = 0x1D;
+// 0 = keep retrying forever until sensors respond.
+static const uint32_t kSensorRetryWindowMs = 0;
+static const uint32_t kSensorRetryIntervalMs = 1000;
+static const bool kEnableBackupHeartbeat = false;
+static const bool kEnableSetupAsciiDiagnostics = true;
+static const uint32_t kDeferredInitStepGapMs = 5;
+static const uint32_t kGpsSentenceTimeoutMs = 3000;
+static const uint32_t kGpsBaudRotateIntervalMs = 4000;
+static const uint16_t kGpsCourseMinSpeedDms = 20; // 2.0 m/s
+static const uint32_t kGpsBaudCandidates[] = {
+  UART_GPS_BAUD, 115200, 57600, 38400, 9600
+};
+static const uint8_t kGpsBaudCandidateCount = static_cast<uint8_t>(
+  sizeof(kGpsBaudCandidates) / sizeof(kGpsBaudCandidates[0])
+);
+static const uint32_t kLoraRetryIntervalMs = 2000;
+static const uint8_t kLoraTxFailReinitThreshold = 3;
+
+enum BootInitStage : uint8_t {
+  kBootInitI2c = 0,
+  kBootInitLoRa,
+  kBootInitSd,
+  kBootInitRtc,
+  kBootInitEnv,
+  kBootInitMotion,
+  kBootInitDone,
+};
 
 static int32_t gps_lat_raw = 0;
 static int32_t gps_lon_raw = 0;
 static int16_t gps_alt_dm = 0;
 static int16_t gps_speed_dms = 0;
+static uint16_t gps_course_ddeg = 0;
 static uint8_t gps_sat_count = 0;
 static uint32_t gps_last_fix_ms = 0;
+static uint32_t gps_last_sentence_ms = 0;
+static uint32_t gps_last_course_ms = 0;
+static uint32_t gps_last_baud_switch_ms = 0;
+static uint8_t gps_baud_idx = 0;
 static const uint32_t kGpsTimeoutMs = 2000;
 static bool gps_fix_valid = false;
+static bool gps_course_valid = false;
 
 static uint8_t flight_state = kStateIdle;
 static uint32_t liftoff_ms = 0;
@@ -167,6 +234,15 @@ static bool main_deployed = false;
 static uint32_t last_heartbeat_ms = 0;
 static float alt_zero_m = 0.0f;
 static bool alt_zero_set = false;
+static HardwareSerial &ground_station_serial = GS_SERIAL_PORT;
+static uint32_t sensor_init_window_start_ms = 0;
+static uint32_t last_sensor_retry_ms = 0;
+static uint32_t i2c_a_runtime_clock_hz = kI2cClockHz;
+static uint32_t i2c_b_runtime_clock_hz = kI2cClockHz;
+static BootInitStage boot_init_stage = kBootInitI2c;
+static uint32_t last_deferred_init_ms = 0;
+static uint32_t last_lora_retry_ms = 0;
+static uint8_t lora_tx_fail_count = 0;
 
 static void write_sd_csv_header() {
   if (!sd_log) {
@@ -281,6 +357,25 @@ static float parse_nmea_coord(const char *field) {
   return static_cast<float>(dec);
 }
 
+static bool parse_nmea_course_ddeg(const char *field, uint16_t &course_ddeg) {
+  if (!field || !*field) {
+    return false;
+  }
+  float course_deg = static_cast<float>(atof(field));
+  if (isnan(course_deg)) {
+    return false;
+  }
+  long course = lroundf(course_deg * 10.0f);
+  while (course < 0) {
+    course += 3600;
+  }
+  while (course >= 3600) {
+    course -= 3600;
+  }
+  course_ddeg = static_cast<uint16_t>(course);
+  return true;
+}
+
 static int hex_nibble(char c) {
   if (c >= '0' && c <= '9') return c - '0';
   if (c >= 'A' && c <= 'F') return c - 'A' + 10;
@@ -293,7 +388,7 @@ static bool nmea_checksum_ok(const char *line) {
     return false;
   }
   const char *star = strchr(line, '*');
-  if (!star || star - line < 1) {
+  if (!star || star[1] == '\0' || star[2] == '\0') {
     return false;
   }
   uint8_t sum = 0;
@@ -316,6 +411,9 @@ static void handle_gps_line(char *line) {
   if (!nmea_checksum_ok(line)) {
     return;
   }
+  const uint32_t now_ms = millis();
+  gps_last_sentence_ms = now_ms;
+
   char *save = nullptr;
   char *type = strtok_r(line, ",", &save);
   if (!type) {
@@ -336,8 +434,10 @@ static void handle_gps_line(char *line) {
     char *lon_f = strtok_r(nullptr, ",", &save);
     char *ew_f = strtok_r(nullptr, ",", &save);
     char *speed_f = strtok_r(nullptr, ",", &save);
+    char *course_f = strtok_r(nullptr, ",", &save);
     (void)time_f;
     if (status_f && status_f[0] == 'A') {
+      bool got_fix_payload = false;
       float lat = parse_nmea_coord(lat_f);
       float lon = parse_nmea_coord(lon_f);
       if (!isnan(lat) && ns_f && ns_f[0] == 'S') {
@@ -349,16 +449,28 @@ static void handle_gps_line(char *line) {
       if (!isnan(lat) && !isnan(lon)) {
         gps_lat_raw = static_cast<int32_t>(lroundf(lat * 1e7f));
         gps_lon_raw = static_cast<int32_t>(lroundf(lon * 1e7f));
-        gps_last_fix_ms = millis();
-        gps_fix_valid = true;
+        got_fix_payload = true;
       }
       if (speed_f && *speed_f) {
         float speed_kn = static_cast<float>(atof(speed_f));
         float speed_ms = speed_kn * 0.514444f;
         gps_speed_dms = clamp_i16(lroundf(speed_ms * 10.0f));
-        gps_last_fix_ms = millis();
+        got_fix_payload = true;
+      }
+      uint16_t course_ddeg = 0;
+      if (parse_nmea_course_ddeg(course_f, course_ddeg)) {
+        gps_course_ddeg = course_ddeg;
+        gps_course_valid = true;
+        gps_last_course_ms = now_ms;
+        got_fix_payload = true;
+      }
+      if (got_fix_payload) {
+        gps_last_fix_ms = now_ms;
         gps_fix_valid = true;
       }
+    } else {
+      gps_fix_valid = false;
+      gps_speed_dms = 0;
     }
     return;
   }
@@ -376,7 +488,18 @@ static void handle_gps_line(char *line) {
     char *alt_f = strtok_r(nullptr, ",", &save);
     (void)time_f;
     (void)hdop_f;
-    if (fix_f && fix_f[0] > '0') {
+    if (sat_f && *sat_f) {
+      int sat_raw = atoi(sat_f);
+      if (sat_raw < 0) {
+        sat_raw = 0;
+      } else if (sat_raw > 255) {
+        sat_raw = 255;
+      }
+      gps_sat_count = static_cast<uint8_t>(sat_raw);
+    }
+    int fix_quality = (fix_f && *fix_f) ? atoi(fix_f) : 0;
+    if (fix_quality > 0) {
+      bool got_fix_payload = false;
       float lat = parse_nmea_coord(lat_f);
       float lon = parse_nmea_coord(lon_f);
       if (!isnan(lat) && ns_f && ns_f[0] == 'S') {
@@ -388,53 +511,93 @@ static void handle_gps_line(char *line) {
       if (!isnan(lat) && !isnan(lon)) {
         gps_lat_raw = static_cast<int32_t>(lroundf(lat * 1e7f));
         gps_lon_raw = static_cast<int32_t>(lroundf(lon * 1e7f));
-        gps_last_fix_ms = millis();
-        gps_fix_valid = true;
+        got_fix_payload = true;
       }
-      if (sat_f && *sat_f) {
-        gps_sat_count = static_cast<uint8_t>(atoi(sat_f));
-        gps_last_fix_ms = millis();
-        gps_fix_valid = true;
-      }
+      got_fix_payload = got_fix_payload || (sat_f && *sat_f);
       if (alt_f && *alt_f) {
         float alt_m = static_cast<float>(atof(alt_f));
         gps_alt_dm = clamp_i16(lroundf(alt_m * 10.0f));
-        gps_last_fix_ms = millis();
+        got_fix_payload = true;
+      }
+      if (got_fix_payload) {
+        gps_last_fix_ms = now_ms;
         gps_fix_valid = true;
       }
+    } else {
+      gps_fix_valid = false;
     }
   }
 }
 
 static void process_gps_stream() {
-  static char line[128];
-  static uint8_t idx = 0;
+  static char line[256];
+  static uint16_t idx = 0;
+  static bool dropping_line = false;
   while (GPSSerial.available()) {
     char c = static_cast<char>(GPSSerial.read());
     if (c == '\n') {
-      line[idx] = '\0';
-      if (idx > 0) {
+      if (!dropping_line) {
+        line[idx] = '\0';
+      }
+      if (!dropping_line && idx > 0) {
         handle_gps_line(line);
       }
       idx = 0;
+      dropping_line = false;
       continue;
     }
     if (c == '\r') {
       continue;
     }
-    if (idx < sizeof(line) - 1) {
+    if (dropping_line) {
+      continue;
+    }
+    if (idx < static_cast<uint16_t>(sizeof(line) - 1)) {
       line[idx++] = c;
     } else {
+      // Drop oversized sentence and wait for next newline to re-sync.
+      dropping_line = true;
       idx = 0;
     }
   }
 }
 
-static void handle_serial_rtc_sync() {
-  static char line[64];
-  static uint8_t idx = 0;
-  while (Serial.available()) {
-    char c = static_cast<char>(Serial.read());
+static void set_gps_uart_baud(uint32_t baud) {
+  GPSSerial.end();
+  delay(2);
+  GPSSerial.begin(baud, SERIAL_8N1, UART_GPS_RX, UART_GPS_TX);
+}
+
+static void maybe_rotate_gps_baud(uint32_t now_ms) {
+  bool sentence_recent = false;
+  if (gps_last_sentence_ms > 0) {
+    sentence_recent = (now_ms - gps_last_sentence_ms) < kGpsBaudRotateIntervalMs;
+  }
+  if (sentence_recent) {
+    return;
+  }
+  if ((now_ms - gps_last_baud_switch_ms) < kGpsBaudRotateIntervalMs) {
+    return;
+  }
+  gps_baud_idx = static_cast<uint8_t>((gps_baud_idx + 1) % kGpsBaudCandidateCount);
+  uint32_t next_baud = kGpsBaudCandidates[gps_baud_idx];
+  set_gps_uart_baud(next_baud);
+  gps_last_baud_switch_ms = now_ms;
+  gps_last_sentence_ms = now_ms;
+  gps_fix_valid = false;
+  gps_course_valid = false;
+  gps_sat_count = 0;
+  gps_speed_dms = 0;
+
+  if (kEnableSetupAsciiDiagnostics) {
+    ground_station_serial.print("BOOT:GPS_BAUD=");
+    ground_station_serial.println(next_baud);
+  }
+}
+
+static void handle_rtc_sync_stream(Stream &port, char *line, uint8_t &idx) {
+  while (port.available()) {
+    char c = static_cast<char>(port.read());
     if (c == '\n' || c == '\r') {
       if (idx == 0) {
         continue;
@@ -449,11 +612,35 @@ static void handle_serial_rtc_sync() {
       }
       idx = 0;
     } else {
-      if (idx < sizeof(line) - 1) {
+      if (idx < kRtcSyncLineLen - 1) {
         line[idx++] = c;
       }
     }
   }
+}
+
+static void handle_serial_rtc_sync() {
+  static char gs_line[kRtcSyncLineLen];
+  static uint8_t gs_idx = 0;
+  handle_rtc_sync_stream(ground_station_serial, gs_line, gs_idx);
+}
+
+static void emit_setup_diag(const char *tag) {
+  if (!kEnableSetupAsciiDiagnostics || !tag) {
+    return;
+  }
+  ground_station_serial.print("BOOT:");
+  ground_station_serial.println(tag);
+}
+
+static void emit_setup_diag_u32(const char *tag, uint32_t value) {
+  if (!kEnableSetupAsciiDiagnostics || !tag) {
+    return;
+  }
+  ground_station_serial.print("BOOT:");
+  ground_station_serial.print(tag);
+  ground_station_serial.print("=");
+  ground_station_serial.println(value);
 }
 
 static inline float inv_sqrt(float x) {
@@ -465,7 +652,122 @@ static bool i2c_probe(TwoWire &bus, uint8_t addr) {
   return bus.endTransmission() == 0;
 }
 
+static uint8_t i2c_count_devices(TwoWire &bus) {
+#if DEBUG_SERIAL
+  uint8_t count = 0;
+  for (uint8_t addr = 0x03; addr <= 0x77; addr++) {
+    if (i2c_probe(bus, addr)) {
+      count++;
+    }
+  }
+  return count;
+#else
+  // Fast-path for boot speed: probe only known sensor addresses when debug is off.
+  static const uint8_t known_addrs[] = {0x44, 0x76, 0x77, 0x53, kAdxlAltAddress, 0x68, 0x69};
+  uint8_t count = 0;
+  for (size_t i = 0; i < sizeof(known_addrs); i++) {
+    if (i2c_probe(bus, known_addrs[i])) {
+      count++;
+    }
+  }
+  return count;
+#endif
+}
+
+static void i2c_scan_print(TwoWire &bus, const char *label);
+
+static void i2c_bus_recover(int sda_pin, int scl_pin) {
+  pinMode(sda_pin, INPUT_PULLUP);
+  pinMode(scl_pin, INPUT_PULLUP);
+  delay(1);
+  if (digitalRead(sda_pin) == HIGH && digitalRead(scl_pin) == HIGH) {
+    return;
+  }
+
+  pinMode(scl_pin, OUTPUT_OPEN_DRAIN);
+  digitalWrite(scl_pin, HIGH);
+  for (uint8_t i = 0; i < 18 && digitalRead(sda_pin) == LOW; i++) {
+    digitalWrite(scl_pin, LOW);
+    delayMicroseconds(5);
+    digitalWrite(scl_pin, HIGH);
+    delayMicroseconds(5);
+  }
+
+  pinMode(sda_pin, OUTPUT_OPEN_DRAIN);
+  digitalWrite(sda_pin, LOW);
+  delayMicroseconds(5);
+  digitalWrite(scl_pin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(sda_pin, HIGH);
+  delayMicroseconds(5);
+
+  pinMode(sda_pin, INPUT_PULLUP);
+  pinMode(scl_pin, INPUT_PULLUP);
+}
+
+static uint8_t init_i2c_bus(TwoWire &bus, int sda_pin, int scl_pin, const char *label) {
+  static const uint32_t kI2cClockCandidates[] = {
+    kI2cClockHz, kI2cClockFallbackHz1, kI2cClockFallbackHz2
+  };
+  uint8_t count = 0;
+  bool recovered = false;
+  uint32_t selected_clock = kI2cClockHz;
+
+  for (uint8_t pass = 0; pass < 2 && count == 0; pass++) {
+    if (pass == 1) {
+      i2c_bus_recover(sda_pin, scl_pin);
+      recovered = true;
+    }
+    for (size_t i = 0; i < sizeof(kI2cClockCandidates) / sizeof(kI2cClockCandidates[0]); i++) {
+      bus.end();
+      delay(2);
+      bus.setPins(sda_pin, scl_pin);
+      bus.begin(sda_pin, scl_pin);
+      bus.setClock(kI2cClockCandidates[i]);
+      bus.setTimeOut(kI2cTimeoutMs);
+      count = i2c_count_devices(bus);
+      if (count > 0) {
+        selected_clock = kI2cClockCandidates[i];
+        break;
+      }
+    }
+  }
+
+  if (count == 0) {
+    // Keep bus initialized at primary clock even when no device was found.
+    bus.end();
+    delay(2);
+    bus.setPins(sda_pin, scl_pin);
+    bus.begin(sda_pin, scl_pin);
+    bus.setClock(kI2cClockHz);
+    bus.setTimeOut(kI2cTimeoutMs);
+    selected_clock = kI2cClockHz;
+  } else if (kEnableSetupAsciiDiagnostics) {
+    char tag[24];
+    snprintf(tag, sizeof(tag), "%s_CLK", label ? label : "I2C");
+    emit_setup_diag_u32(tag, selected_clock);
+    if (recovered) {
+      snprintf(tag, sizeof(tag), "%s_RECOVER", label ? label : "I2C");
+      emit_setup_diag(tag);
+    }
+  }
+
+  if (sda_pin == I2C_A_SDA && scl_pin == I2C_A_SCL) {
+    i2c_a_runtime_clock_hz = selected_clock;
+  } else if (sda_pin == I2C_B_SDA && scl_pin == I2C_B_SCL) {
+    i2c_b_runtime_clock_hz = selected_clock;
+  }
+
+  i2c_scan_print(bus, label);
+  return count;
+}
+
 static void i2c_scan_print(TwoWire &bus, const char *label) {
+#if !DEBUG_SERIAL
+  (void)bus;
+  (void)label;
+  return;
+#else
   DBG_PRINTF("%s scan:\n", label);
   bool found_any = false;
   for (uint8_t addr = 0x03; addr <= 0x77; addr++) {
@@ -476,6 +778,270 @@ static void i2c_scan_print(TwoWire &bus, const char *label) {
   }
   if (!found_any) {
     DBG_PRINTLN("  (no devices)");
+  }
+#endif
+}
+
+static bool init_adxl_sensor() {
+  uint8_t adxl_addr = ADXL375_ADDRESS;
+  accel = &accel_a;
+  adxl_bus_label = "I2C_A";
+
+  if (i2c_probe(Wire, ADXL375_ADDRESS)) {
+    accel = &accel_a;
+    adxl_bus_label = "I2C_A";
+    adxl_addr = ADXL375_ADDRESS;
+  } else if (i2c_probe(Wire, kAdxlAltAddress)) {
+    accel = &accel_a;
+    adxl_bus_label = "I2C_A";
+    adxl_addr = kAdxlAltAddress;
+  } else if (i2c_probe(Wire1, ADXL375_ADDRESS)) {
+    accel = &accel_b;
+    adxl_bus_label = "I2C_B";
+    adxl_addr = ADXL375_ADDRESS;
+  } else if (i2c_probe(Wire1, kAdxlAltAddress)) {
+    accel = &accel_b;
+    adxl_bus_label = "I2C_B";
+    adxl_addr = kAdxlAltAddress;
+  }
+
+  status_adxl = accel->begin(adxl_addr);
+  if (status_adxl) {
+    DBG_PRINTF("ADXL375 OK on %s\n", adxl_bus_label);
+  } else {
+    DBG_PRINTLN("ADXL375 init failed on both I2C_A/I2C_B");
+  }
+  return status_adxl;
+}
+
+static bool init_imu_sensor() {
+  bool imu_present = false;
+  if (i2c_probe(Wire, 0x68)) {
+    imu = &imu_a_68;
+    imu_addr = 0x68;
+    imu_bus_label = "I2C_A";
+    imu_present = true;
+  } else if (i2c_probe(Wire, 0x69)) {
+    imu = &imu_a_69;
+    imu_addr = 0x69;
+    imu_bus_label = "I2C_A";
+    imu_present = true;
+  } else if (i2c_probe(Wire1, 0x68)) {
+    imu = &imu_b_68;
+    imu_addr = 0x68;
+    imu_bus_label = "I2C_B";
+    imu_present = true;
+  } else if (i2c_probe(Wire1, 0x69)) {
+    imu = &imu_b_69;
+    imu_addr = 0x69;
+    imu_bus_label = "I2C_B";
+    imu_present = true;
+  }
+
+  if (!imu_present) {
+    status_imu = false;
+    DBG_PRINTLN("ICM42688 not detected on 0x68/0x69");
+    return false;
+  }
+
+  int imu_status = imu->begin();
+  if (imu_status < 0) {
+    status_imu = false;
+    DBG_PRINTF("ICM42688 init failed on %s @0x%02X\n", imu_bus_label, imu_addr);
+  } else {
+    status_imu = true;
+    DBG_PRINTF("ICM42688 OK on %s @0x%02X\n", imu_bus_label, imu_addr);
+    // 設定 IMU 範圍 (火箭通常需要最大範圍)
+    imu->setAccelFS(ICM42688::gpm16); // ±16g
+    imu->setGyroFS(ICM42688::dps2000); // ±2000 dps
+  }
+
+  // ICM42688 library sets I2C clock to 400kHz internally.
+  // Force both buses back to our stable system-wide clock.
+  Wire.setClock(i2c_a_runtime_clock_hz);
+  Wire1.setClock(i2c_b_runtime_clock_hz);
+  return status_imu;
+}
+
+static void retry_delayed_sensor_init(uint32_t now_ms) {
+  if (status_adxl && status_imu) {
+    return;
+  }
+  if (sensor_init_window_start_ms == 0) {
+    return;
+  }
+  if (kSensorRetryWindowMs > 0 &&
+      now_ms - sensor_init_window_start_ms > kSensorRetryWindowMs) {
+    return;
+  }
+  if (now_ms - last_sensor_retry_ms < kSensorRetryIntervalMs) {
+    return;
+  }
+  last_sensor_retry_ms = now_ms;
+
+  init_i2c_bus(Wire, I2C_A_SDA, I2C_A_SCL, "I2C_A");
+  init_i2c_bus(Wire1, I2C_B_SDA, I2C_B_SCL, "I2C_B");
+
+  if (!status_adxl) {
+    init_adxl_sensor();
+  }
+  if (!status_imu) {
+    init_imu_sensor();
+  }
+}
+
+static void init_lora_subsystem() {
+  pinMode(LORA_NSS, OUTPUT);
+  digitalWrite(LORA_NSS, HIGH);
+  pinMode(LORA_RST, OUTPUT);
+  digitalWrite(LORA_RST, HIGH);
+  pinMode(LORA_DIO0, INPUT);
+  pinMode(LORA_DIO1, INPUT);
+  loraSPI.begin(LORA_SCK, LORA_MISO, LORA_MOSI, LORA_NSS);
+  LoRa.setSPI(loraSPI);
+  LoRa.setPins(LORA_NSS, LORA_RST, LORA_DIO0);
+
+  lora_ready = LoRa.begin(LORA_FREQ);
+  if (lora_ready) {
+    LoRa.setSyncWord(LORA_SYNC_WORD);
+    LoRa.setTxPower(LORA_TX_POWER, PA_OUTPUT_PA_BOOST_PIN);
+    LoRa.setSpreadingFactor(LORA_SF);
+    LoRa.setSignalBandwidth(LORA_BW);
+    LoRa.setCodingRate4(LORA_CR);
+    LoRa.setPreambleLength(LORA_PREAMBLE_LEN);
+    LoRa.enableCrc();
+    lora_tx_fail_count = 0;
+    DBG_PRINTLN("LoRa OK");
+  } else {
+    DBG_PRINTLN("LoRa init failed");
+  }
+  emit_setup_diag(lora_ready ? "LORA_OK" : "LORA_FAIL");
+}
+
+static bool lora_send_frame(const uint8_t *frame, size_t len) {
+  if (!lora_ready || !frame || len == 0) {
+    return false;
+  }
+  if (LoRa.beginPacket() == 0) {
+    return false;
+  }
+  size_t written = LoRa.write(frame, len);
+  int end_ok = LoRa.endPacket();
+  return (written == len) && (end_ok == 1);
+}
+
+static void maintain_lora_link(uint32_t now_ms) {
+  if (lora_ready) {
+    return;
+  }
+  if (boot_init_stage != kBootInitDone) {
+    return;
+  }
+  if ((now_ms - last_lora_retry_ms) < kLoraRetryIntervalMs) {
+    return;
+  }
+  last_lora_retry_ms = now_ms;
+  init_lora_subsystem();
+  if (lora_ready) {
+    emit_setup_diag("LORA_RECOVERED");
+  }
+}
+
+static void init_sd_subsystem() {
+  pinMode(SD_CS, OUTPUT);
+  digitalWrite(SD_CS, HIGH);
+  sdSPI.begin(SD_SCK, SD_MISO, SD_MOSI, SD_CS);
+
+  sd_ready = SD.begin(SD_CS, sdSPI);
+  if (sd_ready) {
+    sd_log = SD.open("/telemetry.csv", FILE_APPEND);
+    if (!sd_log) {
+      sd_ready = false;
+    } else if (sd_log.size() == 0) {
+      write_sd_csv_header();
+    }
+  }
+  emit_setup_diag(sd_ready ? "SD_OK" : "SD_FAIL");
+}
+
+static void init_rtc_subsystem() {
+  rtc_ready = rtc.begin(&Wire1);
+  if (rtc_ready) {
+    if (rtc.lostPower()) {
+      rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+    }
+    rtc.writeSqwPinMode(DS3231_SquareWave1Hz);
+  }
+  emit_setup_diag(rtc_ready ? "RTC_OK" : "RTC_FAIL");
+}
+
+static void init_env_subsystem() {
+  status_sht = sht31.begin(0x44);
+
+  status_bmp = false;
+  if (kEnableBmp390) {
+    status_bmp = bmp.begin_I2C();
+    if (status_bmp) {
+      bmp.setTemperatureOversampling(BMP3_OVERSAMPLING_8X);
+      bmp.setPressureOversampling(BMP3_OVERSAMPLING_4X);
+      bmp.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_3);
+      bmp.setOutputDataRate(BMP3_ODR_50_HZ);
+    }
+  }
+  emit_setup_diag(status_sht ? "SHT_OK" : "SHT_FAIL");
+}
+
+static void init_motion_subsystem(uint32_t now_ms) {
+  init_adxl_sensor();
+  init_imu_sensor();
+  sensor_init_window_start_ms = now_ms;
+  last_sensor_retry_ms = now_ms;
+  emit_setup_diag((status_adxl && status_imu) ? "IMU_ADXL_OK" : "IMU_ADXL_RETRY");
+}
+
+static void run_deferred_boot_init(uint32_t now_ms) {
+  if (boot_init_stage == kBootInitDone) {
+    return;
+  }
+  if ((now_ms - last_deferred_init_ms) < kDeferredInitStepGapMs) {
+    return;
+  }
+  last_deferred_init_ms = now_ms;
+
+  switch (boot_init_stage) {
+    case kBootInitI2c: {
+      uint8_t i2c_a_count = init_i2c_bus(Wire, I2C_A_SDA, I2C_A_SCL, "I2C_A");
+      uint8_t i2c_b_count = init_i2c_bus(Wire1, I2C_B_SDA, I2C_B_SCL, "I2C_B");
+      emit_setup_diag_u32("I2C_A_DEV", i2c_a_count);
+      emit_setup_diag_u32("I2C_B_DEV", i2c_b_count);
+      emit_setup_diag((i2c_a_count + i2c_b_count) > 0 ? "I2C_READY" : "I2C_NO_DEV");
+      boot_init_stage = kBootInitLoRa;
+      break;
+    }
+    case kBootInitLoRa:
+      init_lora_subsystem();
+      boot_init_stage = kBootInitSd;
+      break;
+    case kBootInitSd:
+      init_sd_subsystem();
+      boot_init_stage = kBootInitRtc;
+      break;
+    case kBootInitRtc:
+      init_rtc_subsystem();
+      boot_init_stage = kBootInitEnv;
+      break;
+    case kBootInitEnv:
+      init_env_subsystem();
+      boot_init_stage = kBootInitMotion;
+      break;
+    case kBootInitMotion:
+      init_motion_subsystem(now_ms);
+      boot_init_stage = kBootInitDone;
+      emit_setup_diag("BOOT_INIT_DONE");
+      break;
+    case kBootInitDone:
+    default:
+      break;
   }
 }
 
@@ -592,58 +1158,18 @@ static void madgwick_update_imu(
 }
 
 void setup() {
-  Serial.begin(115200);
-  while (!Serial); // 等待串口連接
-  delay(1000);
-  
-  // 初始化 I2C
-  Wire.begin(I2C_A_SDA, I2C_A_SCL);
-  // 可選：提高 I2C 速度到 400kHz (Fast Mode)
-  Wire.setClock(400000);
-  Wire1.begin(I2C_B_SDA, I2C_B_SCL);
-  Wire1.setClock(400000);
-  i2c_scan_print(Wire, "I2C_A");
-  i2c_scan_print(Wire1, "I2C_B");
+  ground_station_serial.begin(kGroundStationBaud);
+  delay(1);
+  emit_setup_diag("SETUP_ENTER");
+  ground_station_serial.print("HB\n");
 
   pinMode(SAFETY_SWITCH_PIN, INPUT_PULLUP);
-
-  // LoRa init (SPI bus + radio)
-  pinMode(LORA_NSS, OUTPUT);
-  digitalWrite(LORA_NSS, HIGH);
-  pinMode(LORA_RST, OUTPUT);
-  digitalWrite(LORA_RST, HIGH);
-  pinMode(LORA_DIO0, INPUT);
-  pinMode(LORA_DIO1, INPUT);
-  loraSPI.begin(LORA_SCK, LORA_MISO, LORA_MOSI, LORA_NSS);
-  LoRa.setSPI(loraSPI);
-  LoRa.setPins(LORA_NSS, LORA_RST, LORA_DIO0);
-  lora_ready = LoRa.begin(LORA_FREQ);
-  if (lora_ready) {
-    LoRa.setSyncWord(LORA_SYNC_WORD);
-    LoRa.setTxPower(LORA_TX_POWER, PA_OUTPUT_PA_BOOST_PIN);
-    LoRa.setSpreadingFactor(LORA_SF);
-    LoRa.setSignalBandwidth(LORA_BW);
-    LoRa.setCodingRate4(LORA_CR);
-    LoRa.setPreambleLength(LORA_PREAMBLE_LEN);
-    LoRa.enableCrc();
-    DBG_PRINTLN("LoRa OK");
-  } else {
-    DBG_PRINTLN("LoRa init failed");
-  }
-
-  // SD init (dedicated SPI bus)
-  pinMode(SD_CS, OUTPUT);
-  digitalWrite(SD_CS, HIGH);
-  sdSPI.begin(SD_SCK, SD_MISO, SD_MOSI, SD_CS);
-  sd_ready = SD.begin(SD_CS, sdSPI);
-  if (sd_ready) {
-    sd_log = SD.open("/telemetry.csv", FILE_APPEND);
-    if (!sd_log) {
-      sd_ready = false;
-    } else if (sd_log.size() == 0) {
-      write_sd_csv_header();
-    }
-  }
+  pinMode(SEPARATION_SERVO_PIN, OUTPUT);
+  digitalWrite(SEPARATION_SERVO_PIN, LOW);
+  pinMode(CAMERA_A_TRIGGER_PIN, OUTPUT);
+  digitalWrite(CAMERA_A_TRIGGER_PIN, LOW);
+  pinMode(CAMERA_B_TRIGGER_PIN, OUTPUT);
+  digitalWrite(CAMERA_B_TRIGGER_PIN, LOW);
 
   status_led.begin();
   status_led.setBrightness(32);
@@ -651,63 +1177,6 @@ void setup() {
 
   pinMode(WATER_DETECT_PIN, INPUT);
   pinMode(DS3231_SQW_PIN, INPUT_PULLUP);
-  rtc_ready = rtc.begin(&Wire1);
-  if (rtc_ready) {
-    if (rtc.lostPower()) {
-      rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-    }
-    rtc.writeSqwPinMode(DS3231_SquareWave1Hz);
-  }
-
-  // 1. 初始化 SHT31 (溫濕度)
-  if (!sht31.begin(0x44)) {   // 預設地址 0x44
-  } else {
-    status_sht = true;
-  }
-
-  // 2. 初始化 BMP390 (氣壓/高度)
-  if (!bmp.begin_I2C()) {   // 自動偵測地址 0x77 或 0x76
-  } else {
-    status_bmp = true;
-    // 設定 BMP390 採樣參數 (適合火箭的高速採樣)
-    bmp.setTemperatureOversampling(BMP3_OVERSAMPLING_8X);
-    bmp.setPressureOversampling(BMP3_OVERSAMPLING_4X);
-    bmp.setIIRFilterCoeff(BMP3_IIR_FILTER_COEFF_3);
-    bmp.setOutputDataRate(BMP3_ODR_50_HZ);
-  }
-
-  // 3. 初始化 ADXL375 (高 G 值加速度計)
-  if(!accel.begin()) {
-  } else {
-    status_adxl = true;
-  }
-
-  // 4. 初始化 IMU42688 (陀螺儀/加速度計)
-  bool imu_present = false;
-  if (i2c_probe(Wire, 0x68)) {
-    imu = &imu_primary;
-    imu_addr = 0x68;
-    imu_present = true;
-  } else if (i2c_probe(Wire, 0x69)) {
-    imu = &imu_alt;
-    imu_addr = 0x69;
-    imu_present = true;
-  }
-
-  if (imu_present) {
-    int imu_status = imu->begin();
-    if (imu_status < 0) {
-      DBG_PRINTF("ICM42688 init failed on 0x%02X\n", imu_addr);
-    } else {
-      status_imu = true;
-      DBG_PRINTF("ICM42688 OK on 0x%02X\n", imu_addr);
-      // 設定 IMU 範圍 (火箭通常需要最大範圍)
-      imu->setAccelFS(ICM42688::gpm16); // ±16g
-      imu->setGyroFS(ICM42688::dps2000); // ±2000 dps
-    }
-  } else {
-    DBG_PRINTLN("ICM42688 not detected on 0x68/0x69");
-  }
 
   ledcSetup(BUZZER_CH, 2000, BUZZER_RES);
   ledcAttachPin(BUZZER_PIN, BUZZER_CH);
@@ -715,25 +1184,42 @@ void setup() {
   analogReadResolution(12);
   analogSetPinAttenuation(BATTERY_ADC_PIN, ADC_11db);
 
-  GPSSerial.begin(UART_GPS_BAUD, SERIAL_8N1, UART_GPS_RX, UART_GPS_TX);
+  gps_baud_idx = 0;
+  gps_last_sentence_ms = 0;
+  gps_last_fix_ms = 0;
+  gps_last_course_ms = 0;
+  gps_fix_valid = false;
+  gps_course_valid = false;
+  gps_last_baud_switch_ms = millis();
+  set_gps_uart_baud(kGpsBaudCandidates[gps_baud_idx]);
+  emit_setup_diag_u32("GPS_BAUD", kGpsBaudCandidates[gps_baud_idx]);
   pinMode(UART_GPS_PPS, INPUT);
 
-  BackupSerial.begin(UART_SUB_BAUD, SERIAL_8N1, UART_SUB_RX, UART_SUB_TX);
-  
-  delay(1000);
-  // DJI-style startup tone
-  buzzerTone(NOTE_DO, 120);
-  delay(20);
-  buzzerTone(NOTE_MI, 120);
-  delay(20);
-  buzzerTone(NOTE_SOL, 120);
-  delay(20);
-  buzzerTone(NOTE_HDO, 120);
+  if (kEnableBackupHeartbeat) {
+    BackupSerial.begin(UART_SUB_BAUD, SERIAL_8N1, UART_SUB_RX, UART_SUB_TX);
+  }
+
+  boot_init_stage = kBootInitI2c;
+  last_deferred_init_ms = millis();
+  sensor_init_window_start_ms = 0;
+  last_sensor_retry_ms = 0;
+  last_lora_retry_ms = 0;
+  lora_tx_fail_count = 0;
+
+  emit_setup_diag("SETUP_DONE");
+  ground_station_serial.print("HB\n");
 }
 
 void loop() {
   uint32_t time_ms = millis();
-  if (time_ms - last_heartbeat_ms >= 100) {
+  static bool loop_enter_reported = false;
+  if (!loop_enter_reported) {
+    emit_setup_diag("LOOP_ENTER");
+    loop_enter_reported = true;
+  }
+  run_deferred_boot_init(time_ms);
+  maintain_lora_link(time_ms);
+  if (kEnableBackupHeartbeat && time_ms - last_heartbeat_ms >= 100) {
     BackupSerial.write('H');
     BackupSerial.write('B');
     BackupSerial.write('\n');
@@ -743,7 +1229,28 @@ void loop() {
   process_gps_stream();
   if (gps_last_fix_ms > 0 && time_ms - gps_last_fix_ms > kGpsTimeoutMs) {
     gps_fix_valid = false;
-    gps_sat_count = 0;
+    gps_speed_dms = 0;
+  }
+  if (gps_last_course_ms > 0 && time_ms - gps_last_course_ms > kGpsSentenceTimeoutMs) {
+    gps_course_valid = false;
+  }
+  maybe_rotate_gps_baud(time_ms);
+  retry_delayed_sensor_init(time_ms);
+
+  if (kEnableStartupTone && boot_init_stage == kBootInitDone) {
+    static bool startup_tone_done = false;
+    if (!startup_tone_done) {
+      // Keep tone out of setup so loop can start immediately.
+      delay(1000);
+      buzzerTone(NOTE_DO, 120);
+      delay(20);
+      buzzerTone(NOTE_MI, 120);
+      delay(20);
+      buzzerTone(NOTE_SOL, 120);
+      delay(20);
+      buzzerTone(NOTE_HDO, 120);
+      startup_tone_done = true;
+    }
   }
 
   float temp_c = 0.0f;
@@ -756,7 +1263,7 @@ void loop() {
   float pressure_pa = 0.0f;
   float baro_alt_m = 0.0f;
   bool baro_valid = false;
-  if (status_bmp && bmp.performReading()) {
+  if (kEnableBmp390 && status_bmp && bmp.performReading()) {
     pressure_pa = bmp.pressure;
     baro_alt_m = bmp.readAltitude(1013.25);
     baro_valid = true;
@@ -767,7 +1274,7 @@ void loop() {
   float accz_g = 0.0f;
   if (status_adxl) {
     sensors_event_t event;
-    accel.getEvent(&event);
+    accel->getEvent(&event);
     float adxl_x = event.acceleration.x / kG;
     float adxl_y = event.acceleration.y / kG;
     float adxl_z = event.acceleration.z / kG;
@@ -779,7 +1286,8 @@ void loop() {
 
   float roll_deg = 0.0f;
   float pitch_deg = 0.0f;
-  uint16_t gps_heading_ddeg = 0;
+  uint16_t heading_ddeg = 0;
+  bool heading_from_imu = false;
   float gyro_x_dps = 0.0f;
   float gyro_y_dps = 0.0f;
   float gyro_z_dps = 0.0f;
@@ -884,7 +1392,15 @@ void loop() {
     if (fabsf(pitch_deg) < yaw_lock_deg) {
       yaw_hold = yaw_deg;
     }
-    gps_heading_ddeg = clamp_u16(lroundf(yaw_hold * 10.0f));
+    heading_ddeg = clamp_u16(lroundf(yaw_hold * 10.0f));
+    heading_from_imu = true;
+  }
+
+  if (!heading_from_imu &&
+      gps_fix_valid &&
+      gps_course_valid &&
+      gps_speed_dms >= static_cast<int16_t>(kGpsCourseMinSpeedDms)) {
+    heading_ddeg = gps_course_ddeg;
   }
 
   // Low-pass filter to reduce roll/pitch jitter.
@@ -992,12 +1508,17 @@ void loop() {
       if (!apogee_seen && vert_speed_valid && vert_speed_ms < kApogeeDetectVSpeedMs) {
         apogee_seen = true;
         apogee_ms = time_ms;
+        drogue_cond_ms = 0;
+        flight_state = kStateApogee;
+        break;
       }
-      bool apogee_ok = apogee_seen && (time_ms - apogee_ms >= kAfterApogeeMs);
-      bool drogue_cond = ((alt_valid && vert_speed_valid &&
-                           alt_rel_m > kDrogueAltMinM && vert_speed_ms < kDrogueVSpeedMaxMs) ||
+      break;
+    }
+    case kStateApogee: {
+      bool after_apogee = apogee_seen && (time_ms - apogee_ms >= kAfterApogeeMs);
+      bool drogue_cond = ((alt_valid && alt_rel_m > kDrogueAltMinM) ||
                           (flight_time_s > kDrogueTimeS));
-      if (apogee_ok && condition_hold(drogue_cond, drogue_cond_ms, time_ms, kDrogueHoldMs)) {
+      if (after_apogee && condition_hold(drogue_cond, drogue_cond_ms, time_ms, kDrogueHoldMs)) {
         flight_state = kStateDescent;
         main_cond_ms = 0;
         landing_cond_ms = 0;
@@ -1012,9 +1533,10 @@ void loop() {
           condition_hold(main_cond, main_cond_ms, time_ms, kMainHoldMs)) {
         main_deployed = true;
       }
-      bool landing_cond = ((alt_valid && alt_rel_m < kLandingAltMaxM) ||
-                           (water_detected == 1) ||
-                           (vert_speed_valid && vert_speed_ms > kLandingVSpeedMinMs));
+      bool landing_alt_cond = alt_valid && alt_rel_m < kLandingAltMaxM;
+      bool landing_speed_cond = !vert_speed_valid || fabsf(vert_speed_ms) < kLandingVSpeedMaxMs;
+      bool landing_cond = ((water_detected == 1) ||
+                           (landing_alt_cond && landing_speed_cond));
       if (condition_hold(landing_cond, landing_cond_ms, time_ms, kLandingHoldMs)) {
         flight_state = kStateLanded;
       }
@@ -1028,9 +1550,9 @@ void loop() {
   int32_t lat_raw = gps_lat_raw;
   int32_t lon_raw = gps_lon_raw;
   int16_t gps_alt_dm_local = gps_alt_dm;
-  int16_t baro_alt_dm = clamp_i16(lroundf(baro_alt_m * 10.0f));
+  int16_t baro_alt_dm = baro_valid ? clamp_i16(lroundf(baro_alt_m * 10.0f)) : kInvalidBaroAltDm;
   int16_t gps_speed_dms_local = gps_speed_dms;
-  uint8_t sat_count = gps_fix_valid ? gps_sat_count : 0;
+  uint8_t sat_count = gps_sat_count;
   int16_t roll_cdeg = clamp_i16(lroundf(roll_deg * 100.0f));
   int16_t pitch_cdeg = clamp_i16(lroundf(pitch_deg * 100.0f));
   int16_t gyro_ddeg_s = clamp_i16(lroundf(gyro_z_dps * 10.0f));
@@ -1062,7 +1584,7 @@ void loop() {
   if (!rtc_ready) {
     error_code |= kErrRtcInit;
   }
-  if (!status_bmp) {
+  if (kEnableBmp390 && !status_bmp) {
     error_code |= kErrBaroInit;
   }
   if (!status_imu) {
@@ -1090,7 +1612,7 @@ void loop() {
   frame[16] = sat_count;
   write_i16_le(frame, 17, roll_cdeg);
   write_i16_le(frame, 19, pitch_cdeg);
-  write_u16_le(frame, 21, gps_heading_ddeg);
+  write_u16_le(frame, 21, heading_ddeg);
   write_i16_le(frame, 23, gyro_x_ddeg_s);
   write_i16_le(frame, 25, gyro_y_ddeg_s);
   write_i16_le(frame, 27, gyro_ddeg_s);
@@ -1112,24 +1634,34 @@ void loop() {
   frame[kFrameLen - 1] = crc;
 
   if (lora_ready) {
-    LoRa.beginPacket();
-    LoRa.write(frame, kFrameLen);
-    LoRa.endPacket();
+    if (lora_send_frame(frame, kFrameLen)) {
+      lora_tx_fail_count = 0;
+    } else {
+      if (lora_tx_fail_count < 255) {
+        lora_tx_fail_count++;
+      }
+      if (lora_tx_fail_count >= kLoraTxFailReinitThreshold) {
+        lora_ready = false;
+        last_lora_retry_ms = time_ms;
+        emit_setup_diag("LORA_TX_FAIL");
+      }
+    }
   }
 
   if (sd_ready && sd_log) {
     float lat_deg = gps_lat_raw / 1e7f;
     float lon_deg = gps_lon_raw / 1e7f;
     float gps_alt_m = gps_alt_dm_local / 10.0f;
+    float baro_alt_log_m = baro_valid ? baro_alt_m : NAN;
     float speed_ms = gps_speed_dms_local / 10.0f;
-    float heading_deg = gps_heading_ddeg / 10.0f;
+    float heading_deg = heading_ddeg / 10.0f;
     write_sd_csv_line(
         time_ms,
         rtc_unix,
         lat_deg,
         lon_deg,
         gps_alt_m,
-        baro_alt_m,
+        baro_alt_log_m,
         speed_ms,
         heading_deg,
         sat_count,
@@ -1146,7 +1678,7 @@ void loop() {
         servo_angle_ddeg / 10.0f,
         temp_c,
         hum,
-        pressure_pa,
+        baro_valid ? pressure_pa : NAN,
         flight_state,
         error_code,
         water_detected);
@@ -1155,7 +1687,7 @@ void loop() {
     }
   }
 
-  Serial.write(frame, kFrameLen);
+  ground_station_serial.write(frame, kFrameLen);
 
   // 簡易延遲，約 10Hz (實際飛行時不能用 delay)
   delay(100); 

@@ -1,4 +1,3 @@
-import struct
 import time
 # gui_main.py
 from PyQt5.QtWidgets import (
@@ -10,12 +9,12 @@ from PyQt5.QtWidgets import (
     QGroupBox,
     QSplitter,
 )
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer
 
 from serial_comm import SerialWorker
 from state_machine import FlightState
-from config import FRAME_START, PACKET_LEN
 from logger import CSVLogger
+from protocol import FRAME_SYNC, TelemetryStreamParser, decode_frame
 
 from rocket_attitude import RocketAttitudeView
 from battery_panel import BatteryPanel
@@ -37,23 +36,22 @@ class MainWindow(QMainWindow):
         self.resize(1200, 800)
 
         # ---- Core logic ----
-        self._legacy_buffer = bytearray()
-        self._legacy_link_logged = False
         self._mission_start_uptime = None
         self._last_uptime = 0.0
         self._boot_time_seconds = 0.0
         self._current_flight_state = None
         self._logger = None
+        self._reset_frame_state()
         self.telemetry = {
             "time": 0.0,
             "lat": 0.0,
             "lon": 0.0,
             "alt": 0.0,
             "gps_alt": 0.0,
-            "baro_alt": 0.0,
+            "baro_alt": None,
             "speed": 0.0,
             "gps_speed": 0.0,
-            "baro_speed": 0.0,
+            "baro_speed": None,
             "heading": 0.0,
             "sat": 0,
             "accx": 0.0,
@@ -76,6 +74,11 @@ class MainWindow(QMainWindow):
 
         # ---- UI ----
         self._init_ui()
+        self._diag_timer = QTimer(self)
+        self._diag_timer.setInterval(250)
+        self._diag_timer.timeout.connect(self._update_stream_diagnostics)
+        self._diag_timer.start()
+        self._update_stream_diagnostics()
         # Fixed-length telemetry decoding (47-byte frames).
 
     # ---------------- UI ----------------
@@ -185,6 +188,7 @@ class MainWindow(QMainWindow):
         if self.serial_worker:
             return
 
+        self._reset_frame_state()
         self.serial_worker = SerialWorker(port, baudrate)
         self.serial_worker.data_received.connect(self._on_serial_data)
         self.serial_worker.error_occurred.connect(self._on_serial_status)
@@ -195,10 +199,17 @@ class MainWindow(QMainWindow):
         if self.serial_worker:
             self.serial_worker.stop()
             self.serial_worker = None
+        self._reset_frame_state()
         self.serial_panel.set_status("Status: DISCONNECTED", color="red")
 
     def _on_serial_data(self, raw: bytes):
+        if raw:
+            if self._first_rx_monotonic is None:
+                self._first_rx_monotonic = time.monotonic()
+            self._rx_bytes += len(raw)
+        self._maybe_log_non_telemetry_serial(raw)
         self._process_legacy_stream(raw)
+        self._update_stream_diagnostics()
 
     def closeEvent(self, event):
         if self.serial_worker:
@@ -272,8 +283,10 @@ class MainWindow(QMainWindow):
         self.event_panel.add_event(message)
         msg_lower = message.lower()
         if "disconnect" in msg_lower or "failed" in msg_lower:
+            self.serial_panel.set_connected(False)
             self.serial_panel.set_status(message, color="red")
         elif "connected" in msg_lower:
+            self.serial_panel.set_connected(True)
             self.serial_panel.set_status(message, color="green")
         else:
             self.serial_panel.set_status(message)
@@ -293,134 +306,117 @@ class MainWindow(QMainWindow):
 
     # ---------------- Fixed-length frames (47 bytes) ----------------
 
+    def _reset_frame_state(self):
+        self._frame_parser = TelemetryStreamParser()
+        self._legacy_link_logged = False
+        self._saw_hb_text = False
+        self._boot_markers_seen = set()
+        self._text_serial_logged = False
+        self._rx_bytes = 0
+        self._valid_frames = 0
+        self._crc_fail = 0
+        self._resync_count = 0
+        self._first_rx_monotonic = None
+        self._last_frame_monotonic = None
+        self._non_telemetry_warning_logged = False
+        if hasattr(self, "serial_panel"):
+            self.serial_panel.reset_diagnostics()
+
+    def _maybe_log_non_telemetry_serial(self, raw: bytes):
+        if not raw or self._legacy_link_logged:
+            return
+
+        text = raw.decode("ascii", errors="ignore")
+        if text:
+            for line in text.splitlines():
+                marker = line.strip()
+                if marker.startswith("BOOT:") and marker not in self._boot_markers_seen:
+                    self.event_panel.add_event(f"[FW] {marker}")
+                    self._boot_markers_seen.add(marker)
+
+        if b"HB\n" in raw and FRAME_SYNC not in raw:
+            self._saw_hb_text = True
+
+        if self._text_serial_logged:
+            return
+
+        printable = sum(1 for b in raw if 32 <= b <= 126 or b in (9, 10, 13))
+        if (
+            printable == len(raw)
+            and FRAME_SYNC not in raw
+            and "BOOT:" not in text
+            and "HB" not in text
+        ):
+            self.event_panel.add_event(
+                "收到的是文字序列資料，不是 47-byte 遙測 frame。"
+            )
+            self._text_serial_logged = True
+
     def _process_legacy_stream(self, data: bytes):
-        """
-        Fixed 47-byte frames starting with 0x55 0xAA.
-        Parse them here so the UI updates from fixed-length telemetry frames.
-        """
-        if not data:
+        frames = self._frame_parser.feed(data)
+        self._crc_fail = self._frame_parser.total_crc_fail
+        self._resync_count = self._frame_parser.total_resync_count
+        if frames:
+            self._valid_frames += len(frames)
+            self._last_frame_monotonic = time.monotonic()
+        for frame in frames:
+            self._handle_legacy_frame(decode_frame(frame))
+
+    def _update_stream_diagnostics(self):
+        now = time.monotonic()
+        last_frame_age_ms = None
+        if self._last_frame_monotonic is not None:
+            last_frame_age_ms = int((now - self._last_frame_monotonic) * 1000.0)
+
+        self.serial_panel.set_diagnostics(
+            rx_bytes=self._rx_bytes,
+            valid_frames=self._valid_frames,
+            crc_fail=self._crc_fail,
+            resync_count=self._resync_count,
+            last_frame_age_ms=last_frame_age_ms,
+        )
+
+        if (
+            self._rx_bytes > 0
+            and self._valid_frames == 0
+            and self._first_rx_monotonic is not None
+            and (now - self._first_rx_monotonic) >= 2.0
+        ):
+            if self._saw_hb_text:
+                msg = "收到 HB/BOOT 回應，但尚未收到 47-byte 遙測（尚未進入 loop 或 port/baud 不符）"
+            else:
+                msg = "收到資料但非 47-byte 遙測（port/baud 不符）"
+            self.serial_panel.set_diagnostic_notice(msg, color="#a35f00")
+            if not self._non_telemetry_warning_logged:
+                self.event_panel.add_event(msg)
+                self._non_telemetry_warning_logged = True
             return
 
-        self._legacy_buffer.extend(data)
-        frame_len = PACKET_LEN
+        if self._valid_frames > 0:
+            self.serial_panel.set_diagnostic_notice("47-byte 遙測正常接收中。", color="green")
+        elif self._rx_bytes > 0:
+            self.serial_panel.set_diagnostic_notice("已收到資料，正在等待有效 47-byte frame...", color="#666")
+        else:
+            self.serial_panel.set_diagnostic_notice("")
 
-        while True:
-            if len(self._legacy_buffer) < frame_len:
-                return
-
-            try:
-                # Find sync (0x55 0xAA)
-                start_idx = -1
-                for i in range(len(self._legacy_buffer) - 1):
-                    if self._legacy_buffer[i] == 0x55 and self._legacy_buffer[i + 1] == FRAME_START:
-                        start_idx = i
-                        break
-                if start_idx == -1:
-                    self._legacy_buffer.clear()
-                    return
-            except ValueError:
-                self._legacy_buffer.clear()
-                return
-
-            if start_idx > 0:
-                del self._legacy_buffer[:start_idx]
-                if len(self._legacy_buffer) < frame_len:
-                    return
-
-            frame = bytes(self._legacy_buffer[:frame_len])
-            del self._legacy_buffer[:frame_len]
-            self._handle_legacy_frame(frame)
-
-    def _handle_legacy_frame(self, frame: bytes):
-        # Expected layout (47 bytes):
-        # 0-1: 0x55 0xAA
-        # 2-3: TimeTag uint16 (0.1 s)
-        # 4-7: Latitude int32 (deg * 1e7)
-        # 8-11: Longitude int32 (deg * 1e7)
-        # 12-13: GPS Alt int16 (0.1 m)
-        # 14-15: GPS Speed int16 (0.1 m/s)
-        # 16: GPS Sat count uint8
-        # 17-18: Roll int16 (0.01 deg) - IMU fusion output
-        # 19-20: Pitch int16 (0.01 deg)
-        # 21-22: Yaw uint16 (0.1 deg) - IMU fusion output
-        # 23-24: GyroX int16 (0.1 deg/s)
-        # 25-26: GyroY int16 (0.1 deg/s)
-        # 27-28: GyroZ int16 (0.1 deg/s)
-        # 29-30: AccX int16 (0.01 g)
-        # 31-32: AccY int16 (0.01 g)
-        # 33-34: AccZ int16 (0.01 g)
-        # 35-36: Baro Altitude int16 (0.1 m)
-        # 37-38: Battery uint16 (mV)
-        # 39-40: Servo Power uint16 (mV)
-        # 41-42: Servo Angle int16 (0.1 deg)
-        # 43: FlightState uint8
-        # 44: ErrorCode uint8
-        # 45: WaterDetected uint8 (0/1)
-        # 46: CRC8 XOR(0..45)
-        if len(frame) != PACKET_LEN or frame[0] != 0x55 or frame[1] != FRAME_START:
-            return
-
-        try:
-            ts_ds = struct.unpack("<H", frame[2:4])[0]
-            lat_raw = struct.unpack("<i", frame[4:8])[0]
-            lon_raw = struct.unpack("<i", frame[8:12])[0]
-            gps_alt_dm = struct.unpack("<h", frame[12:14])[0]
-            gps_speed_dms = struct.unpack("<h", frame[14:16])[0]
-            sat_count = frame[16]
-            roll_cdeg = struct.unpack("<h", frame[17:19])[0]
-            pitch_cdeg = struct.unpack("<h", frame[19:21])[0]
-            yaw_ddeg = struct.unpack("<H", frame[21:23])[0]
-            gyro_x_ddeg_s = struct.unpack("<h", frame[23:25])[0]
-            gyro_y_ddeg_s = struct.unpack("<h", frame[25:27])[0]
-            gyro_ddeg_s = struct.unpack("<h", frame[27:29])[0]
-            accx_cg = struct.unpack("<h", frame[29:31])[0]
-            accy_cg = struct.unpack("<h", frame[31:33])[0]
-            accz_cg = struct.unpack("<h", frame[33:35])[0]
-            baro_alt_dm = struct.unpack("<h", frame[35:37])[0]
-            battery_mv = struct.unpack("<H", frame[37:39])[0]
-            servo_power_mv = struct.unpack("<H", frame[39:41])[0]
-            servo_angle_ddeg = struct.unpack("<h", frame[41:43])[0]
-            flight_state_raw = frame[43]
-            error_code = frame[44]
-            water_detected = frame[45]
-        except Exception:
-            return
-
-        crc_calc = 0
-        for b in frame[:PACKET_LEN - 1]:
-            crc_calc ^= b
-        if crc_calc != frame[PACKET_LEN - 1]:
-            return
-
-        gps_alt_m = gps_alt_dm / 10.0
-        gps_speed_ms = gps_speed_dms / 10.0
-        baro_speed_ms = gps_speed_ms  # no separate baro speed provided
-        heading_deg = (yaw_ddeg / 10.0) % 360
-        roll_deg = roll_cdeg / 100.0
-        pitch_deg = pitch_cdeg / 100.0
-        gyro_z_dps = gyro_ddeg_s / 10.0
-        gyro_x_dps = gyro_x_ddeg_s / 10.0
-        gyro_y_dps = gyro_y_ddeg_s / 10.0
-        battery_v = battery_mv / 1000.0
-        servo_power_v = servo_power_mv / 1000.0
-        servo_angle_deg = servo_angle_ddeg / 10.0
-        baro_alt_m = baro_alt_dm / 10.0
-        accx_g = accx_cg / 100.0
-        accy_g = accy_cg / 100.0
-        accz_g = accz_cg / 100.0
+    def _handle_legacy_frame(self, packet):
+        gps_speed_ms = packet.gps_speed_ms
+        baro_alt_m = packet.baro_alt_m
+        baro_speed_ms = gps_speed_ms if baro_alt_m is not None else None
+        battery_v = packet.battery_v
+        primary_alt_m = baro_alt_m if baro_alt_m is not None else packet.gps_alt_m
 
         if not self._legacy_link_logged:
-            self.event_panel.add_event("Detected 47-byte telemetry frames.")
+            self.event_panel.add_event("偵測到 47-byte 遙測 frame。")
             self._legacy_link_logged = True
 
-        t_sec = ts_ds / 10.0
+        t_sec = packet.time_s
         self._last_uptime = t_sec
         self._boot_time_seconds = t_sec
 
         # Flight state handling / mission start tracking
         try:
-            from state_machine import FlightState
-            fs = FlightState(flight_state_raw)
+            fs = FlightState(packet.flight_state)
         except Exception:
             fs = None
         if fs != self._current_flight_state and fs is not None:
@@ -433,37 +429,37 @@ class MainWindow(QMainWindow):
             mission_elapsed = max(0.0, t_sec - self._mission_start_uptime)
 
         self.time_panel.update_time(mission_elapsed or 0.0)
-        self.plot_panel.update_altitude(baro_alt_m)
-        self.map_view.update_gps(lat_raw / 1e7, lon_raw / 1e7, gps_alt_m)
+        self.plot_panel.update_altitude(primary_alt_m)
+        self.map_view.update_gps(packet.lat_deg, packet.lon_deg, packet.gps_alt_m)
         self.battery_panel.update_voltage(battery_v)
 
         # Update telemetry model and refresh derived panels
         self.telemetry.update({
             "time": self._boot_time_seconds,
-            "lat": lat_raw / 1e7,
-            "lon": lon_raw / 1e7,
-            "alt": gps_alt_m,
-            "gps_alt": gps_alt_m,
+            "lat": packet.lat_deg,
+            "lon": packet.lon_deg,
+            "alt": primary_alt_m,
+            "gps_alt": packet.gps_alt_m,
             "baro_alt": baro_alt_m,
             "speed": gps_speed_ms,
             "gps_speed": gps_speed_ms,
             "baro_speed": baro_speed_ms,
-            "heading": heading_deg,
-            "accx": accx_g,
-            "accy": accy_g,
-            "accz": accz_g,
-            "roll": roll_deg,
-            "pitch": pitch_deg,
-            "gyro_z": gyro_z_dps,
-            "gyro_x": gyro_x_dps,
-            "gyro_y": gyro_y_dps,
-            "servo_power": servo_power_v,
-            "servo_angle": servo_angle_deg,
-            "sat": sat_count,
+            "heading": packet.heading_deg,
+            "accx": packet.accx_g,
+            "accy": packet.accy_g,
+            "accz": packet.accz_g,
+            "roll": packet.roll_deg,
+            "pitch": packet.pitch_deg,
+            "gyro_z": packet.gyro_z_dps,
+            "gyro_x": packet.gyro_x_dps,
+            "gyro_y": packet.gyro_y_dps,
+            "servo_power": packet.servo_power_v,
+            "servo_angle": packet.servo_angle_deg,
+            "sat": packet.sat_count,
             "battery": battery_v,
-            "status": fs.value if fs is not None else flight_state_raw,
-            "error": error_code,
-            "water": water_detected,
+            "status": fs.value if fs is not None else packet.flight_state,
+            "error": packet.error_code,
+            "water": packet.water_detected,
         })
 
         mission_elapsed = None

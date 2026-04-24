@@ -21,13 +21,28 @@ class SerialWorker(QThread):
         self._running = False
         self._ser = None
 
+    def _configure_line_state(self):
+        if not self._ser:
+            return
+
+        for attr in ("dtr", "rts"):
+            try:
+                setattr(self._ser, attr, False)
+            except Exception:
+                pass
+
     def run(self):
         try:
             self._ser = serial.Serial(
                 self.port,
                 self.baudrate,
-                timeout=0.1  # NON-blocking
+                timeout=0.1,  # NON-blocking
+                write_timeout=0.2,
+                rtscts=False,
+                dsrdtr=False,
+                xonxoff=False,
             )
+            self._configure_line_state()
             self._running = True
             self.status_changed.emit(f"Connected to {self.port}")
 

@@ -1,0 +1,3063 @@
+# host_log_start unix=1778503528 port=/dev/cu.wchusbserial110 baud=230400 decode=utf-8
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=14000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=15000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=16000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=17000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=18000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=19000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=20000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=21000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=22000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=23000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=24000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=25000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=26000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=27000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=28000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=29000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=30000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=31000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=32000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=33000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=34000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=35000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=36000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=37000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=38000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=39000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=40000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=41000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=42000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=43000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=44000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=45000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=46000
+# host_log_start unix=1778504414 port=/dev/cu.wchusbserial110 baud=230400 decode=utf-8
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=8000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=9000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=10000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=11000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=12000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=13000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=14000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=15000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=16000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=17000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=18000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=19000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=20000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=21000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=22000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=23000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=24000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=25000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=26000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=27000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=28000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=29000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=30000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=31000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=32000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=33000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=34000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=35000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=36000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=37000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=38000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=39000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=40000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=41000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=42000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=43000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=44000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=45000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=46000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=47000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=48000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=49000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=50000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=51000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=52000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=53000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=54000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=55000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=56000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=57000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=58000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=59000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=60000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=61000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=62000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=63000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=64000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=65000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=66000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=67000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=68000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=69000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=70000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=71000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=72000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=73000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=74000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=75000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=76000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=77000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=78000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=79000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=80000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=81000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=82000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=83000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=84000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=85000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=86000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=87000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=88000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=89000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=90000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=91000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=92000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=93000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=94000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=95000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=96000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=97000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=98000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=99000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=100000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=101000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=102000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=103000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=104000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=105000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=106000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=107000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=108000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=109000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=110000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=111000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=112000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=113000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=114000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=115000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=116000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=117000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=118000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=119000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=120000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=121000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=122000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=123000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=124000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=125000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=126000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=127000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=128000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=129000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=130000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=131000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=132000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=133000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=134000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=135000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=136000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=137000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=138000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=139000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=140000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=141000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=142000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=143000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=144000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=145000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=146000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=147000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=148000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=149000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=150000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=151000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=152000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=153000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=154000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=155000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=156000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=157000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=158000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=159000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=160000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=161000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=162000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=163000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=164000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=165000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=166000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=167000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=168000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=169000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=170000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=171000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=172000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=173000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=174000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=175000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=176000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=177000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=178000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=179000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=180000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=181000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=182000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=183000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=184000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=185000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=186000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=187000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=188000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=189000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=190000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=191000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=192000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=193000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=194000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=195000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=196000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=197000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=198000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=199000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=200000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=201000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=202000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=203000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=204000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=205000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=206000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=207000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=208000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=209000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=210000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=211000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=212000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=213000
+f~�f~�� x�x ������x�x~`怘�怘���~�f� f�~f������f�f`ff�������`�~ f�x �ff�f`�f�f`�����f����`f�������xf�~��f� �~ � ��f�f f~ fxff�������fx�~���fx�~��`�fx�~�����fx�~����`�fx�~��~�fx�~�������`fx�`������ �������x��x�~�������x��xx�xx�x ���f�������怘�����x� �����f������x�x�������x�  ���f����x x����f��`��f �昆怘�# ESP32 DevKit v1 barometric altitude test
+# serial_baud=230400
+# i2c_sda=21 i2c_scl=22
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# bmp_init_failed addr 0x76/0x77
+time_us,sample,baseline_ready,temp_c,pressure_pa,alt_raw_m,alt_filt_m,vz_mps,min_m,max_m,span_m,baseline_pressure_pa,failed_reads
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=1000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=2000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=3000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=4000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=5000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=6000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=7000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=8000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=9000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=10000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=11000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=12000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=13000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=14000
+f~�f~�� x�x ������x�x~`怘�怘���~�f� f�~f������f�f`ff�������`�~ f�x �ff�f`�f�f`�����f����`f�������xf�~��f� �~ � ��f�f f~ fxff�������fx�~���fx�~��`�fx�~�����fx�~����`�fx�~��~�fx�~�������`fx�`������ �������x��x�~�������x��xx�xx�x ���f�������怘�����x� �����f������x�x�������x�  ���f����x x����f��`��f �昆怘�# ESP32 DevKit v1 barometric altitude test
+# serial_baud=230400
+# i2c_sda=21 i2c_scl=22
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# bmp_init_failed addr 0x76/0x77
+time_us,sample,baseline_ready,temp_c,pressure_pa,alt_raw_m,alt_filt_m,vz_mps,min_m,max_m,span_m,baseline_pressure_pa,failed_reads
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=1000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=2000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=3000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=4000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=5000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=6000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=7000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=8000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=9000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=10000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=11000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=12000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=13000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=14000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=15000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=16000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=17000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=18000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=19000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=20000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=21000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=22000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=23000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=24000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=25000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=26000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=27000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=28000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=29000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=30000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=31000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=32000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=33000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=34000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=35000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=36000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=37000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=38000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=39000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=40000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=41000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=42000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=43000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=44000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=45000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=46000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=47000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=48000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=49000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=50000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=51000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=52000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=53000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=54000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=55000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=56000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=57000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=58000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=59000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=60000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=61000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=62000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=63000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=64000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=65000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=66000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=67000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=68000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=69000
+# retry_bmp_init
+# scan_i2c
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=70000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=71000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=72000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=73000
+# host_log_start unix=1778505155 port=/dev/cu.wchusbserial110 baud=230400 decode=utf-8
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=4000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=5000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=6000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=7000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=8000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=9000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=10000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=11000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=12000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=13000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=14000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=15000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=16000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=17000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=18000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=19000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=20000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=21000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=22000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=23000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=24000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=25000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=26000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=27000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=28000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=29000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=30000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=31000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=32000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=33000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=34000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=35000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=36000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=37000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=38000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=39000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=40000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=41000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=42000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=43000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=44000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=45000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=46000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=47000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=48000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=49000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=50000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=51000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=52000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=53000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=54000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=55000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=56000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=57000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=58000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=59000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=60000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=61000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=62000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=63000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=64000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=65000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=66000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=67000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=68000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=69000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=70000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=71000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=72000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=73000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=74000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=75000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=76000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=77000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=78000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=79000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=80000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=81000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=82000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=83000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=84000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=85000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=86000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=87000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=88000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=89000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=90000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=91000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=92000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=93000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=94000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=95000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=96000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=97000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=98000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=99000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=100000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=101000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=102000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=103000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=104000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=105000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=106000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=107000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=108000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=109000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=110000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=111000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=112000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=113000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=114000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=115000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=116000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=117000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=118000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=119000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=120000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=121000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=122000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=123000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=124000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=125000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=126000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=127000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=128000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=129000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=130000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=131000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=132000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=133000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=134000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=135000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=136000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=137000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=138000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=139000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=140000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=141000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=142000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=143000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=144000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=145000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=146000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=147000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=148000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=149000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=150000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=151000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=152000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=153000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=154000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=155000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=156000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=157000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=158000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=159000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=160000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=161000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=162000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=163000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=164000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=165000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=166000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=167000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=168000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=169000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=170000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=171000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=172000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=173000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=174000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=175000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=176000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=177000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=178000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=179000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=180000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=181000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=182000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=183000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=184000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=185000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=186000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=187000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=188000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=189000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=190000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=191000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=192000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=193000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=194000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=195000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=196000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=197000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=198000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=199000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=200000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=201000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=202000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=203000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=204000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=205000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=206000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=207000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=208000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=209000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=210000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=211000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=212000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=213000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=214000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=215000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=216000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=217000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=218000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=219000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=220000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=221000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=222000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=223000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=224000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=225000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=226000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=227000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=228000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=229000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=230000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=231000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=232000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=233000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=234000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=235000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=236000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=237000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=238000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=239000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=240000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=241000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=242000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=243000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=244000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=245000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=246000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=247000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=248000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=249000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=250000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=251000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=252000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=253000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=254000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=255000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=256000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=257000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=258000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=259000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=260000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=261000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=262000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=263000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=264000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=265000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=266000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=267000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=268000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=269000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=270000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=271000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=272000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=273000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=274000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=275000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=276000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=277000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=278000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=279000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=280000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=281000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=282000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=283000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=284000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=285000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=286000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=287000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=288000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=289000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=290000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=291000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=292000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=293000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=294000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=295000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=296000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=297000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=298000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=299000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=300000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=301000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=302000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=303000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=304000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=305000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=306000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=307000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=308000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=309000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=310000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=311000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=312000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=313000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=314000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=315000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=316000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=317000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=318000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=319000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=320000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=321000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=322000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=323000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=324000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=325000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=326000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=327000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=328000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=329000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=330000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=331000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=332000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=333000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=334000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=335000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=336000
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x3 (DOWNLOAD_BOOT(UART0/UART1/SDIO_REI_REO_V2))
+waiting for download
+# host_log_start unix=1778505519 port=/dev/cu.wchusbserial110 baud=230400 decode=utf-8
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=6000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=7000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=8000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=9000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=10000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=11000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=12000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=13000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=14000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=15000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=16000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=17000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=18000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=19000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=20000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=21000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=22000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=23000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=24000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=25000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=26000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=27000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=28000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=29000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=30000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=31000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=32000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=33000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=34000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=35000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=36000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=37000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=38000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=39000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=40000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=41000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=42000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=43000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=44000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=45000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=46000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=47000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=48000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=49000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=50000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=51000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=52000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=53000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=54000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=55000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=56000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=57000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=58000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=59000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=60000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=61000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=62000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=63000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=64000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=65000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=66000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=67000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=68000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=69000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=70000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=71000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=72000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=73000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=74000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=75000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=76000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=77000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=78000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=79000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=80000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=81000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=82000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=83000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=84000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=85000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=86000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=87000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=88000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=89000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=90000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=91000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=92000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=93000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=94000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=95000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=96000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=97000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=98000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=99000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=100000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=101000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=102000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=103000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=104000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=105000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=106000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=107000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=108000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=109000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=110000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=111000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=112000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=113000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=114000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=115000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=116000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=117000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=118000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=119000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=120000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=121000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=122000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=123000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=124000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=125000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=126000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=127000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=128000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=129000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=130000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=131000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=132000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=133000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=134000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=135000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=136000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=137000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=138000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=139000
+# retry_bmp_init
+# before_recovery sda=HIGH scl=HIGH
+# after_recovery sda=HIGH scl=HIGH
+# scan_i2c clock_hz=10000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=50000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# scan_i2c clock_hz=100000
+# i2c_addr=0x69
+# probe addr=0x69 reg0x00=0x00 reg0xD0=0x06 reg0x75=0x47
+# i2c_addr=0x7E
+# probe addr=0x7E reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# i2c_count=2
+# scan_i2c clock_hz=400000
+# i2c_addr=0x69
+# i2c_addr=0x7E
+# i2c_count=2
+# direct_bmp_addr_probe
+# probe addr=0x76 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# probe addr=0x77 reg0x00=ERR reg0xD0=ERR reg0x75=ERR
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=140000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=141000
+# status=BMP_NOT_FOUND reason=FOUND_0x69_AND_RESERVED_ADDR_NOT_BMP_CHECK_MODULE_WIRING_PULLUPS_OR_SENSOR_TYPE i2c_count=2 samples=0 baseline=0/100 failed_reads=0 uptime_ms=142000

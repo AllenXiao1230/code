@@ -62,12 +62,12 @@
 #define LORA_RST 38
 #define LORA_DIO0 37
 #define LORA_DIO1 36
-#define LORA_FREQ 433250000
+#define LORA_FREQ 433000000
 #define LORA_SYNC_WORD 0x12
 #define LORA_TX_POWER 22
 #define LORA_BW 125E3
 #define LORA_SF 9
-#define LORA_CR 7
+#define LORA_CR 6
 #define LORA_PREAMBLE_LEN 8
 
 #define SD_CS 11
@@ -910,6 +910,7 @@ static void init_lora_subsystem() {
     LoRa.setCodingRate4(LORA_CR);
     LoRa.setPreambleLength(LORA_PREAMBLE_LEN);
     LoRa.enableCrc();
+    LoRa.disableInvertIQ();
     lora_tx_fail_count = 0;
     DBG_PRINTLN("LoRa OK");
   } else {

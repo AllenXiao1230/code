@@ -1,4 +1,7 @@
 # rocket_attitude.py
+import math
+import time
+
 from PyQt5.QtWidgets import QWidget, QVBoxLayout
 from PyQt5.QtGui import QColor, QVector3D, QQuaternion
 from PyQt5.Qt3DCore import QEntity, QTransform
@@ -44,8 +47,44 @@ class RocketAttitudeView(QWidget):
         self._rocket_transform = QTransform()
         self._rocket_root.addComponent(self._rocket_transform)
 
+        # Display-side attitude stabilization to reduce visual jitter.
+        self._filtered_roll = 0.0
+        self._filtered_pitch = 0.0
+        self._filtered_yaw_cont = 0.0
+        self._last_raw_yaw = 0.0
+        self._filter_initialized = False
+        self._last_update_monotonic = None
+
         self._build_rocket()
         self._add_axes()
+
+    @staticmethod
+    def _is_finite(v: float) -> bool:
+        return math.isfinite(v)
+
+    @staticmethod
+    def _normalize_pm180(angle_deg: float) -> float:
+        a = (angle_deg + 180.0) % 360.0 - 180.0
+        if a == -180.0:
+            return 180.0
+        return a
+
+    @staticmethod
+    def _normalize_360(angle_deg: float) -> float:
+        return angle_deg % 360.0
+
+    @staticmethod
+    def _shortest_delta_deg(current_deg: float, target_deg: float) -> float:
+        # Return angular delta in [-180, 180] from current -> target.
+        return (target_deg - current_deg + 180.0) % 360.0 - 180.0
+
+    @staticmethod
+    def _clamp_delta(delta: float, max_abs_delta: float) -> float:
+        if delta > max_abs_delta:
+            return max_abs_delta
+        if delta < -max_abs_delta:
+            return -max_abs_delta
+        return delta
 
     def _build_rocket(self):
         body = QEntity(self._rocket_root)
@@ -163,8 +202,61 @@ class RocketAttitudeView(QWidget):
         tip_entity.addComponent(tip_transform)
 
     def update_attitude(self, roll: float, pitch: float, yaw: float):
-        # Axis mapping: roll->Z, pitch->X, yaw->Y (rocket frame).
-        q_roll = QQuaternion.fromAxisAndAngle(0.0, 0.0, 1.0, roll)
-        q_pitch = QQuaternion.fromAxisAndAngle(1.0, 0.0, 0.0, pitch)
-        q_yaw = QQuaternion.fromAxisAndAngle(0.0, 1.0, 0.0, yaw)
+        if not (self._is_finite(roll) and self._is_finite(pitch) and self._is_finite(yaw)):
+            return
+
+        roll = self._normalize_pm180(roll)
+        pitch = self._normalize_pm180(pitch)
+        yaw = self._normalize_360(yaw)
+
+        now = time.monotonic()
+        if self._last_update_monotonic is None:
+            dt = 0.1
+        else:
+            dt = max(0.001, min(0.25, now - self._last_update_monotonic))
+        self._last_update_monotonic = now
+
+        if not self._filter_initialized:
+            self._filtered_roll = roll
+            self._filtered_pitch = pitch
+            self._filtered_yaw_cont = yaw
+            self._last_raw_yaw = yaw
+            self._filter_initialized = True
+        else:
+            # Unwrap yaw to continuous angle to avoid 0/360 jump.
+            yaw_step = self._shortest_delta_deg(self._last_raw_yaw, yaw)
+            self._last_raw_yaw = yaw
+            target_yaw_cont = self._filtered_yaw_cont + yaw_step
+
+            # Rate limiting protects view from packet spikes.
+            max_roll_pitch_rate_dps = 220.0
+            max_yaw_rate_dps = 300.0
+            max_rp_step = max_roll_pitch_rate_dps * dt
+            max_yaw_step = max_yaw_rate_dps * dt
+
+            roll_target = self._filtered_roll + self._clamp_delta(
+                self._normalize_pm180(roll - self._filtered_roll), max_rp_step
+            )
+            pitch_target = self._filtered_pitch + self._clamp_delta(
+                self._normalize_pm180(pitch - self._filtered_pitch), max_rp_step
+            )
+            yaw_target = self._filtered_yaw_cont + self._clamp_delta(
+                target_yaw_cont - self._filtered_yaw_cont, max_yaw_step
+            )
+
+            # 1st-order LPF with dt-aware alpha.
+            tau_s = 0.22
+            alpha = 1.0 - math.exp(-dt / tau_s)
+            self._filtered_roll += alpha * (roll_target - self._filtered_roll)
+            self._filtered_pitch += alpha * (pitch_target - self._filtered_pitch)
+            self._filtered_yaw_cont += alpha * (yaw_target - self._filtered_yaw_cont)
+
+        roll_disp = self._filtered_roll
+        pitch_disp = self._filtered_pitch
+        yaw_disp = self._normalize_360(self._filtered_yaw_cont)
+
+        # NASA-style body axes: roll->X, pitch->Y, yaw->Z.
+        q_roll = QQuaternion.fromAxisAndAngle(1.0, 0.0, 0.0, roll_disp)
+        q_pitch = QQuaternion.fromAxisAndAngle(0.0, 1.0, 0.0, pitch_disp)
+        q_yaw = QQuaternion.fromAxisAndAngle(0.0, 0.0, 1.0, yaw_disp)
         self._rocket_transform.setRotation(q_yaw * q_pitch * q_roll)

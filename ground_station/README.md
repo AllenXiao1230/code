@@ -38,7 +38,6 @@ python3 -m unittest discover -s tests -q
 python3 main.py
 ```
 
-
 使用指南（介面區塊）
 ------------------
 - 序列埠：掃描可用埠，顯示連線狀態/錯誤，Connect/Disconnect 控制。
@@ -92,7 +91,7 @@ ErrorCode（bitmask）
 | 0 | 0x01 | `lora_ready == false` | LoRa 初始化失敗 |
 | 1 | 0x02 | `sd_ready == false` | SD 初始化失敗 |
 | 2 | 0x04 | `rtc_ready == false` | RTC 初始化失敗 |
-| 3 | 0x08 | `status_bmp == false` | BMP390 初始化失敗 |
+| 3 | 0x08 | `status_bmp == false` | BMP388/BMP3XX 初始化失敗 |
 | 4 | 0x10 | `status_imu == false` | IMU 初始化失敗 |
 | 5 | 0x20 | `status_adxl == false` | ADXL375 初始化失敗 |
 | 6 | 0x40 | `flight_state >= PREFLIGHT && !gps_fix_valid` | GPS 無定位/逾時 |
@@ -104,9 +103,9 @@ ErrorCode（bitmask）
 ----------------
 - IMU（ICM42688）：提供姿態融合輸出（Roll/Pitch/Yaw）與 GyroX/Y/Z。
 - ADXL375：提供加速度 AccX/Y/Z（高 G 加速度）。
-- BMP390：提供氣壓（Pa）與氣壓高度（m）。
+- BMP388/BMP3XX：提供氣壓（Pa）與氣壓高度（m）。
 - SHT31：提供溫度/濕度（僅記錄於機內 SD，不在遙測封包中）。
-- BMP390：氣壓僅記錄於機內 SD，不在遙測封包中。
+- BMP388/BMP3XX：氣壓僅記錄於機內 SD，不在遙測封包中。
 - RTC（DS3231）：提供 Unix 時間戳（秒），僅存於機內 SD 記錄，可由地面站同步。
 - RTC 同步格式：地面站送出 `RTC_SYNC:<unix>`（ASCII，換行結尾），火箭端收到後更新 RTC。
 - GPS：經緯度/速度/高度/衛星數（目前韌體端多數仍為 0，待接入 GPS 串流）。

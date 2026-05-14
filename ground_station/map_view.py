@@ -30,11 +30,18 @@ HTML_TEMPLATE = """
   var path = [];
   var polyline = L.polyline(path, {color: 'deepskyblue', weight: 3}).addTo(map);
 
-  function updateGPS(lat, lon) {
+  function updateGPS(lat, lon, zoom) {
     marker.setLatLng([lat, lon]);
     path.push([lat, lon]);
     polyline.setLatLngs(path);
-    map.setView([lat, lon], 16);
+    map.setView([lat, lon], zoom || 18, {animate: false});
+  }
+
+  function resetGPS() {
+    path = [];
+    polyline.setLatLngs(path);
+    marker.setLatLng([25.0330, 121.5654]);
+    map.setView([25.0330, 121.5654], 12, {animate: false});
   }
 </script>
 </body>
@@ -68,15 +75,21 @@ class MapView(QWidget):
 
     # ---------- Public API ----------
 
-    def update_gps(self, lat: float, lon: float, alt: float):
+    def update_gps(self, lat: float, lon: float, alt: float, zoom: int = 16):
         """
         Update marker position. If the page isn't ready yet, queue the update.
         """
         if not self._page_ready:
-            self._pending_updates.append((lat, lon))
+            self._pending_updates.append((lat, lon, zoom))
             return
-        js = f"updateGPS({lat}, {lon});"
+        js = f"updateGPS({lat}, {lon}, {int(zoom)});"
         self.web.page().runJavaScript(js)
+
+    def reset_path(self):
+        self._pending_updates.clear()
+        if not self._page_ready:
+            return
+        self.web.page().runJavaScript("resetGPS();")
 
     # ---------- Internal ----------
 
@@ -85,7 +98,7 @@ class MapView(QWidget):
         if not ok:
             return
         # Flush queued updates
-        for lat, lon in self._pending_updates:
-            js = f"updateGPS({lat}, {lon});"
+        for lat, lon, zoom in self._pending_updates:
+            js = f"updateGPS({lat}, {lon}, {int(zoom)});"
             self.web.page().runJavaScript(js)
         self._pending_updates.clear()

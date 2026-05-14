@@ -6,6 +6,7 @@ import sys
 def _missing_runtime_deps() -> list[tuple[str, str]]:
     required = [
         ("PyQt5", "PyQt5"),
+        ("PyQt5.QtWebEngineWidgets", "PyQtWebEngine"),
         ("serial", "pyserial"),
     ]
     missing = []

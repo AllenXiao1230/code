@@ -32,7 +32,7 @@ class SerialPanel(QWidget):
         layout.addWidget(QLabel("Baud:"))
 
         self.baud_box = QComboBox()
-        self.baud_box.addItems(["9600", "38400", "57600", "115200", "230400"])
+        self.baud_box.addItems(["9600", "38400", "57600", "115200", "230400", "460800", "921600"])
         self.baud_box.setCurrentText("115200")
         layout.addWidget(self.baud_box)
 

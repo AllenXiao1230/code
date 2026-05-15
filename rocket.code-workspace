@@ -30,6 +30,12 @@
 		},
 		{
 			"path": "rocket_lora_link_test"
+		},
+		{
+			"path": "fuse_cutter"
+		},
+		{
+			"path": "rocket_cam_ov5640"
 		}
 	],
 	"settings": {}
